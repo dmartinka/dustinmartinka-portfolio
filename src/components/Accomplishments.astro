@@ -1,0 +1,252 @@
+---
+// Accomplishments / Feature Gallery section
+// Adapted from Figma export -- three card types: metric-dark, metric-light, headline
+---
+
+<section class="accomplishments-section">
+  <div class="accomplishments-inner">
+    <h2 class="accomplishments-title">Recent accomplishments</h2>
+    <div class="gallery">
+
+      <!-- Column 1 -->
+      <div class="col">
+        <div class="card spacer"></div>
+
+        <div class="card metric-light">
+          <p class="metric-number">500%</p>
+          <p class="metric-label">Team growth</p>
+          <p class="card-body">Scaled the product design team five-fold in two years and helped shift us from ticket takers to strategic partners.</p>
+        </div>
+
+        <div class="card headline-neutral">
+          <p class="headline-title">Built Company-Wide Design System</p>
+          <p class="card-body">Defined vision and led creation of MoxiWorks' first design system, earning engineering buy-in and dedicated resources to standardize patterns and scale delivery.</p>
+        </div>
+
+        <div class="card headline-neutral">
+          <p class="headline-title">Redefined coverage transparency</p>
+          <p class="card-body">Challenged telecom norms and rebuilt the coverage map around accuracy and transparency, improving customer trust where churn was highest.</p>
+        </div>
+
+        <div class="card metric-light">
+          <p class="metric-number">19k</p>
+          <p class="metric-label">Activations</p>
+          <p class="card-body">Removed friction from switching phone carriers and aligned teams around one clear path, resulting in 19,000 new activations in year one.</p>
+        </div>
+      </div>
+
+      <!-- Column 2 -->
+      <div class="col">
+        <div class="card metric-dark">
+          <p class="metric-number">85%</p>
+          <p class="metric-label">Flow redesign</p>
+          <p class="card-body">Led redesign of 85% of authenticated journeys during platform migration, achieving full accessibility compliance and measurable customer satisfaction gains.</p>
+        </div>
+
+        <div class="card headline-light">
+          <p class="headline-title">AI Product Design Certification</p>
+          <p class="card-body">Completed advanced AI product design training with formal recommendation, applying machine learning concepts and ethical principles to product strategy.</p>
+        </div>
+
+        <div class="card headline-neutral">
+          <p class="headline-title">Biometric pre-authentication patent</p>
+          <p class="card-body">Co-invented and patented a biometric pre-authentication system that made customer care faster, more secure, and more seamless.</p>
+        </div>
+      </div>
+
+      <!-- Column 3 -->
+      <div class="col">
+        <div class="card spacer"></div>
+
+        <div class="card headline-neutral">
+          <p class="headline-title">Built foundations team from scratch</p>
+          <p class="card-body">Established and scaled a Foundations team to own navigation, onboarding, authentication, notifications, and other critical experience systems.</p>
+        </div>
+
+        <div class="card metric-light">
+          <p class="metric-number">59%</p>
+          <p class="metric-label">Share of enterprise</p>
+          <p class="card-body">Partnered across product and engineering to drive record digital enterprise share and process 276,000 digital device orders during Apple's iPhone launch.</p>
+        </div>
+
+        <div class="card headline-neutral">
+          <p class="headline-title">Safety-first infotainment design</p>
+          <p class="card-body">Designed infotainment for real driving conditions, testing interactions in simulators to balance safety with staying connected.</p>
+        </div>
+
+        <div class="card companies">
+          <p class="companies-title">Organizations I've partnered with</p>
+          <ul class="companies-list">
+            <li>T-Mobile</li>
+            <li>Apple</li>
+            <li>AT&T</li>
+            <li>MoxiWorks</li>
+            <li>Mapbox</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .accomplishments-section {
+    background: #ffffff;
+    width: 100%;
+  }
+
+  .accomplishments-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 56px;
+  }
+
+  .accomplishments-title {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(32, 30, 27, 0.45);
+    margin: 0 0 40px 0;
+  }
+
+  /* ── GALLERY GRID ── */
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ── CARD BASE ── */
+  .card {
+    border-radius: 8px;
+    padding: 28px 30px;
+  }
+
+  .card.spacer {
+    background: #ffffff;
+    height: 44px;
+    padding: 0;
+  }
+
+  /* ── METRIC CARDS ── */
+  .metric-number {
+    font-family: var(--font-serif);
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0 0 4px 0;
+  }
+
+  .metric-label {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 48px 0;
+  }
+
+  .card-body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .card.metric-dark {
+    background: #2b2b2b;
+    color: #ffffff;
+  }
+
+  .card.metric-light {
+    background: #ffffff;
+    border: 1px solid #e0dfdf;
+    color: #2b2b2b;
+  }
+
+  /* ── HEADLINE CARDS ── */
+  .headline-title {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 32px 0;
+    color: #2b2b2b;
+  }
+
+  .card.headline-neutral {
+    background: #f5f4f0;
+    color: #2b2b2b;
+    padding: 48px 30px;
+  }
+
+  .card.headline-light {
+    background: #ffffff;
+    border: 1px solid #e0dfdf;
+    color: #2b2b2b;
+    padding: 48px 30px;
+  }
+
+  /* ── COMPANIES CARD ── */
+  .card.companies {
+    background: #2b2b2b;
+    color: #ffffff;
+    padding: 28px 30px 40px;
+  }
+
+  .companies-title {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: #ffffff;
+    margin: 0 0 32px 0;
+  }
+
+  .companies-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+  }
+
+  .companies-list li {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+
+    .col {
+      width: 100%;
+    }
+
+    .card.spacer {
+      display: none;
+    }
+
+    .accomplishments-inner {
+      padding: 60px 32px;
+    }
+  }
+</style>

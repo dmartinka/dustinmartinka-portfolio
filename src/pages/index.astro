@@ -2,33 +2,265 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import Accomplishments from '../components/Accomplishments.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<p class="hero-intro">Hi, I'm Dustin.</p>
-			<h1>I build design cultures. I raise the craft bar. I still make things.</h1>
-			<p>
-				20+ years at T-Mobile, MoxiWorks, and Microsoft. I build teams that ship great work and grow as people. And I stay close enough to the craft to know the difference.
-			</p>
-			<p>
-				When teams feel trusted, clear, and supported, they do their best work. I've led through ambiguity, reorgs, and high-pressure launches by bringing clarity to complex problem spaces and keeping the work grounded in real users and real business outcomes. I'm calm under pressure, direct in feedback, and invested in helping designers grow into the next version of themselves.
-			</p>
-			<p>
-				No ego. Thoughtful direction. I don't always have all the answers, but I'll ask the right questions and help the team find the path forward.
-			</p>
-			<p>
-				<a href="/work">Work</a> &nbsp;&middot;&nbsp; <a href="/about">About</a> &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/dustinmartinka" target="_blank">LinkedIn</a>
-			</p>
-			<p class="tagline"><small>Be a good human. Do great things.</small></p>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+
+    <section class="hero">
+      <!-- Left: Text -->
+      <div class="hero-text">
+        <h1 class="hero-headline">
+          <span class="name-line">Hi, I'm Dustin</span>
+          <span class="statement">
+            I <em class="highlight">grow</em> design cultures. I <em class="highlight">sharpen</em> the craft. I still <em class="highlight">make</em> things.
+          </span>
+        </h1>
+        <div class="hero-divider"></div>
+        <p class="hero-meta">Available for new opportunities</p>
+      </div>
+
+      <!-- Right: Photo -->
+      <div class="hero-photo-wrap">
+        <img
+          class="hero-photo"
+          src="/DSCF9895.jpg"
+          alt="Dustin Martinka"
+        />
+      </div>
+    </section>
+
+    <main>
+      <section class="about-section">
+        <div class="about-inner">
+          <h2 class="about-headline">
+            When teams feel trusted, clear, and supported — they do their best work.
+          </h2>
+          <div class="about-body">
+            <p>20+ years at T-Mobile, MoxiWorks, and Microsoft. I build teams that ship great work and grow as people. And I stay close enough to the craft to know the difference.</p>
+            <p>I've led through ambiguity, reorgs, and high-pressure launches by bringing clarity to complex problem spaces and keeping the work grounded in real users and real business outcomes. I'm calm under pressure, direct in feedback, and invested in helping designers grow into the next version of themselves.</p>
+            <p>No ego. Thoughtful direction. I don't always have all the answers, but I'll ask the right questions and help the team find the path forward.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Accomplishments />
+
+    <Footer />
+  </body>
 </html>
+
+<style>
+  :root {
+    --bg: #201e1b;
+    --fg: #f2ede8;
+    --fg-mid: rgba(242, 237, 232, 0.7);
+    --fg-dim: rgba(242, 237, 232, 0.45);
+  }
+
+  body {
+    background-color: var(--bg);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  /* ── LEFT COLUMN ── */
+  .hero-text {
+    padding: 140px 0px 80px 56px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-headline {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(52px, 6.5vw, 96px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    text-wrap: pretty;
+    margin: 0 0 0 0;
+  }
+
+  .hero-headline .name-line {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    display: block;
+    margin-bottom: 10px;
+    letter-spacing: 0;
+  }
+
+  .hero-headline .statement {
+    display: block;
+    color: #ffffff;
+  }
+
+  .hero-headline .statement span {
+    display: block;
+    color: var(--fg-mid);
+  }
+
+  .hero-headline .highlight {
+    color: #C9A96E;
+    font-style: normal;
+  }
+
+  .hero-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--fg-dim);
+    margin: 40px 0;
+  }
+
+  .hero-meta {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* ── RIGHT COLUMN — PHOTO ── */
+  .hero-photo-wrap {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-photo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(100%) contrast(0.88) brightness(0.75);
+    display: block;
+    border-radius: 0;
+  }
+
+  /* Gradient: fade photo into bg on left, bottom, and slightly top */
+  .hero-photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      linear-gradient(to right, var(--bg) 0%, transparent 35%),
+      linear-gradient(to top, var(--bg) 0%, transparent 22%),
+      linear-gradient(to bottom, var(--bg) 0%, transparent 10%);
+    pointer-events: none;
+  }
+
+  /* Right edge vignette */
+  .hero-photo-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(to left, var(--bg) 0%, transparent 20%);
+    pointer-events: none;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-headline { animation: fadeUp 0.9s ease both; animation-delay: 0.25s; }
+  .hero-divider  { animation: fadeUp 0.8s ease both; animation-delay: 0.55s; }
+  .hero-meta     { animation: fadeUp 0.8s ease both; animation-delay: 0.65s; }
+  .hero-photo    { animation: fadeUp 1.1s ease both; animation-delay: 0.15s; }
+
+  /* Override global main constraint for homepage */
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ── ABOUT SECTION ── */
+  .about-section {
+    background: #f2ede8;
+    width: 100%;
+  }
+
+  .about-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 120px 56px;
+  }
+
+  .about-headline {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #201e1b;
+    margin: 0 0 56px 0;
+  }
+
+  .about-body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .about-body p {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(32, 30, 27, 0.7);
+    margin: 0;
+  }
+
+  .about-body p:first-child {
+    font-size: 18px;
+    color: rgba(32, 30, 27, 0.85);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 800px) {
+    .hero {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+
+    .hero-text {
+      padding: 120px 32px 40px;
+      grid-row: 1;
+    }
+
+    .hero-photo-wrap {
+      height: 60vw;
+      grid-row: 2;
+    }
+  }
+</style>
