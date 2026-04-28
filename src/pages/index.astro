@@ -41,10 +41,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
       <section class="about-section">
         <div class="about-inner">
           <h2 class="about-headline">
-            When teams feel trusted, clear, and supported — they do their best work.
+            Great work starts with a culture that makes it possible.
           </h2>
           <div class="about-body">
-            <p>20+ years at T-Mobile, MoxiWorks, and Microsoft. I build teams that ship great work and grow as people. And I stay close enough to the craft to know the difference.</p>
+            <p>I've spent 20+ years at T-Mobile, MoxiWorks, and Microsoft designing product and growing design teams from the inside out. Getting the craft sharper, the collaboration tighter, and the work closer to what users actually need. I stay close enough to the making that I know the difference between good direction and the real thing.</p>
             <p>I've led through ambiguity, reorgs, and high-pressure launches by bringing clarity to complex problem spaces and keeping the work grounded in real users and real business outcomes. I'm calm under pressure, direct in feedback, and invested in helping designers grow into the next version of themselves.</p>
             <p>No ego. Thoughtful direction. I don't always have all the answers, but I'll ask the right questions and help the team find the path forward.</p>
           </div>
@@ -207,7 +207,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
   /* ── ABOUT SECTION ── */
   .about-section {
-    background: #f2ede8;
+    background: #F5F4F0;
     width: 100%;
   }
 
@@ -223,7 +223,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
     font-size: clamp(32px, 4vw, 56px);
     line-height: 1.2;
     letter-spacing: -0.02em;
-    color: #201e1b;
+    color: #2b2b2b;
     margin: 0 0 56px 0;
   }
 
@@ -235,16 +235,12 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
   .about-body p {
     font-family: var(--font-sans);
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.7;
-    color: rgba(32, 30, 27, 0.7);
+    color: rgba(43, 43, 43, 0.7);
     margin: 0;
   }
 
-  .about-body p:first-child {
-    font-size: 18px;
-    color: rgba(32, 30, 27, 0.85);
-  }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 800px) {
@@ -261,6 +257,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
     .hero-photo-wrap {
       height: 60vw;
       grid-row: 2;
+    }
+
+    .about-body p {
+      font-size: 17px;
     }
   }
 </style>
