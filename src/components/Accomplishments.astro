@@ -42,6 +42,10 @@
           <p class="card-body">Led redesign of 85% of authenticated journeys during platform migration, achieving full accessibility compliance and measurable customer satisfaction gains.</p>
         </div>
 
+        <div class="card image-card">
+          <img src="/flagship-app.png" alt="Flagship application home screen" class="card-image" />
+        </div>
+
         <div class="card headline-light">
           <p class="headline-title">AI Product Design Certification</p>
           <p class="card-body">Completed advanced AI product design training with formal recommendation, applying machine learning concepts and ethical principles to product strategy.</p>
@@ -75,13 +79,14 @@
 
         <div class="card companies">
           <p class="companies-title">Organizations I've partnered with</p>
-          <ul class="companies-list">
-            <li>T-Mobile</li>
-            <li>Apple</li>
-            <li>AT&T</li>
-            <li>MoxiWorks</li>
-            <li>Mapbox</li>
-          </ul>
+          <div class="logos-grid">
+            <img src="/logos/tmobile.svg"   alt="T-Mobile"  class="logo logo-tmobile" />
+            <img src="/logos/apple.png"      alt="Apple"     class="logo logo-apple" />
+            <img src="/logos/microsoft.svg"  alt="Microsoft" class="logo logo-microsoft" />
+            <img src="/logos/att.png"        alt="AT&T"      class="logo logo-att" />
+            <img src="/logos/mapbox.png"     alt="Mapbox"    class="logo logo-mapbox" />
+            <img src="/logos/moxiworks.svg"  alt="MoxiWorks" class="logo logo-moxiworks" />
+          </div>
         </div>
       </div>
 
@@ -197,6 +202,21 @@
     padding: 48px 30px;
   }
 
+  /* ── IMAGE CARD ── */
+  .card.image-card {
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e0dfdf;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+  }
+
   /* ── COMPANIES CARD ── */
   .card.companies {
     background: #2b2b2b;
@@ -213,22 +233,26 @@
     margin: 0 0 32px 0;
   }
 
-  .companies-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 24px;
+  .logos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px 16px;
+    align-items: center;
   }
 
-  .companies-list li {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.7);
-    letter-spacing: 0.04em;
+  .logo {
+    width: auto;
+    max-width: 100%;
+    opacity: 0.85;
+    border-radius: 0;
   }
+
+  .logo-tmobile   { height: 56px; }
+  .logo-apple     { height: 48px; justify-self: center; }
+  .logo-microsoft { height: 40px; justify-self: end; }
+  .logo-att       { height: 36px; }
+  .logo-mapbox    { height: 34px; grid-column: 2 / -1; justify-self: end; }
+  .logo-moxiworks { height: 32px; grid-column: 1 / -1; justify-self: center; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {

@@ -246,17 +246,26 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
   @media (max-width: 800px) {
     .hero {
       grid-template-columns: 1fr;
-      grid-template-rows: auto 1fr;
+      grid-template-rows: 1fr;
     }
 
     .hero-text {
-      padding: 120px 32px 40px;
+      padding: 140px 32px 80px;
       grid-row: 1;
+      grid-column: 1;
+      position: relative;
+      z-index: 10;
     }
 
     .hero-photo-wrap {
-      height: 60vw;
-      grid-row: 2;
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      grid-row: unset;
+    }
+
+    .hero-photo {
+      filter: grayscale(100%) contrast(0.88) brightness(0.25);
     }
 
     .about-body p {
