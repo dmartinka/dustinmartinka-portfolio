@@ -13,7 +13,7 @@ Add your notes under each card. Leave blank if no changes needed.
 **Feedback:**
 - Number:
 - Label:
-- Copy:
+- Copy: Scaled the product design team five-fold, from 7 product and content designers to 35 in two years and helped shift us from ticket takers to strategic partners.
 - Style / layout:
 
 ---

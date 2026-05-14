@@ -1,0 +1,145 @@
+---
+import StaticPage from '../layouts/StaticPage.astro';
+---
+
+<StaticPage title="Resume — Dustin Martinka" description="Download Dustin Martinka's resume.">
+    <main>
+      <section class="resume-section">
+        <div class="resume-inner">
+          <h1 class="resume-headline">My resume.</h1>
+          <p class="resume-subhead">Grab whichever format works for you.</p>
+
+          <div class="cards">
+
+            <a class="card" href="/Dustin_Martinka_Resume.pdf" download>
+              <div class="card-label">For humans</div>
+              <p class="card-title">Download PDF</p>
+              <p class="card-desc">Designed, clean, easy to read.</p>
+            </a>
+
+            <a class="card" href="/Dustin_Martinka_Resume_ATS.txt" download>
+              <div class="card-label">For machines</div>
+              <p class="card-title">Download ATS</p>
+              <p class="card-desc">Plain text, no formatting, plays nice with machines.</p>
+            </a>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+</StaticPage>
+
+<style>
+  body {
+    background: #F5F4F0;
+  }
+
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .resume-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: #F5F4F0;
+    padding-top: 76px;
+  }
+
+  .resume-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 56px;
+    width: 100%;
+  }
+
+  .resume-headline {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #2b2b2b;
+    margin: 0 0 16px 0;
+  }
+
+  .resume-subhead {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(43, 43, 43, 0.6);
+    margin: 0 0 64px 0;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid rgba(43, 43, 43, 0.1);
+    border-radius: 4px;
+    padding: 40px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    border-color: #C9A96E;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #C9A96E;
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 28px;
+    color: #2b2b2b;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(43, 43, 43, 0.6);
+    margin: 0;
+    flex: 1;
+  }
+
+  @media (max-width: 640px) {
+    .resume-section {
+      padding-top: 60px;
+    }
+
+    .resume-inner {
+      padding: 32px 32px 40px;
+    }
+
+    .cards {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      padding: 32px;
+    }
+  }
+</style>

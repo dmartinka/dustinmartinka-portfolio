@@ -1,9 +1,15 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+
+interface Props {
+  forceScrolled?: boolean;
+}
+
+const { forceScrolled = false } = Astro.props;
 ---
 
-<header>
+<header class={forceScrolled ? 'scrolled' : ''}>
   <nav>
     <a class="nav-logo" href="/">{SITE_TITLE}</a>
     <div class="nav-links">
@@ -16,15 +22,17 @@ import HeaderLink from './HeaderLink.astro';
   </nav>
 </header>
 
-<script>
-  const header = document.querySelector('header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header?.classList.add('scrolled');
-    } else {
-      header?.classList.remove('scrolled');
-    }
-  }, { passive: true });
+<script define:vars={{ forceScrolled }}>
+  if (!forceScrolled) {
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header?.classList.add('scrolled');
+      } else {
+        header?.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
 </script>
 
 <style>
