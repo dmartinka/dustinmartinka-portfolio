@@ -1,0 +1,85 @@
+DUSTIN MARTINKA
+dmartinka@gmail.com | dustinmartinka.com | linkedin.com/in/dustinmartinka
+
+Product Design Leader with 20+ years of experience building products used by millions across telecom, real estate, and enterprise software. I build design cultures where teams thrive and do their best work, and I bring clarity to complex, ambiguous problems. I've helped shift design from execution partner to strategic voice, elevated designers into senior and principal roles, and launched products that drive real business growth. Calm under pressure. No ego. Thoughtful direction.
+
+
+EXPERIENCE
+
+T-MOBILE - BELLEVUE, WA
+
+Sr. Manager, Product Design | 2022 - Present
+
+Digital transformation strategy - Partnered with Product and Engineering to overhaul the T-Mobile app as part of a company mission to become digital-first. Led design strategy and implemented a user-centered design approach, conducting extensive user research and usability testing, which improved SUS scores from 5.5 (good) to 6.0 (excellent).
+
+Reimagined coverage map experience - Led design strategy to transform T-Mobile's network visualization, addressing the primary cause of customer churn. Improved customer trust through precise geographic data representation, intuitive zoom levels, and contextual overlays, setting a new standard for network coverage visualization in the telecom industry.
+
+AI design integration - Championed AI adoption within the product design org, pushing to enable Figma Make for the design team. Completed an AI Product Design certification (ELVTR) and currently coaching designers on integrating AI into their workflows and evolving their role alongside the technology.
+
+eCommerce growth - Helped org achieve T-Mobile's best New Product Initiative for digital, driving a record 59% Share of Enterprise and processing 276,000 device orders. Partnered closely with cross-functional teams to optimize e-commerce flows, leading to significant growth in new device activations.
+
+Enterprise new product launch - Spearheaded design strategy for Easy Switch app, an Uncarrier initiative that enabled 19,000 prospect activations in its first year. Partnered with external agencies to craft seamless onboarding flows and intuitive experiences, contributing to customer growth in a competitive market.
+
+Manager, Product Design | 2020 - 2022
+
+Team scaling - Expanded the product design team by 500% in just 2 years, managing a maximum span of control over 35 product and content designers.
+
+Authenticated user redesign - Led team of 6 designers to redesign 85% of authenticated user flows during a platform migration, including key pages such as the homepage, usage, billing, accounts, and change plan, ensuring 100% accessibility compliance and seamless integration with the new design system. Led to an increased CSAT score of +11% and Ability to Accomplish of +9%.
+
+Sr. Designer, User Experience | 2019 - 2020
+
+Launch Apple Pay - Lead designer for launching Apple Pay experience to T-Mobile customers for purchase and bill pay flows. This feature now accounts for 9.3% of all digital one-time payments.
+
+Profile settings IA - Led the design and implementation of an enhanced Information Architecture framework for the Profile Settings section, optimizing user experience and navigation efficiency.
+
+
+MOXIWORKS - SEATTLE, WA
+
+Manager, User Experience | 2014 - 2019
+
+Built UX from the ground up - Hired and led a team of 3 designers while staying hands-on as a working designer. Delivered 3 SaaS products for the real estate industry and created a user-centered culture that earned recognition from leadership and clients.
+
+Introduced user research - Convinced executives to invest in user research by proving its return on investment, embedding it into the product development process.
+
+Design system creation - Built a design system that unified the visual and interaction language across all products. Partnered with Engineering on adoption, resulting in faster development cycles and a more consistent experience.
+
+
+MICROSOFT - REDMOND, WA
+
+Senior IxD, c/o Allovus | 2013 - 2014
+
+Car infotainment design - Prioritized user safety and seamless connectivity to essential life aspects while driving by developing innovative designs, rigorously validated through research using a simulated driving experience. Partnered with a team of designers to build out a consistent, intuitive interface, leveraging user-tested design patterns to enhance user experience.
+
+Microsoft Office - Designed web and client interfaces for Microsoft Office customer acquisition. Partnered with overseas engineering teams and used a Lean UX process, iterating daily and validating designs through user testing.
+
+Clearwire, Sr. UX Designer | Product Designer, c/o Aquent | 2009 - 2011
+
+Designed the Clearwire Sales Tool used by hundreds of sales reps across the country. Led a small design effort to improve branded websites and customer account management to support retention goals.
+
+Windows Mobile | Product Designer, c/o Aquent | 2008 - 2009
+
+Designed the first web-based app store for the Windows Mobile platform and its developer portal, creating the end-to-end experience from app creation to purchase.
+
+Hacker Group, Sr. UX/UI Architect
+
+
+NOTABLE ACHIEVEMENTS
+
+- AI Product Design certification, ELVTR 2025
+- Value in Action winner, T-Mobile 2022
+- Digital Unsung Hero, T-Mobile 2020
+- Advisory board member, Tombolo Institute 2021-2023
+- Patent awarded: 611 Pre-authentication using biometric recognition, T-Mobile 2020
+- Speaker at Deutsche Telekom's annual Design Summit 2022 - Ran a barcamp on "The Cost of Design" to 100+ designers in Germany
+
+
+EDUCATION
+
+BFA in Graphic Design, Montana State University
+
+
+SKILLS
+
+Leadership: Team development, Experience strategy, Design culture building, Vendor management
+Strategy: Design thinking methodology, Design process optimization, UX metrics & ROI, AI design integration
+Design excellence: Design ethics & accessibility, User-centered design, Design systems strategy
