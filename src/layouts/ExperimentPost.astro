@@ -23,14 +23,11 @@ const { title, description, status, tags } = Astro.props;
     <div class="experiment-header">
       <div class="experiment-header-inner">
         <a href="/experiments" class="back-link">← Experiments</a>
-        <div class="meta">
-          {status && <span class="status-badge">{status}</span>}
-          {tags && tags.length > 0 && (
-            <div class="tags">
-              {tags.map(tag => <span class="tag">{tag}</span>)}
-            </div>
-          )}
-        </div>
+        {status && (
+          <div class="meta">
+            <span class="status-badge">{status}</span>
+          </div>
+        )}
         <h1>{title}</h1>
         <p class="description">{description}</p>
       </div>
@@ -58,7 +55,7 @@ const { title, description, status, tags } = Astro.props;
   }
 
   .experiment-header-inner {
-    max-width: 720px;
+    max-width: var(--width-wide);
     margin: 0 auto;
   }
 
@@ -96,27 +93,6 @@ const { title, description, status, tags } = Astro.props;
     border: 1px solid rgba(201, 169, 110, 0.4);
     padding: 4px 10px;
     border-radius: 20px;
-  }
-
-  .tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(242, 237, 232, 0.4);
-  }
-
-  .tag + .tag::before {
-    content: '·';
-    margin-right: 8px;
-    color: rgba(242, 237, 232, 0.2);
   }
 
   .experiment-header h1 {

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C9A96E" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#201e1b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="#201e1b"/>
+
+  <!-- Subtle radial glow -->
+  <ellipse cx="400" cy="210" rx="320" ry="200" fill="url(#glow)"/>
+
+  <!-- Grid lines (very subtle) -->
+  <g stroke="rgba(242,237,232,0.04)" stroke-width="1">
+    <line x1="0" y1="70" x2="800" y2="70"/>
+    <line x1="0" y1="140" x2="800" y2="140"/>
+    <line x1="0" y1="210" x2="800" y2="210"/>
+    <line x1="0" y1="280" x2="800" y2="280"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="133" y1="0" x2="133" y2="420"/>
+    <line x1="266" y1="0" x2="266" y2="420"/>
+    <line x1="400" y1="0" x2="400" y2="420"/>
+    <line x1="533" y1="0" x2="533" y2="420"/>
+    <line x1="666" y1="0" x2="666" y2="420"/>
+  </g>
+
+  <!-- Connection lines between nodes -->
+  <g stroke="#C9A96E" stroke-opacity="0.2" stroke-width="1" fill="none">
+    <line x1="400" y1="210" x2="220" y2="130"/>
+    <line x1="400" y1="210" x2="580" y2="130"/>
+    <line x1="400" y1="210" x2="580" y2="290"/>
+    <line x1="400" y1="210" x2="220" y2="290"/>
+    <line x1="400" y1="210" x2="400" y2="90"/>
+    <line x1="400" y1="210" x2="400" y2="330"/>
+    <line x1="220" y1="130" x2="580" y2="130"/>
+    <line x1="580" y1="130" x2="580" y2="290"/>
+    <line x1="580" y1="290" x2="220" y2="290"/>
+    <line x1="220" y1="290" x2="220" y2="130"/>
+  </g>
+
+  <!-- Outer nodes -->
+  <g fill="#C9A96E" fill-opacity="0.5">
+    <circle cx="220" cy="130" r="4"/>
+    <circle cx="580" cy="130" r="4"/>
+    <circle cx="580" cy="290" r="4"/>
+    <circle cx="220" cy="290" r="4"/>
+    <circle cx="400" cy="90" r="4"/>
+    <circle cx="400" cy="330" r="4"/>
+  </g>
+
+  <!-- Outer node rings -->
+  <g fill="none" stroke="#C9A96E" stroke-opacity="0.25" stroke-width="1">
+    <circle cx="220" cy="130" r="9"/>
+    <circle cx="580" cy="130" r="9"/>
+    <circle cx="580" cy="290" r="9"/>
+    <circle cx="220" cy="290" r="9"/>
+    <circle cx="400" cy="90" r="9"/>
+    <circle cx="400" cy="330" r="9"/>
+  </g>
+
+  <!-- Center node rings -->
+  <circle cx="400" cy="210" r="28" fill="none" stroke="#C9A96E" stroke-opacity="0.15" stroke-width="1"/>
+  <circle cx="400" cy="210" r="18" fill="none" stroke="#C9A96E" stroke-opacity="0.25" stroke-width="1"/>
+
+  <!-- Center node -->
+  <circle cx="400" cy="210" r="8" fill="#C9A96E" fill-opacity="0.8"/>
+
+  <!-- Label -->
+  <text x="400" y="384" font-family="'IBM Plex Serif', Georgia, serif" font-size="13" font-weight="400" fill="rgba(242,237,232,0.25)" text-anchor="middle" letter-spacing="0.08em">DUSTAIN</text>
+</svg>
