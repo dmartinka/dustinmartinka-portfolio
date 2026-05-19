@@ -3,7 +3,7 @@ title: "Letting the Team Set the Direction"
 description: "What happens when you run a workshop where the leader brings the context and the team brings the answer."
 pubDate: 2026-01-01
 tags: [Leadership, Team culture]
-image: /experiments/tmobile-workshop.svg
+image: /experiments/22b19e02-7d3c-419b-a6c5-874f679e53f7.webp
 ---
 
 I've attended plenty of offsites where the leader shows up with the agenda, walks through the plan, and asks the team to execute it. This wasn't that.

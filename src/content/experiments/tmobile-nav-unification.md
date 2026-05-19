@@ -3,7 +3,7 @@ title: "Unifying T-Mobile's Navigation (Unsolicited)"
 description: "What happens when you decide to fix a problem nobody asked you to fix — and navigate a large organization to make it real."
 pubDate: 2025-08-01
 tags: [Leadership, Design strategy]
-image: /experiments/tmobile-nav.svg
+image: /experiments/270de3d8-76ae-45d7-a4d4-b07d4ed1ff1a.webp
 ---
 
 T-Mobile's navigation hadn't been looked at from a UX lens in over five years. The company had grown, added new products and business lines, and just kept bolting things on. By 2025 there were eight different navigation patterns depending on where you entered the site. Wireless, prepaid, internet, business — each one its own thing. No single view of T-Mobile as one company.

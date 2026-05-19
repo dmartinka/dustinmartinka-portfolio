@@ -3,7 +3,7 @@ title: "DustAIn (Customized AI assistant)"
 description: "My new superpower. An AI-powered second brain built on Claude Code, wired into my calendar, tasks, docs, and a persistent memory system."
 pubDate: 2025-01-01
 tags: [AI, productivity, tools]
-image: /experiments/dustain.svg
+image: /experiments/0a176f1e-fec7-4560-a489-0faaf630183a.webp
 ---
 
 Most people use AI. I wanted to manage it.
