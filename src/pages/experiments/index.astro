@@ -1,12 +1,42 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 
-const experiments = (await getCollection('experiments')).sort(
+const allExperiments = (await getCollection('experiments')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+// Pre-compute hover rotation: move 3deg toward 0, never cross it.
+function hoverRot(rot: string): string {
+  const deg = parseFloat(rot);
+  const delta = 3;
+  const hover = deg > 0 ? Math.max(0, deg - delta) : Math.min(0, deg + delta);
+  return `${hover}deg`;
+}
+
+// 15 card positions. Real experiments keyed by slug at specific positions.
+// 3 rows of 5, staggered vertically. Rotations alternate direction.
+const cardDefs = [
+  // Row 1 — top of spread, tight stagger
+  { top: '4%',  left: '10%', rot: '-5deg', slug: null },
+  { top: '2%',  left: '25%', rot: '3deg',  slug: null },
+  { top: '5%',  left: '40%', rot: '-2deg', slug: 'dustain' },
+  { top: '2%',  left: '55%', rot: '6deg',  slug: null },
+  { top: '4%',  left: '70%', rot: '-4deg', slug: null },
+  // Row 2 — overlaps row 1 by ~120px, shifted right half a column
+  { top: '30%', left: '17%', rot: '4deg',  slug: null },
+  { top: '27%', left: '32%', rot: '-6deg', slug: null },
+  { top: '31%', left: '47%', rot: '2deg',  slug: 'tmobile-nav-unification' },
+  { top: '28%', left: '62%', rot: '-3deg', slug: null },
+  { top: '30%', left: '77%', rot: '5deg',  slug: null },
+  // Row 3 — overlaps row 2 by ~120px, shifted left half a column
+  { top: '55%', left: '12%', rot: '3deg',  slug: null },
+  { top: '52%', left: '27%', rot: '-4deg', slug: null },
+  { top: '56%', left: '42%', rot: '6deg',  slug: 'tmobile-workshop' },
+  { top: '53%', left: '57%', rot: '-2deg', slug: null },
+  { top: '55%', left: '72%', rot: '4deg',  slug: null },
+];
 ---
 
 <!doctype html>
@@ -20,210 +50,365 @@ const experiments = (await getCollection('experiments')).sort(
   <body>
     <Header forceScrolled={true} />
 
-    <div class="page-hero">
-      <div class="page-hero-inner">
-        <h1>Experiments</h1>
-        <p>I view life as one big experiment. These are things I've built, tried, and learned from. Not all of them worked. That's the point.</p>
+    <div class="experiments-stage">
+      <p class="stage-label">These are things I've built, tried, and learned from. Not all of them worked. That's the point.</p>
+      <div class="card-spread" id="card-spread">
+        {cardDefs.map((def, i) => {
+          const exp = def.slug
+            ? allExperiments.find(e => e.id === def.slug)
+            : null;
+          const isPlaceholder = !exp;
+
+          return (
+            <div
+              class={`exp-card${isPlaceholder ? ' is-placeholder' : ''}`}
+              style={`--rot: ${def.rot}; --hover-rot: ${hoverRot(def.rot)}; top: ${def.top}; left: ${def.left};`}
+              data-index={i}
+              role="button"
+              tabindex="0"
+              aria-expanded="false"
+            >
+              <p class="card-intro">The time I...</p>
+              <h2 class="card-headline">
+                {exp ? exp.data.cardHeadline ?? exp.data.title : 'coming soon'}
+              </h2>
+              <div class="card-detail" aria-hidden="true">
+                {exp ? (
+                  <>
+                    <p class="card-detail-text">{exp.data.cardDetail ?? exp.data.description}</p>
+                    <a href={`/experiments/${exp.id}/`} class="card-link">Full story →</a>
+                  </>
+                ) : (
+                  <p class="card-oven">still in the oven.</p>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
-
-    <main class="wide">
-      <ul class="experiments-list">
-        {experiments.map((exp) => (
-          <li>
-            <a href={`/experiments/${exp.id}/`} class="experiment-card">
-              {exp.data.image && (
-                <div class="card-image">
-                  <img src={exp.data.image} alt={exp.data.title} />
-                </div>
-              )}
-              <div class="card-body">
-                {exp.data.tags && exp.data.tags.length > 0 && (
-                  <div class="card-meta">
-                    <div class="tags">
-                      {exp.data.tags.map(tag => <span class="tag">{tag}</span>)}
-                    </div>
-                  </div>
-                )}
-                <h2 class="card-title">{exp.data.title}</h2>
-                <p class="card-description">{exp.data.description}</p>
-                <span class="card-link">Read more →</span>
-              </div>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </main>
-
-    <Footer />
   </body>
 </html>
 
 <style>
-  body {
-    background: var(--color-beige);
+  html, body {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
   }
 
-  /* ── HERO ── */
-  .page-hero {
+  .experiments-stage {
+    height: 100dvh;
+    padding-top: 72px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     background: #201e1b;
-    padding: 120px 56px 72px;
+    overflow: hidden;
   }
 
-  .page-hero-inner {
-    max-width: var(--width-wide);
-    margin: 0 auto;
-  }
-
-  .page-hero h1 {
+  .stage-label {
     font-family: var(--font-serif);
     font-weight: 300;
-    font-size: clamp(48px, 6vw, 80px);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: #f2ede8;
-    margin: 0 0 20px 0;
-  }
-
-  .page-hero p {
-    font-family: var(--font-sans);
-    font-size: var(--text-lg);
-    line-height: 1.6;
-    color: rgba(242, 237, 232, 0.5);
+    font-size: clamp(16px, 1.6vw, 22px);
+    color: rgba(242, 237, 232, 0.9);
+    padding: 28px 0 30px;
     margin: 0;
+    flex-shrink: 0;
+    letter-spacing: -0.01em;
+    text-align: center;
   }
 
-  /* ── GRID ── */
-  main {
-    max-width: 1200px;
-    width: calc(100% - 112px);
-    margin: 0 auto;
-    padding: 80px 0;
-  }
-
-  .experiments-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-items: start;
+  .card-spread {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
   }
 
   /* ── CARD ── */
-  .experiment-card {
-    display: block;
+  .exp-card {
+    --card-size: clamp(180px, 19vw, 280px);
+    position: absolute;
+    width: var(--card-size);
+    min-height: var(--card-size);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background: #ffffff;
-    border-radius: 8px;
-    overflow: hidden;
-    text-decoration: none;
     border: 1px solid #e0dfdf;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    border-radius: 8px;
+    padding: clamp(16px, 1.8vw, 28px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transform: rotate(var(--rot, 0deg));
+    transform-origin: center center;
+    transition:
+      transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1),
+      box-shadow 0.35s ease,
+      filter 0.35s ease,
+      opacity 0.35s ease;
+    z-index: 1;
+    user-select: none;
+    outline: none;
   }
 
-  .experiment-card:hover {
-    box-shadow: 0 8px 24px rgba(43, 43, 43, 0.1);
-    transform: translateY(-2px);
+  .exp-card:focus-visible {
+    outline: 2px solid #C9A96E;
+    outline-offset: 3px;
   }
 
-  .card-image {
-    width: 100%;
-    aspect-ratio: 2 / 1;
-    overflow: hidden;
-    background: #F5F4F0;
+  .exp-card:hover:not(.active) {
+    transform: rotate(var(--hover-rot, 0deg)) translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
   }
 
-  .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  .exp-card.active {
+    transform: rotate(0deg) scale(1.04);
+    box-shadow: 0 20px 56px rgba(0, 0, 0, 0.35);
+    z-index: 10;
   }
 
-  .card-body {
-    padding: 28px 28px 32px;
+  .card-spread.has-active .exp-card:not(.active) {
+    transform: rotate(var(--rot, 0deg)) scale(0.95);
+    filter: blur(3px) brightness(0.55);
+    pointer-events: none;
   }
 
-  .card-meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-  }
-
-  .tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #767676;
-  }
-
-  .tag + .tag::before {
-    content: '·';
-    margin-right: 8px;
-    color: rgba(43, 43, 43, 0.2);
-  }
-
-  .card-title {
+  /* ── CARD INTRO ── */
+  .card-intro {
     font-family: var(--font-serif);
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    color: var(--color-black);
-    margin: 0 0 10px 0;
+    font-weight: 300;
+    font-size: clamp(11px, 1.1vw, 15px);
+    color: #C9A96E;
+    margin: 0 0 6px 0;
+    font-style: italic;
+    letter-spacing: 0;
   }
 
-  .card-description {
+  .is-placeholder .card-intro {
+    display: none;
+  }
+
+  /* ── HEADLINE ── */
+  .card-headline {
     font-family: var(--font-sans);
-    font-size: var(--text-base);
-    line-height: 1.6;
+    font-weight: 700;
+    font-size: clamp(14px, 1.6vw, 22px);
+    line-height: 1.25;
+    color: #2b2b2b;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .is-placeholder .card-headline {
+    color: #c8c4c0;
+    font-size: clamp(10px, 1vw, 14px);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ── DETAIL ── */
+  .card-detail {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease 0.06s;
+  }
+
+  .exp-card.active .card-detail {
+    max-height: 260px;
+    opacity: 1;
+  }
+
+  .card-detail-text {
+    font-family: var(--font-sans);
+    font-size: clamp(12px, 1.15vw, 15px);
+    line-height: 1.65;
     color: #595959;
-    margin: 0 0 20px 0;
+    margin: 14px 0 0 0;
+  }
+
+  .card-oven {
+    font-family: var(--font-sans);
+    font-size: clamp(12px, 1.15vw, 15px);
+    line-height: 1.65;
+    color: #bbb;
+    font-style: italic;
+    margin: 12px 0 0 0;
   }
 
   .card-link {
+    display: inline-block;
+    margin-top: 14px;
     font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    color: var(--color-dark);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #2b2b2b;
     text-decoration: none;
+    border-bottom: 1px solid rgba(43, 43, 43, 0.25);
+    padding-bottom: 1px;
+    transition: border-color 0.2s ease, color 0.2s ease;
   }
 
-  .experiment-card:hover .card-link {
-    color: var(--color-black);
+  .card-link:hover {
+    color: #000;
+    border-color: #000;
   }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 720px) {
-    .experiments-list {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 600px) {
-    main {
-      width: calc(100% - 64px);
-      padding: 56px 0;
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    html, body {
+      overflow: auto;
+      height: auto;
     }
 
-    .page-hero {
-      padding: 100px 32px 56px;
+    .experiments-stage {
+      height: auto;
+      padding-top: 80px;
+      padding-bottom: 48px;
+      overflow: visible;
     }
 
-    .experiments-list {
-      grid-template-columns: 1fr;
+    .stage-label {
+      padding: 20px 24px 8px;
+    }
+
+    .card-spread {
+      position: static;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 20px 24px;
+    }
+
+    .exp-card {
+      position: static !important;
+      width: 100% !important;
+      transform: none !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    .exp-card:hover:not(.active) {
+      transform: translateY(-2px) !important;
+    }
+
+    .exp-card.active {
+      transform: none !important;
+    }
+
+    .card-spread.has-active .exp-card:not(.active) {
+      transform: none !important;
+      filter: none;
+      opacity: 0.5;
+    }
+
+    .is-placeholder {
+      display: none;
     }
   }
 </style>
+
+<script>
+  const spread = document.getElementById('card-spread')!;
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.exp-card'));
+
+  // Shuffle z-indices within row bands so top-row cards always sit above lower rows.
+  // Row 0 (top): z 11–15, Row 1 (middle): z 6–10, Row 2 (bottom): z 1–5.
+  // Within each band the order is random, so it looks different every load.
+  const shuffledZ: number[] = [];
+  for (let row = 0; row < 3; row++) {
+    const base = (2 - row) * 5;
+    const band = [base + 1, base + 2, base + 3, base + 4, base + 5];
+    for (let i = band.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [band[i], band[j]] = [band[j], band[i]];
+    }
+    shuffledZ.push(...band);
+  }
+  cards.forEach((card, i) => card.style.zIndex = String(shuffledZ[i]));
+
+  // Hover: bring card to top, restore on leave
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      if (!card.classList.contains('active')) {
+        card.dataset.prevZ = card.style.zIndex;
+        card.style.zIndex = '50';
+      }
+    });
+    card.addEventListener('mouseleave', () => {
+      if (!card.classList.contains('active') && card.dataset.prevZ) {
+        card.style.zIndex = card.dataset.prevZ;
+      }
+    });
+  });
+  let activeIndex: number | null = null;
+
+  function selectCard(index: number) {
+    cards.forEach((card, i) => {
+      const isActive = i === index;
+      card.classList.toggle('active', isActive);
+      card.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      const detail = card.querySelector('.card-detail');
+      if (detail) detail.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+    });
+    spread.classList.add('has-active');
+    activeIndex = index;
+  }
+
+  function deselect() {
+    cards.forEach(card => {
+      card.classList.remove('active');
+      card.setAttribute('aria-expanded', 'false');
+      const detail = card.querySelector('.card-detail');
+      if (detail) detail.setAttribute('aria-hidden', 'true');
+    });
+    spread.classList.remove('has-active');
+    activeIndex = null;
+  }
+
+  cards.forEach((card, i) => {
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (activeIndex === i) {
+        deselect();
+      } else {
+        selectCard(i);
+      }
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (activeIndex === i) {
+          deselect();
+        } else {
+          selectCard(i);
+        }
+      }
+    });
+  });
+
+  document.addEventListener('click', () => {
+    if (activeIndex !== null) deselect();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') deselect();
+  });
+
+  spread.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (activeIndex === null) {
+      selectCard(e.deltaY > 0 ? 0 : cards.length - 1);
+    } else {
+      const next = e.deltaY > 0
+        ? (activeIndex + 1) % cards.length
+        : (activeIndex - 1 + cards.length) % cards.length;
+      selectCard(next);
+    }
+  }, { passive: false });
+</script>

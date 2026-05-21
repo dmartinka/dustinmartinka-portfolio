@@ -4,6 +4,8 @@ description: "My new superpower. An AI-powered second brain built on Claude Code
 pubDate: 2025-01-01
 tags: [AI, productivity, tools]
 image: /experiments/0a176f1e-fec7-4560-a489-0faaf630183a.webp
+cardHeadline: "built myself an AI that does half my thinking"
+cardDetail: "I got laid off and immediately built a custom AI assistant to help me figure out what to do next. It has context on my life, my goals, and my projects — and it remembers things between sessions. Turns out the best productivity tool is the one you built yourself."
 ---
 
 Most people use AI. I wanted to manage it.

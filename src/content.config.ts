@@ -26,6 +26,8 @@ const experiments = defineCollection({
 		tags: z.array(z.string()).optional(),
 		status: z.string().optional(),
 		image: z.string().optional(),
+		cardHeadline: z.string().optional(),
+		cardDetail: z.string().optional(),
 	}),
 });
 
