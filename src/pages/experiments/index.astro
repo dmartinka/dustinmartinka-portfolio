@@ -15,27 +15,26 @@ function hoverRot(rot: string): string {
   return `${hover}deg`;
 }
 
-// 15 card positions. Real experiments keyed by slug at specific positions.
-// 3 rows of 5, staggered vertically. Rotations alternate direction.
+// 14 card positions. 5 top, 4 middle, 5 bottom.
+// Rotations alternate direction.
 const cardDefs = [
-  // Row 1 — top of spread, tight stagger
-  { top: '4%',  left: '10%', rot: '-5deg', slug: null },
-  { top: '2%',  left: '25%', rot: '3deg',  slug: null },
+  // Row 1 — top of spread, 5 cards
+  { top: '4%',  left: '10%', rot: '-5deg', slug: 'onboarding-gpt' },
+  { top: '2%',  left: '25%', rot: '3deg',  slug: 'mood-uplifter' },
   { top: '5%',  left: '40%', rot: '-2deg', slug: 'dustain' },
-  { top: '2%',  left: '55%', rot: '6deg',  slug: null },
-  { top: '4%',  left: '70%', rot: '-4deg', slug: null },
-  // Row 2 — overlaps row 1 by ~120px, shifted right half a column
-  { top: '30%', left: '17%', rot: '4deg',  slug: null },
-  { top: '27%', left: '32%', rot: '-6deg', slug: null },
-  { top: '31%', left: '47%', rot: '2deg',  slug: 'tmobile-nav-unification' },
-  { top: '28%', left: '62%', rot: '-3deg', slug: null },
-  { top: '30%', left: '77%', rot: '5deg',  slug: null },
-  // Row 3 — overlaps row 2 by ~120px, shifted left half a column
-  { top: '55%', left: '12%', rot: '3deg',  slug: null },
-  { top: '52%', left: '27%', rot: '-4deg', slug: null },
-  { top: '56%', left: '42%', rot: '6deg',  slug: 'tmobile-workshop' },
-  { top: '53%', left: '57%', rot: '-2deg', slug: null },
-  { top: '55%', left: '72%', rot: '4deg',  slug: null },
+  { top: '2%',  left: '55%', rot: '6deg',  slug: 'interview-framework' },
+  { top: '4%',  left: '70%', rot: '-4deg', slug: 'layoff-advocacy' },
+  // Row 2 — middle, 4 cards, centered
+  { top: '30%', left: '20%', rot: '4deg',  slug: 'weekly-wrapup' },
+  { top: '27%', left: '35%', rot: '-6deg', slug: 'design-brief' },
+  { top: '31%', left: '50%', rot: '2deg',  slug: 'tmobile-nav-unification' },
+  { top: '28%', left: '65%', rot: '-3deg', slug: 'competency-assessment' },
+  // Row 3 — bottom, 5 cards
+  { top: '55%', left: '10%', rot: '3deg',  slug: 'general-assembly' },
+  { top: '52%', left: '25%', rot: '-4deg', slug: 'marketplace-fridge' },
+  { top: '56%', left: '40%', rot: '6deg',  slug: 'tmobile-workshop' },
+  { top: '53%', left: '55%', rot: '-2deg', slug: 'elvtr-certification' },
+  { top: '55%', left: '70%', rot: '5deg',  slug: 'frankfurt-barcamp' },
 ];
 ---
 
@@ -62,7 +61,7 @@ const cardDefs = [
           return (
             <div
               class={`exp-card${isPlaceholder ? ' is-placeholder' : ''}`}
-              style={`--rot: ${def.rot}; --hover-rot: ${hoverRot(def.rot)}; top: ${def.top}; left: ${def.left};`}
+              style={`--rot: ${def.rot}; --hover-rot: ${hoverRot(def.rot)}; top: ${def.top}; left: ${def.left}; opacity: 0;`}
               data-index={i}
               role="button"
               tabindex="0"
@@ -76,7 +75,9 @@ const cardDefs = [
                 {exp ? (
                   <>
                     <p class="card-detail-text">{exp.data.cardDetail ?? exp.data.description}</p>
-                    <a href={`/experiments/${exp.id}/`} class="card-link">Full story →</a>
+                    {exp.data.fullStory !== false && (
+                      <a href={`/experiments/${exp.id}/`} class="card-link">Full story →</a>
+                    )}
                   </>
                 ) : (
                   <p class="card-oven">still in the oven.</p>
@@ -107,6 +108,11 @@ const cardDefs = [
     overflow: hidden;
   }
 
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   .stage-label {
     font-family: var(--font-serif);
     font-weight: 300;
@@ -117,6 +123,8 @@ const cardDefs = [
     flex-shrink: 0;
     letter-spacing: -0.01em;
     text-align: center;
+    animation: fadeUp 0.9s ease both;
+    animation-delay: 0.15s;
   }
 
   .card-spread {
@@ -316,10 +324,74 @@ const cardDefs = [
   const spread = document.getElementById('card-spread')!;
   const cards = Array.from(document.querySelectorAll<HTMLElement>('.exp-card'));
 
-  // Shuffle z-indices within row bands so top-row cards always sit above lower rows.
+  // ── POSITION SHUFFLE ──
+  // Extract each card's layout props (with its original row band), shuffle them,
+  // then re-apply so real experiments land in a different slot every page load.
+  const positions = cards.map((card, i) => ({
+    top:      card.style.top,
+    left:     card.style.left,
+    rot:      card.style.getPropertyValue('--rot'),
+    hoverRot: card.style.getPropertyValue('--hover-rot'),
+    row:      Math.floor(i / 5) as 0 | 1 | 2,
+  }));
+  for (let i = positions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [positions[i], positions[j]] = [positions[j], positions[i]];
+  }
+  cards.forEach((card, i) => {
+    const pos = positions[i];
+    card.style.top  = pos.top;
+    card.style.left = pos.left;
+    card.style.setProperty('--rot',       pos.rot);
+    card.style.setProperty('--hover-rot', pos.hoverRot);
+    card.dataset.row = String(pos.row);
+  });
+
+  // Entrance animation via WAAPI — avoids CSS-var-in-keyframe resolution issues.
+  // Cards start off-screen by exactly enough to be hidden, so they're visible
+  // for most of the journey and the rotation is clearly perceptible.
+  const vw = document.documentElement.clientWidth;
+  const vh = document.documentElement.clientHeight;
+
+  cards.forEach(card => {
+    const restDeg = parseFloat(card.style.getPropertyValue('--rot') || '0');
+    const edges = ['left', 'right', 'top', 'bottom'] as const;
+    const edge = edges[Math.floor(Math.random() * 4)];
+    const extra = 80 + Math.random() * 30; // 80–110deg rotation swing — visible even near the end of travel
+
+    let tx: number, ty: number, startRot: number;
+    if (edge === 'left') {
+      tx = -1.3 * vw; ty = 0; startRot = restDeg - extra;
+    } else if (edge === 'right') {
+      tx =  1.3 * vw; ty = 0; startRot = restDeg + extra;
+    } else if (edge === 'top') {
+      tx = 0; ty = -1.3 * vh; startRot = restDeg + (Math.random() > 0.5 ? extra : -extra);
+    } else {
+      tx = 0; ty =  1.3 * vh; startRot = restDeg + (Math.random() > 0.5 ? extra : -extra);
+    }
+
+    const delay = Math.random() * 200;        // 0–200ms stagger (was 0–500ms)
+    const dur   = 450 + Math.random() * 150;  // 450–600ms duration (was 650–850ms)
+
+    const anim = card.animate(
+      [
+        { transform: `translate(${tx}px, ${ty}px) rotate(${startRot}deg)`, opacity: '0' },
+        { transform: `rotate(${restDeg}deg)`,                              opacity: '1' },
+      ],
+      { duration: dur, delay, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'both' }
+    );
+
+    anim.addEventListener('finish', () => {
+      anim.commitStyles();
+      anim.cancel();
+      card.style.transform = '';
+      card.style.opacity = '';
+    }, { once: true });
+  });
+
+  // ── Z-INDEX (row-banded, using shuffled row assignment) ──
   // Row 0 (top): z 11–15, Row 1 (middle): z 6–10, Row 2 (bottom): z 1–5.
-  // Within each band the order is random, so it looks different every load.
-  const shuffledZ: number[] = [];
+  const zPools: number[][] = [[], [], []];
   for (let row = 0; row < 3; row++) {
     const base = (2 - row) * 5;
     const band = [base + 1, base + 2, base + 3, base + 4, base + 5];
@@ -327,9 +399,13 @@ const cardDefs = [
       const j = Math.floor(Math.random() * (i + 1));
       [band[i], band[j]] = [band[j], band[i]];
     }
-    shuffledZ.push(...band);
+    zPools[row] = band;
   }
-  cards.forEach((card, i) => card.style.zIndex = String(shuffledZ[i]));
+  const zCounts = [0, 0, 0];
+  cards.forEach(card => {
+    const row = parseInt(card.dataset.row || '0');
+    card.style.zIndex = String(zPools[row][zCounts[row]++]);
+  });
 
   // Hover: bring card to top, restore on leave
   cards.forEach(card => {
@@ -397,18 +473,16 @@ const cardDefs = [
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') deselect();
-  });
-
-  spread.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    if (activeIndex === null) {
-      selectCard(e.deltaY > 0 ? 0 : cards.length - 1);
-    } else {
-      const next = e.deltaY > 0
-        ? (activeIndex + 1) % cards.length
-        : (activeIndex - 1 + cards.length) % cards.length;
+    if (e.key === 'Escape') {
+      deselect();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      const next = activeIndex === null ? 0 : (activeIndex + 1) % cards.length;
+      selectCard(next);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const next = activeIndex === null ? cards.length - 1 : (activeIndex - 1 + cards.length) % cards.length;
       selectCard(next);
     }
-  }, { passive: false });
+  });
 </script>
