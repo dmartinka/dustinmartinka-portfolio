@@ -171,7 +171,7 @@ const cardDefs = [
   }
 
   .exp-card.active {
-    transform: rotate(0deg) scale(1.04);
+    transform: translate(var(--active-tx, 0px), var(--active-ty, 0px)) rotate(0deg) scale(1.04);
     box-shadow: 0 20px 56px rgba(0, 0, 0, 0.35);
     z-index: 10;
   }
@@ -225,7 +225,7 @@ const cardDefs = [
   }
 
   .exp-card.active .card-detail {
-    max-height: 260px;
+    max-height: 600px;
     opacity: 1;
   }
 
@@ -404,7 +404,9 @@ const cardDefs = [
   const zCounts = [0, 0, 0];
   cards.forEach(card => {
     const row = parseInt(card.dataset.row || '0');
-    card.style.zIndex = String(zPools[row][zCounts[row]++]);
+    const z = String(zPools[row][zCounts[row]++]);
+    card.style.zIndex = z;
+    card.dataset.baseZ = z;
   });
 
   // Hover: bring card to top, restore on leave
@@ -422,14 +424,41 @@ const cardDefs = [
     });
   });
   let activeIndex: number | null = null;
+  let topZ = 20;
 
   function selectCard(index: number) {
+    const activeCard = cards[index];
+
+    // Pre-compute viewport correction accounting for full expanded height.
+    // The card grows downward from rect.top, so we use the expanded center, not the collapsed center.
+    // scrollHeight gives the detail's true height even while collapsed (overflow:hidden doesn't affect it).
+    const rect = activeCard.getBoundingClientRect();
+    const detail = activeCard.querySelector<HTMLElement>('.card-detail');
+    const detailH = detail ? detail.scrollHeight : 0;
+    const expandedH = rect.height + detailH;
+    const scale = 1.04;
+    const cx = rect.left + rect.width / 2;
+    const expandedCy = rect.top + expandedH / 2;
+    const projLeft   = cx         - (rect.width * scale) / 2;
+    const projRight  = cx         + (rect.width * scale) / 2;
+    const projTop    = expandedCy - (expandedH  * scale) / 2;
+    const projBottom = expandedCy + (expandedH  * scale) / 2;
+    const margin = 20;
+    let tx = 0, ty = 0;
+    if (projLeft   < margin)           tx = margin - projLeft;
+    else if (projRight  > vw - margin) tx = (vw - margin) - projRight;
+    if (projTop    < margin)           ty = margin - projTop;
+    else if (projBottom > vh - margin) ty = (vh - margin) - projBottom;
+    activeCard.style.setProperty('--active-tx', `${tx}px`);
+    activeCard.style.setProperty('--active-ty', `${ty}px`);
+
     cards.forEach((card, i) => {
       const isActive = i === index;
       card.classList.toggle('active', isActive);
       card.setAttribute('aria-expanded', isActive ? 'true' : 'false');
       const detail = card.querySelector('.card-detail');
       if (detail) detail.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      card.style.zIndex = isActive ? '100' : (card.dataset.baseZ ?? '1');
     });
     spread.classList.add('has-active');
     activeIndex = index;
@@ -441,6 +470,9 @@ const cardDefs = [
       card.setAttribute('aria-expanded', 'false');
       const detail = card.querySelector('.card-detail');
       if (detail) detail.setAttribute('aria-hidden', 'true');
+      if (card.classList.contains('active')) {
+        card.style.zIndex = String(++topZ);
+      }
     });
     spread.classList.remove('has-active');
     activeIndex = null;
