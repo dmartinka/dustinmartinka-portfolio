@@ -4,8 +4,9 @@ description: "What happens when you decide to fix a problem nobody asked you to 
 pubDate: 2025-08-01
 tags: [Leadership, Design strategy]
 image: /experiments/270de3d8-76ae-45d7-a4d4-b07d4ed1ff1a.webp
-cardHeadline: "redesigned something nobody asked me to"
-cardDetail: "T-Mobile had six different nav patterns living on the same platform. Nobody asked me to fix it. I fixed it anyway, pitched it up the chain, and it actually landed."
+cardHeadline: "Redesigned something nobody asked me to"
+cardIntro: "When I..."
+cardDetail: "T-Mobile had eight different navigation patterns living on the same platform. To customers, it created a fragmented experience. Nobody asked me to fix it. I went forward with it, pitched it up the chain, and it actually landed."
 ---
 
 T-Mobile's navigation hadn't been looked at from a UX lens in over five years. The company had grown, added new products and business lines, and just kept bolting things on. By 2025 there were eight different navigation patterns depending on where you entered the site. Wireless, prepaid, internet, business — each one its own thing. No single view of T-Mobile as one company.

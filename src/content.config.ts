@@ -28,6 +28,8 @@ const experiments = defineCollection({
 		image: z.string().optional(),
 		cardHeadline: z.string().optional(),
 		cardDetail: z.string().optional(),
+		cardIntro: z.string().optional(),
+		fullStory: z.boolean().optional(),
 	}),
 });
 

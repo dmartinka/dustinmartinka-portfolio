@@ -4,7 +4,7 @@ import ExperimentPost from '../../layouts/ExperimentPost.astro';
 
 export async function getStaticPaths() {
   const experiments = await getCollection('experiments');
-  return experiments.map((exp) => ({
+  return experiments.filter((exp) => exp.data.fullStory !== false).map((exp) => ({
     params: { slug: exp.id },
     props: exp,
   }));

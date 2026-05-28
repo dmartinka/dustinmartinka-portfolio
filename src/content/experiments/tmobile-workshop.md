@@ -4,7 +4,8 @@ description: "What happens when you run a workshop where the leader brings the c
 pubDate: 2026-01-01
 tags: [Leadership, Team culture]
 image: /experiments/22b19e02-7d3c-419b-a6c5-874f679e53f7.webp
-cardHeadline: "handed the wheel to my team and watched what happened"
+cardHeadline: "Handed the wheel to my team and watched what happened"
+cardIntro: "Back when I..."
 cardDetail: "I ran a workshop where I came in with the problem, not the answer. The team built the direction. I kept my mouth shut and facilitated. It was harder than it sounds and better than I expected."
 ---
 

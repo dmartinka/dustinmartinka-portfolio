@@ -50,7 +50,7 @@ const cardDefs = [
     <Header forceScrolled={true} />
 
     <div class="experiments-stage">
-      <p class="stage-label">These are things I've built, tried, and learned from. Not all of them worked. That's the point.</p>
+      <p class="stage-label">These are things I've built, tried, and learned from. Not all of them worked.</p>
       <div class="card-spread" id="card-spread">
         {cardDefs.map((def, i) => {
           const exp = def.slug
@@ -67,7 +67,7 @@ const cardDefs = [
               tabindex="0"
               aria-expanded="false"
             >
-              <p class="card-intro">The time I...</p>
+              <p class="card-intro">{exp ? (exp.data.cardIntro ?? 'The time I...') : ''}</p>
               <h2 class="card-headline">
                 {exp ? exp.data.cardHeadline ?? exp.data.title : 'coming soon'}
               </h2>
@@ -264,6 +264,19 @@ const cardDefs = [
   .card-link:hover {
     color: #000;
     border-color: #000;
+  }
+
+  /* ── LARGE SCREENS ── */
+  /* Scales smoothly from 280px at 1710px viewport to 420px at 2560px, then caps. */
+  @media (min-width: 1710px) {
+    .exp-card {
+      --card-size: clamp(280px, 16.37vw, 420px);
+      padding: clamp(28px, 1.637vw, 42px);
+    }
+    .stage-label  { font-size: clamp(22px, 1.287vw, 33px); }
+    .card-intro   { font-size: clamp(15px, 0.877vw, 22px); }
+    .card-headline { font-size: clamp(22px, 1.287vw, 33px); }
+    .card-detail-text { font-size: clamp(15px, 0.877vw, 22px); }
   }
 
   /* ── MOBILE ── */
