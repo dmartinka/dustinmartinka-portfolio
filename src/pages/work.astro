@@ -1,0 +1,102 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="Work — Dustin Martinka"
+      description="Case studies from 20+ years of product design leadership at T-Mobile, MoxiWorks, and Microsoft."
+    />
+  </head>
+  <body>
+    <Header forceScrolled={true} />
+
+    <main>
+      <div class="work-inner">
+        <h1 class="headline">Case studies in progress!</h1>
+        <p class="body-copy">
+          I'm currently updating these. Please reach out to me directly and I'll walk you through the work, show you what I can share, and have a real conversation about what I'd bring to your team.
+        </p>
+        <a class="contact-link" href="mailto:dmartinka@gmail.com">
+          Get in touch &rarr;
+        </a>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  body {
+    background: #201e1b;
+  }
+
+  main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 56px 80px;
+    box-sizing: border-box;
+  }
+
+  .work-inner {
+    max-width: 640px;
+    width: 100%;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .headline {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #f2ede8;
+    margin: 0 0 32px 0;
+    animation: fadeUp 0.9s ease both;
+    animation-delay: 0.2s;
+  }
+
+  .body-copy {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.4vw, 20px);
+    line-height: 1.7;
+    color: rgba(242, 237, 232, 0.6);
+    margin: 0 0 40px 0;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.4s;
+  }
+
+  .contact-link {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #C9A96E;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.35);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.55s;
+  }
+
+  .contact-link:hover {
+    color: #d9bc89;
+    border-color: rgba(201, 169, 110, 0.7);
+  }
+
+  @media (max-width: 800px) {
+    main {
+      padding: 100px 32px 64px;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -8,6 +8,7 @@ interface Props {
 
 const { forceScrolled = false } = Astro.props;
 const currentPath = Astro.url.pathname;
+const isWork = currentPath.startsWith('/work');
 const isExperiments = currentPath.startsWith('/experiments');
 ---
 
@@ -15,6 +16,7 @@ const isExperiments = currentPath.startsWith('/experiments');
   <nav>
     <a class="nav-logo" href="/">{SITE_TITLE}</a>
     <div class="nav-links">
+      <a href="/work/" class={isWork ? 'active' : ''}>Work</a>
       <a href="/experiments/" class={isExperiments ? 'active' : ''}>Experiments</a>
       <a class="linkedin-link" href="https://www.linkedin.com/in/dustinmartinka/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
