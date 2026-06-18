@@ -3,8 +3,72 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} Dustin Martinka. All rights reserved.
+	<p class="copyright">&copy; {today.getFullYear()} Dustin Martinka. All rights reserved.</p>
+	<p class="credits-line">
+		Made using AI and my 🧠 and ❤️ &mdash;
+		<button class="credits-link" id="open-credits">Full credits</button>
+	</p>
 </footer>
+
+<!-- Credits overlay (position: fixed — DOM placement doesn't affect layout) -->
+<div class="credits-overlay" id="credits-overlay" role="dialog" aria-modal="true" aria-label="Full credits">
+	<button class="credits-close" id="credits-close" aria-label="Close credits">&times;</button>
+	<div class="credits-scroll-wrap">
+		<div class="credits-content" id="credits-content">
+
+			<p class="credits-section-label">AI &amp; Development</p>
+
+			<p class="credits-name">Claude</p>
+			<p class="credits-sub">Anthropic</p>
+			<p class="credits-role">Strategy, writing, design feedback, and creative direction.</p>
+
+			<p class="credits-name">Claude Code</p>
+			<p class="credits-sub">Anthropic</p>
+			<p class="credits-role">The VS Code extension. Connected to the codebase, wrote the code, ran the builds.</p>
+
+			<p class="credits-section-label">Design &amp; Craft</p>
+
+			<p class="credits-name">Figma</p>
+			<p class="credits-role">Design and prototyping.</p>
+
+			<p class="credits-name">Figma Make</p>
+			<p class="credits-sub">with Nano Banana</p>
+			<p class="credits-role">Design system architecture and case study presentations.</p>
+
+			<p class="credits-name">Claude Design</p>
+			<p class="credits-sub">Anthropic</p>
+			<p class="credits-role">Design system build-out and case study deck.</p>
+
+			<p class="credits-section-label">Imagery &amp; Illustration</p>
+
+			<p class="credits-name">Redraft</p>
+			<p class="credits-role">AI image styling, connected via DustAIn.</p>
+
+			<p class="credits-name">Gemini &amp; Nano Banana</p>
+			<p class="credits-sub">Google</p>
+			<p class="credits-role">Portrait illustrations from photo.</p>
+
+			<p class="credits-name">Canva</p>
+			<p class="credits-role">Portfolio card illustrations.</p>
+
+			<p class="credits-section-label">Inspiration</p>
+
+			<p class="credits-name">Variant</p>
+			<p class="credits-role">Layout inspiration and fresh ideas.</p>
+
+			<p class="credits-section-label">Built On</p>
+
+			<p class="credits-name">Astro</p>
+			<p class="credits-role">Static site framework.</p>
+
+			<div class="credits-divider"></div>
+
+			<p class="credits-finale">A Dustin Martinka Production</p>
+
+		</div>
+	</div>
+</div>
+
 <style>
 	footer {
 		padding: 2em 1em 6em 1em;
@@ -14,4 +78,195 @@ const today = new Date();
 		font-family: var(--font-sans);
 		font-size: 13px;
 	}
+
+	.copyright {
+		margin: 0 0 8px;
+	}
+
+	.credits-line {
+		margin: 0;
+		font-size: 13px;
+		color: rgba(43, 43, 43, 0.5);
+	}
+
+	.credits-link {
+		background: none;
+		border: none;
+		border-bottom: 1px solid rgba(201, 169, 110, 0.35);
+		padding: 0 0 1px;
+		font-family: var(--font-sans);
+		font-size: 13px;
+		color: #C9A96E;
+		cursor: pointer;
+		transition: color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.credits-link:hover {
+		color: #d9bc89;
+		border-color: rgba(201, 169, 110, 0.7);
+	}
+
+	/* ── OVERLAY ── */
+	.credits-overlay {
+		position: fixed;
+		inset: 0;
+		z-index: 500;
+		background: #201e1b;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.7s ease;
+	}
+
+	.credits-overlay.is-open {
+		opacity: 1;
+		pointer-events: all;
+	}
+
+	.credits-close {
+		position: absolute;
+		top: 32px;
+		right: 40px;
+		z-index: 10;
+		background: none;
+		border: none;
+		font-size: 32px;
+		line-height: 1;
+		color: rgba(242, 237, 232, 0.35);
+		cursor: pointer;
+		transition: color 0.2s ease;
+		padding: 0;
+	}
+
+	.credits-close:hover {
+		color: #f2ede8;
+	}
+
+	/* ── SCROLL MECHANICS ── */
+	.credits-scroll-wrap {
+		position: absolute;
+		inset: 0;
+		overflow: hidden;
+	}
+
+	.credits-content {
+		width: 100%;
+		max-width: 560px;
+		margin: 0 auto;
+		padding: 0 40px 0;
+		text-align: center;
+		transform: translateY(100vh);
+	}
+
+	.credits-overlay.is-open .credits-content {
+		animation: rollCredits 90s linear forwards;
+	}
+
+	.credits-content:hover {
+		animation-play-state: paused;
+	}
+
+	@keyframes rollCredits {
+		from { transform: translateY(100vh); }
+		to   { transform: translateY(-100%); }
+	}
+
+	/* ── CREDITS TYPOGRAPHY ── */
+	.credits-section-label {
+		font-family: var(--font-sans);
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: #C9A96E;
+		margin: 80px 0 36px;
+	}
+
+	.credits-name {
+		font-family: var(--font-serif);
+		font-weight: 300;
+		font-size: clamp(28px, 4vw, 44px);
+		line-height: 1.15;
+		color: #f2ede8;
+		margin: 0 0 6px;
+	}
+
+	.credits-sub {
+		font-family: var(--font-sans);
+		font-size: 13px;
+		font-weight: 400;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: rgba(242, 237, 232, 0.35);
+		margin: 0 0 14px;
+	}
+
+	.credits-role {
+		font-family: var(--font-sans);
+		font-size: 16px;
+		line-height: 1.65;
+		color: rgba(242, 237, 232, 0.5);
+		margin: 0 0 56px;
+	}
+
+	.credits-divider {
+		width: 40px;
+		height: 1px;
+		background: rgba(242, 237, 232, 0.15);
+		margin: 80px auto 64px;
+	}
+
+	.credits-finale {
+		font-family: var(--font-sans);
+		font-size: 12px;
+		font-weight: 400;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: rgba(242, 237, 232, 0.3);
+		margin: 0 0 240px;
+	}
+
+	@media (max-width: 600px) {
+		.credits-close {
+			top: 20px;
+			right: 24px;
+		}
+
+		.credits-content {
+			padding: 0 32px;
+		}
+	}
 </style>
+
+<script>
+	const overlay = document.getElementById('credits-overlay');
+	const openBtn = document.getElementById('open-credits');
+	const closeBtn = document.getElementById('credits-close');
+	const content = document.getElementById('credits-content');
+
+	function openCredits() {
+		overlay?.classList.add('is-open');
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeCredits() {
+		overlay?.classList.remove('is-open');
+		document.body.style.overflow = '';
+		if (content) {
+			content.style.animation = 'none';
+			requestAnimationFrame(() => {
+				content.style.animation = '';
+			});
+		}
+	}
+
+	openBtn?.addEventListener('click', openCredits);
+	closeBtn?.addEventListener('click', closeCredits);
+
+	document.addEventListener('keydown', e => {
+		if (e.key === 'Escape' && overlay?.classList.contains('is-open')) closeCredits();
+	});
+
+	overlay?.addEventListener('click', e => {
+		if (e.target === overlay) closeCredits();
+	});
+</script>
