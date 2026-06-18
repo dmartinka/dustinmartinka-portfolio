@@ -108,6 +108,7 @@ const today = new Date();
 
 	/* ── OVERLAY ── */
 	.credits-overlay {
+		display: none;
 		position: fixed;
 		inset: 0;
 		z-index: 500;
@@ -115,6 +116,10 @@ const today = new Date();
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity 0.7s ease;
+	}
+
+	.credits-overlay.is-visible {
+		display: block;
 	}
 
 	.credits-overlay.is-open {
@@ -244,7 +249,12 @@ const today = new Date();
 	const content = document.getElementById('credits-content');
 
 	function openCredits() {
-		overlay?.classList.add('is-open');
+		overlay?.classList.add('is-visible');
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				overlay?.classList.add('is-open');
+			});
+		});
 		document.body.style.overflow = 'hidden';
 	}
 
@@ -253,10 +263,11 @@ const today = new Date();
 		document.body.style.overflow = '';
 		if (content) {
 			content.style.animation = 'none';
-			requestAnimationFrame(() => {
-				content.style.animation = '';
-			});
+			requestAnimationFrame(() => { content.style.animation = ''; });
 		}
+		overlay?.addEventListener('transitionend', () => {
+			overlay?.classList.remove('is-visible');
+		}, { once: true });
 	}
 
 	openBtn?.addEventListener('click', openCredits);
