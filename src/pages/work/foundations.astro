@@ -1,0 +1,764 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="Foundations Team — Dustin Martinka"
+      description="How I built T-Mobile's Foundations team from scratch after a major reorg — scoping 4 product areas and hiring a 10-person team in 18 months."
+    />
+  </head>
+  <body>
+
+    <div class="bg-layer" aria-hidden="true">
+      <div class="bg-orbs">
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
+        <div class="orb orb-c"></div>
+      </div>
+      <div class="bg-grain"></div>
+    </div>
+
+    <Header forceScrolled={true} />
+
+    <!-- BACK LINK -->
+    <div class="back-wrap">
+      <div class="page-container">
+        <a class="back-link" href="/work" id="back-btn">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          All work
+        </a>
+      </div>
+    </div>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="page-container hero-inner">
+        <p class="eyebrow">Case Study · T-Mobile</p>
+        <h1 class="hero-headline">
+          Built the team that owned<br>
+          T-Mobile's <em>foundational</em><br>
+          digital surface.
+        </h1>
+        <div class="meta-strip">
+          <div class="meta-item">
+            <p class="meta-label">Role</p>
+            <p class="meta-value">Sr. Manager, Product Design</p>
+          </div>
+          <div class="meta-divider" aria-hidden="true"></div>
+          <div class="meta-item">
+            <p class="meta-label">Timeline</p>
+            <p class="meta-value">18 months</p>
+          </div>
+          <div class="meta-divider" aria-hidden="true"></div>
+          <div class="meta-item">
+            <p class="meta-label">Year</p>
+            <p class="meta-value">2024–2025</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── THE CHALLENGE ── -->
+    <section class="section section--light">
+      <div class="section-inner two-col">
+        <div class="col-left">
+          <h2 class="section-heading">The Challenge</h2>
+          <p class="body-text">After a major reorg, I was stripped of my previous team and left with 2 contractors and a blank org chart. No defined scope. No direction. I had to figure out what my team would own — while simultaneously making sure nothing fell through the cracks.</p>
+          <p class="body-text">My first move was to partner with Product peers to understand their roadmap. A tactical play to hold the line while I did the harder strategic work of defining what this team would actually be.</p>
+        </div>
+        <div class="col-right">
+          <div class="objective-box">
+            <p class="objective-label">Objective</p>
+            <p class="objective-quote">"Build a team that owns the foundational digital experiences T-Mobile customers rely on every day."</p>
+          </div>
+          <div class="approach-items">
+            <div class="approach-item">
+              <span class="approach-num">1</span>
+              <div>
+                <p class="approach-title">Define the scope</p>
+                <p class="approach-body">Map the product surface. Find the open areas that mattered but had no ownership.</p>
+              </div>
+            </div>
+            <div class="approach-item">
+              <span class="approach-num">2</span>
+              <div>
+                <p class="approach-title">Build the team</p>
+                <p class="approach-body">Hire the right people — internal transfers and external hires — to own each area.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── THE APPROACH ── -->
+    <section class="section section--dark">
+      <div class="section-inner">
+        <p class="section-eyebrow">The Approach</p>
+        <h2 class="section-heading-dark">Finding the open field.</h2>
+        <p class="body-text body-text--muted body-text--centered">I reviewed product roadmaps across the org, then grouped areas from a user-centered perspective — consolidating the many into four clear pillars. This became the blueprint for the team.</p>
+
+        <div class="pillars-grid">
+          <div class="pillar">
+            <p class="pillar-name">Search &amp; Discovery</p>
+            <p class="pillar-desc">Helping customers find information quickly and navigate the platform with confidence.</p>
+            <div class="pillar-areas">
+              <span>Navigation &amp; IA</span>
+              <span>Search</span>
+            </div>
+          </div>
+          <div class="pillar">
+            <p class="pillar-name">Security &amp; Authentication</p>
+            <p class="pillar-desc">Ensuring customers a secure and trustworthy way to manage their digital presence.</p>
+            <div class="pillar-areas">
+              <span>Authentication / Login</span>
+              <span>Profile</span>
+              <span>Privacy</span>
+            </div>
+          </div>
+          <div class="pillar">
+            <p class="pillar-name">User Engagement &amp; Support</p>
+            <p class="pillar-desc">Keeping customers informed, connected, and supported throughout their journey.</p>
+            <div class="pillar-areas">
+              <span>Homepage</span>
+              <span>Notifications</span>
+              <span>Onboarding</span>
+              <span>Support</span>
+            </div>
+          </div>
+          <div class="pillar">
+            <p class="pillar-name">Network Services</p>
+            <p class="pillar-desc">Ensuring customers have reliable service and clear visibility into their coverage.</p>
+            <div class="pillar-areas">
+              <span>Network</span>
+              <span>Coverage</span>
+              <span>Maps</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BUILDING THE TEAM ── -->
+    <section class="section section--light">
+      <div class="section-inner two-col two-col--reverse">
+        <div class="col-left">
+          <p class="section-eyebrow-light">Building the team</p>
+          <h2 class="section-heading">Quality over speed.</h2>
+          <p class="body-text">It took 18 months to fully staff the team. I wasn't in a rush to fill seats. I looked for people who understood that foundational work — the unglamorous kind — is where the biggest leverage lives.</p>
+          <p class="body-text">I hired both externally and through internal transfers, often pulling people I'd worked with before and trusted. By the end, we had 10 people covering all four pillars, with clear ownership and a shared sense of purpose.</p>
+          <p class="body-text">We called ourselves the Foundations team.</p>
+        </div>
+        <div class="col-right col-right--stat">
+          <div class="team-stat">
+            <p class="team-stat-num">2</p>
+            <p class="team-stat-label">contractors at the start</p>
+          </div>
+          <div class="team-stat-arrow" aria-hidden="true">↓</div>
+          <div class="team-stat">
+            <p class="team-stat-num">10</p>
+            <p class="team-stat-label">people, 4 pillars, full ownership</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PULL QUOTE ── -->
+    <section class="quote-section">
+      <div class="quote-inner">
+        <blockquote class="pull-quote">
+          "Everyone wants to work on the next big thing. We owned the things that made everything else possible."
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ── KEY RESULTS ── -->
+    <section class="section section--light">
+      <div class="section-inner">
+        <h2 class="results-heading">Key Results</h2>
+        <p class="results-subhead">Selected outcomes across onboarding, authentication, and account management.</p>
+        <div class="results-grid">
+          <div class="result-item">
+            <p class="result-num">41<span class="result-arrow">→</span>81%</p>
+            <p class="result-label">LOA2+ sessions — passwordless authentication adoption</p>
+          </div>
+          <div class="result-item">
+            <p class="result-num">700K</p>
+            <p class="result-label">fewer projected Care calls from improved onboarding flows</p>
+          </div>
+          <div class="result-item">
+            <p class="result-num">$6M</p>
+            <p class="result-label">projected OPEX savings from self-service account closure</p>
+          </div>
+        </div>
+        <div class="results-grid results-grid--2">
+          <div class="result-item">
+            <p class="result-num">+5.9%</p>
+            <p class="result-label">more customers verified before reaching a Care agent</p>
+          </div>
+          <div class="result-item">
+            <p class="result-num">53.6K</p>
+            <p class="result-label">customers who recovered account access via selfie-based ID verification</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NEXT PROJECT ── -->
+    <section class="next-section">
+      <div class="next-inner">
+        <p class="next-label">Next project</p>
+        <h2 class="next-headline">Turned a two-sentence ask into a six-month initiative.</h2>
+        <a class="next-cta" href="/work">View all work →</a>
+      </div>
+    </section>
+
+  </body>
+</html>
+
+<script>
+  const btn = document.getElementById('back-btn');
+  if (btn) {
+    btn.addEventListener('click', (e) => {
+      const fromSameSite = document.referrer.startsWith(window.location.origin);
+      if (fromSameSite) {
+        e.preventDefault();
+        history.back();
+      }
+    });
+  }
+</script>
+
+<style>
+  body {
+    background: #201e1b;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND ── */
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .bg-orbs { position: absolute; inset: 0; }
+
+  .bg-grain {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: overlay;
+    opacity: 0.22;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/></filter><rect width='300' height='300' filter='url(%23n)' opacity='1'/></svg>");
+    background-size: 300px 300px;
+  }
+
+  @keyframes pulse-a { from { opacity: 0.1; transform: scale(1); } to { opacity: 0.6; transform: scale(1.1); } }
+  @keyframes pulse-b { from { opacity: 0.05; transform: scale(1); } to { opacity: 0.45; transform: scale(1.12); } }
+
+  .orb { position: absolute; border-radius: 50%; mix-blend-mode: screen; }
+  .orb-a { width: 600px; height: 600px; top: -100px; left: -100px; background: rgba(201,169,110,0.18); filter: blur(80px); animation: pulse-a 6s ease-in-out infinite alternate; }
+  .orb-b { width: 500px; height: 500px; top: 40%; right: -80px; background: rgba(242,237,232,0.08); filter: blur(80px); animation: pulse-b 8s ease-in-out infinite alternate; }
+  .orb-c { width: 400px; height: 400px; bottom: 10%; left: 20%; background: rgba(201,169,110,0.1); filter: blur(100px); animation: pulse-a 7s ease-in-out infinite alternate; animation-delay: 2s; }
+
+  /* ── LAYOUT ── */
+  .page-container {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .back-wrap {
+    position: relative;
+    z-index: 10;
+    padding: 104px clamp(28px, 8vw, 120px) 0;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(242, 237, 232, 0.4);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover { color: #C9A96E; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 10;
+    padding: clamp(32px, 5vh, 56px) clamp(28px, 8vw, 120px) clamp(64px, 10vh, 120px);
+  }
+
+  .hero-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C9A96E;
+    margin: 0 0 24px;
+  }
+
+  .hero-headline {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(36px, 5.5vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: #f2ede8;
+    margin: 0 0 48px;
+    max-width: 860px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: #C9A96E;
+  }
+
+  .meta-strip {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+
+  .meta-label {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(242, 237, 232, 0.35);
+    margin: 0;
+  }
+
+  .meta-value {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(242, 237, 232, 0.75);
+    margin: 0;
+  }
+
+  .meta-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(242, 237, 232, 0.12);
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    position: relative;
+    z-index: 10;
+    padding: clamp(64px, 10vh, 120px) clamp(28px, 8vw, 120px);
+  }
+
+  .section--light { background: #f2ede8; }
+  .section--dark  { background: #1a1815; }
+
+  .section-inner { max-width: 1080px; margin: 0 auto; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+
+  .two-col--reverse .col-left { order: 1; }
+  .two-col--reverse .col-right { order: 0; }
+
+  .section-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C9A96E;
+    margin: 0 0 16px;
+  }
+
+  .section-eyebrow-light {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(43, 43, 43, 0.4);
+    margin: 0 0 16px;
+  }
+
+  .section-heading {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 48px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #2b2b2b;
+    margin: 0 0 24px;
+  }
+
+  .section-heading-dark {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 48px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #f2ede8;
+    margin: 0 0 16px;
+    text-align: center;
+  }
+
+  .body-text {
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.75;
+    color: #595959;
+    margin: 0 0 18px;
+  }
+
+  .body-text:last-child { margin-bottom: 0; }
+
+  .body-text--muted { color: rgba(242, 237, 232, 0.5); }
+
+  .body-text--centered {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 56px;
+  }
+
+  /* ── OBJECTIVE BOX ── */
+  .objective-box {
+    background: #2b2b2b;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+
+  .objective-label {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #C9A96E;
+    margin: 0 0 12px;
+  }
+
+  .objective-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(16px, 1.4vw, 20px);
+    line-height: 1.55;
+    color: #f2ede8;
+    margin: 0;
+  }
+
+  /* ── APPROACH ITEMS ── */
+  .approach-items { display: flex; flex-direction: column; gap: 20px; }
+
+  .approach-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .approach-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(43, 43, 43, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(43, 43, 43, 0.5);
+    flex-shrink: 0;
+  }
+
+  .approach-title {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: #2b2b2b;
+    margin: 0 0 4px;
+  }
+
+  .approach-body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(43, 43, 43, 0.55);
+    margin: 0;
+  }
+
+  /* ── PILLARS GRID ── */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .pillar {
+    background: rgba(242, 237, 232, 0.04);
+    border: 1px solid rgba(242, 237, 232, 0.08);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pillar-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: #C9A96E;
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+
+  .pillar-desc {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(242, 237, 232, 0.45);
+    margin: 0;
+    flex: 1;
+  }
+
+  .pillar-areas {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px solid rgba(242, 237, 232, 0.08);
+    padding-top: 14px;
+    margin-top: auto;
+  }
+
+  .pillar-areas span {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(242, 237, 232, 0.3);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── TEAM STAT ── */
+  .col-right--stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 48px 32px;
+    background: #f0ebe4;
+    border-radius: 12px;
+  }
+
+  .team-stat { text-align: center; }
+
+  .team-stat-num {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #2b2b2b;
+    margin: 0 0 6px;
+  }
+
+  .team-stat-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(43, 43, 43, 0.38);
+    margin: 0;
+  }
+
+  .team-stat-arrow {
+    font-size: 28px;
+    color: #C9A96E;
+    line-height: 1;
+  }
+
+  /* ── PULL QUOTE ── */
+  .quote-section {
+    position: relative;
+    z-index: 10;
+    background: #201e1b;
+    padding: clamp(64px, 10vh, 120px) clamp(28px, 8vw, 120px);
+    border-top: 1px solid rgba(242, 237, 232, 0.06);
+    border-bottom: 1px solid rgba(242, 237, 232, 0.06);
+  }
+
+  .quote-inner { max-width: 800px; margin: 0 auto; }
+
+  .pull-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(24px, 3.5vw, 44px);
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: #f2ede8;
+    margin: 0;
+    border-left: 3px solid #C9A96E;
+    padding-left: clamp(24px, 3vw, 48px);
+  }
+
+  /* ── KEY RESULTS ── */
+  .results-heading {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 48px);
+    letter-spacing: -0.02em;
+    color: #2b2b2b;
+    margin: 0 0 8px;
+    text-align: center;
+  }
+
+  .results-subhead {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: rgba(43, 43, 43, 0.45);
+    text-align: center;
+    margin: 0 0 56px;
+    letter-spacing: 0.01em;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+  }
+
+  .results-grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+    border-radius: 0 0 10px 10px;
+    margin-top: 2px;
+  }
+
+  .result-item {
+    background: #ede8e1;
+    padding: clamp(32px, 4vw, 56px) clamp(24px, 3vw, 40px);
+    text-align: center;
+  }
+
+  .result-num {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #2b2b2b;
+    margin: 0 0 12px;
+  }
+
+  .result-arrow {
+    font-weight: 300;
+    color: #C9A96E;
+    margin: 0 4px;
+  }
+
+  .result-label {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(43, 43, 43, 0.5);
+    margin: 0;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  /* ── NEXT PROJECT ── */
+  .next-section {
+    position: relative;
+    z-index: 10;
+    background: #171512;
+    padding: clamp(64px, 10vh, 120px) clamp(28px, 8vw, 120px);
+  }
+
+  .next-inner { max-width: 1080px; margin: 0 auto; }
+
+  .next-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(242, 237, 232, 0.3);
+    margin: 0 0 16px;
+  }
+
+  .next-headline {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(24px, 3.5vw, 48px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #f2ede8;
+    margin: 0 0 32px;
+    max-width: 600px;
+  }
+
+  .next-cta {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: #C9A96E;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.35);
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .next-cta:hover {
+    color: #d9bc89;
+    border-color: rgba(201, 169, 110, 0.7);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+    .two-col--reverse .col-left { order: 0; }
+    .two-col--reverse .col-right { order: 1; }
+    .pillars-grid { grid-template-columns: 1fr 1fr; }
+    .results-grid { grid-template-columns: 1fr; }
+    .meta-strip { gap: 20px; }
+    .meta-divider { display: none; }
+    .col-right--stat { padding: 32px 24px; }
+  }
+
+  @media (max-width: 480px) {
+    .pillars-grid { grid-template-columns: 1fr; }
+  }
+</style>
