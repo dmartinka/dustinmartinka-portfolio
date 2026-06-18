@@ -12,6 +12,19 @@ const today = new Date();
 
 <!-- Credits overlay (position: fixed — DOM placement doesn't affect layout) -->
 <div class="credits-overlay" id="credits-overlay" role="dialog" aria-modal="true" aria-label="Full credits">
+
+	<!-- Cursor orb -->
+	<div class="cursor-orb" id="cursor-orb" aria-hidden="true"></div>
+
+	<!-- Parallax ambient orbs -->
+	<div class="ambient-orbs" aria-hidden="true">
+		<div class="ambient-orb" data-speed="0.04" style="width:320px;height:320px;top:10%;left:8%;background:#C9A96E;"></div>
+		<div class="ambient-orb" data-speed="0.07" style="width:200px;height:200px;top:60%;left:75%;background:#f2ede8;"></div>
+		<div class="ambient-orb" data-speed="0.03" style="width:260px;height:260px;top:75%;left:15%;background:#C9A96E;"></div>
+		<div class="ambient-orb" data-speed="0.06" style="width:160px;height:160px;top:20%;left:80%;background:#f2ede8;"></div>
+		<div class="ambient-orb" data-speed="0.05" style="width:220px;height:220px;top:45%;left:50%;background:#C9A96E;"></div>
+	</div>
+
 	<button class="credits-close" id="credits-close" aria-label="Close credits">&times;</button>
 	<div class="credits-scroll-wrap">
 		<div class="credits-content" id="credits-content">
@@ -146,6 +159,45 @@ const today = new Date();
 		color: #f2ede8;
 	}
 
+	/* ── CURSOR ORB ── */
+	.cursor-orb {
+		position: absolute;
+		width: 280px;
+		height: 280px;
+		border-radius: 50%;
+		background: radial-gradient(circle, rgba(201,169,110,0.55) 0%, rgba(201,169,110,0) 70%);
+		filter: blur(24px);
+		mix-blend-mode: screen;
+		pointer-events: none;
+		transform: translate(-50%, -50%);
+		left: 50%;
+		top: 50%;
+		z-index: 2;
+		transition: opacity 0.4s ease;
+		opacity: 0;
+	}
+
+	.credits-overlay.is-open .cursor-orb {
+		opacity: 1;
+	}
+
+	/* ── AMBIENT PARALLAX ORBS ── */
+	.ambient-orbs {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 1;
+	}
+
+	.ambient-orb {
+		position: absolute;
+		border-radius: 50%;
+		opacity: 0.08;
+		filter: blur(60px);
+		mix-blend-mode: screen;
+		will-change: transform;
+	}
+
 	/* ── SCROLL MECHANICS ── */
 	.credits-scroll-wrap {
 		position: absolute;
@@ -248,6 +300,46 @@ const today = new Date();
 	const closeBtn = document.getElementById('credits-close');
 	const content = document.getElementById('credits-content');
 
+	// ── CURSOR ORB + PARALLAX ──
+	const cursorOrb = document.getElementById('cursor-orb') as HTMLElement | null;
+	const ambientOrbs = Array.from(document.querySelectorAll<HTMLElement>('.ambient-orb'));
+
+	let mouseX = window.innerWidth / 2;
+	let mouseY = window.innerHeight / 2;
+	let orbX = mouseX;
+	let orbY = mouseY;
+	let rafId: number;
+
+	function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
+
+	function animateOrb() {
+		orbX = lerp(orbX, mouseX, 0.08);
+		orbY = lerp(orbY, mouseY, 0.08);
+		if (cursorOrb) {
+			cursorOrb.style.left = orbX + 'px';
+			cursorOrb.style.top  = orbY + 'px';
+		}
+		rafId = requestAnimationFrame(animateOrb);
+	}
+
+	function onMouseMove(e: MouseEvent) {
+		mouseX = e.clientX;
+		mouseY = e.clientY;
+
+		// Parallax orbs — offset from center
+		const cx = window.innerWidth / 2;
+		const cy = window.innerHeight / 2;
+		const dx = e.clientX - cx;
+		const dy = e.clientY - cy;
+
+		ambientOrbs.forEach(orb => {
+			const speed = parseFloat(orb.dataset.speed || '0.05');
+			orb.style.transform = `translate(${dx * speed}px, ${dy * speed}px)`;
+		});
+	}
+
+	overlay?.addEventListener('mousemove', onMouseMove);
+
 	function openCredits() {
 		overlay?.classList.add('is-visible');
 		requestAnimationFrame(() => {
@@ -256,11 +348,13 @@ const today = new Date();
 			});
 		});
 		document.body.style.overflow = 'hidden';
+		animateOrb();
 	}
 
 	function closeCredits() {
 		overlay?.classList.remove('is-open');
 		document.body.style.overflow = '';
+		cancelAnimationFrame(rafId);
 		if (content) {
 			content.style.animation = 'none';
 			requestAnimationFrame(() => { content.style.animation = ''; });
