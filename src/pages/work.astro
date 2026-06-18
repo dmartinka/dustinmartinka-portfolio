@@ -1,6 +1,123 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
+
+interface CaseStudy {
+  num: string;
+  company: string;
+  role: string;
+  year: string;
+  impactTitle: string;
+  summary: string | string[];
+  metric: string | null;
+  metricLabel: string | null;
+  protected: boolean;
+  href: string;
+  image?: string;
+  imageVariant?: 'cover' | 'phone';
+  projectName?: string;
+  gradAngle: string;
+}
+
+const caseStudies: CaseStudy[] = [
+  {
+    num: '01',
+    company: 'T-Mobile',
+    role: 'Sr. Manager, Product Design',
+    year: '2024–2025',
+    impactTitle: 'Built the team, the structure, and the culture from scratch.',
+    summary: [
+      "After a major reorg, I was handed a blank org chart and told to figure it out. I scoped T-Mobile's foundational digital surface — search and discovery, security and authentication, support, user engagement, network and coverage — and built the team to own it. Hired internally and externally to find the right people for unglamorous but critical work.",
+      "We became the Foundations team.",
+    ],
+    metric: '2 → 10',
+    metricLabel: 'designers hired in 18 months',
+    protected: false,
+    href: '/work/foundations',
+    image: '/work/bg-06-waves.png',
+    projectName: 'Digital Foundations',
+    gradAngle: '135deg',
+  },
+  {
+    num: '02',
+    company: 'T-Mobile',
+    role: 'Sr. Manager, Product Design',
+    year: '2025',
+    impactTitle: 'Turned a two-sentence ask into a six-month initiative',
+    summary: [
+      "Web was T-Mobile's forgotten surface — inconsistent, under-resourced, two years without a quality bar. My VP pulled me into her office and asked me to take it over. I built a three-part strategy, rallied 7 principals across 6 teams, and shipped a v1 Web Toolkit in 90 days.",
+      "It earned design a seat on the t-mobile.com homepage redesign — and opened the door to a VP-level tiger team.",
+    ],
+    metric: '90',
+    metricLabel: 'days to ship the v1 Web Toolkit from kickoff',
+    protected: true,
+    href: '/work/web-elevation',
+    image: '/work/bg-04-interference.png',
+    projectName: 'Elevate Web',
+    gradAngle: '160deg',
+  },
+  {
+    num: '03',
+    company: 'T-Mobile',
+    role: 'Sr. Manager, Product Design',
+    year: '2022–2023',
+    impactTitle: 'Led the account and eCommerce redesign that shipped in T-Life',
+    summary: [
+      "T-Mobile's flagship app was customers' top touchpoint and the business's lowest priority. Leading a team of 35, I drove the redesign across 5 product surfaces while navigating many simultaneous headwinds — no dedicated app designers, a new dev team, leadership changes mid-project, and a design system still being built underneath us.",
+      "The account management and eCommerce sections shipped as part of T-Life.",
+    ],
+    metric: '5.5 → 6.0',
+    metricLabel: 'SUS score improvement — "Good" to "Excellent"',
+    protected: true,
+    href: '/work/tlife',
+    image: '/work/bg-05-grid-warp.png',
+    projectName: 'Flagship App',
+    gradAngle: '110deg',
+  },
+  {
+    num: '04',
+    company: 'MoxiWorks',
+    role: 'Head of Design',
+    year: '2015–2021',
+    impactTitle: 'Built a UX culture where there was none',
+    summary: 'Joined as the first designer. Built a research practice, a design system, and a team of four across three SaaS products.',
+    metric: '6+ years',
+    metricLabel: 'design system still in production',
+    protected: false,
+    href: '/work/moxiworks',
+    gradAngle: '145deg',
+  },
+  {
+    num: '05',
+    company: 'MoxiWorks',
+    role: 'Lead UX Designer',
+    year: '2017–2018',
+    impactTitle: 'Redesigned home search for millions of buyers',
+    summary: [
+      "Brokerage sites were losing ground to Zillow and Redfin. I declared the product was for consumers, not agents — cut three features with near-zero adoption, and surfaced a commute-time search tool that was buried in the nav despite being one of homebuyers' top priorities. Redesigned everything mobile-first. Ran our first remote usability study, caught two real issues before launch, and shipped. One test participant said unprompted: \"Quicker than Zillow, and slicker.\"",
+    ],
+    metric: '92%',
+    metricLabel: 'user satisfaction post-launch',
+    protected: false,
+    href: '/work/moxiworks-search',
+    image: '/work/search/home-search-card.png',
+    imageVariant: 'phone',
+    gradAngle: '160deg',
+  },
+  {
+    num: '05',
+    company: 'T-Mobile',
+    role: 'Sr. Manager, Product Design',
+    year: '2022–2024',
+    impactTitle: 'The player/coach case study',
+    summary: 'Hands-on product design alongside leadership. Direct craft contribution, not just direction.',
+    metric: null,
+    metricLabel: null,
+    protected: false,
+    href: 'mailto:dmartinka@gmail.com',
+    gradAngle: '125deg',
+  },
+];
 ---
 
 <!doctype html>
@@ -12,69 +129,746 @@ import Header from '../components/Header.astro';
     />
   </head>
   <body>
+    <!-- Fixed background layer — orbs + grain always visible, never scroll -->
+    <div class="bg-layer" aria-hidden="true">
+      <div class="bg-orbs">
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
+        <div class="orb orb-c"></div>
+        <div class="orb orb-d"></div>
+        <div class="orb orb-e"></div>
+        <div class="orb orb-f"></div>
+        <div class="orb orb-g"></div>
+        <div class="orb orb-h"></div>
+        <div class="orb orb-i"></div>
+      </div>
+      <div class="bg-grain"></div>
+    </div>
+
     <Header forceScrolled={true} />
 
-    <main>
-      <div class="work-inner">
-        <h1 class="headline">Case studies in progress!</h1>
-        <p class="body-copy">
-          I'm currently updating these. Please reach out to me directly and I'll walk you through the work, show you what I can share, and have a real conversation about what I'd bring to your team.
+    <!-- SR nav for keyboard/AT users -->
+    <nav class="sr-only-block" aria-label="Jump to case study">
+      {caseStudies.map((cs, i) => (
+        <a href={`#sr-card-${i}`}>{cs.impactTitle}</a>
+      ))}
+    </nav>
+
+    <!-- ── SCROLL TRACK ──
+         Section 0 = intro (visible in sticky stage while scrolling)
+         Sections 1–5 = each card slides up from below
+    ── -->
+    <div class="work-track" id="work-track" aria-hidden="true">
+      <div class="work-stage" id="work-stage">
+
+        <!-- Intro content (section 0) -->
+        <div class="intro-content" id="intro-content">
+          <p class="intro-label">Selected Works</p>
+          <h1 class="intro-headline">
+            Work that <em>shaped</em> teams,<br>
+            <em>defined</em> products, and <em>moved</em> numbers.
+          </h1>
+          <div class="intro-scroll-hint" aria-hidden="true">
+            <span class="scroll-label">Scroll</span>
+            <svg class="chevron chevron-1" width="16" height="9" viewBox="0 0 16 9" fill="none">
+              <path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="chevron chevron-2" width="16" height="9" viewBox="0 0 16 9" fill="none">
+              <path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="chevron chevron-3" width="16" height="9" viewBox="0 0 16 9" fill="none">
+              <path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Card deck (all 5 cards, all start below viewport) -->
+        <div class="deck" id="deck">
+          {caseStudies.map((cs, i) => (
+            <article
+              class="work-card"
+              id={`card-${i}`}
+              data-index={String(i)}
+              data-href={cs.href}
+              aria-labelledby={`card-${i}-title`}
+              tabindex="-1"
+            >
+              <div class="card-left">
+                <div class="card-top">
+                  <p class="card-meta-top">
+                    <span class="card-company">{cs.company}</span>
+                    <span class="card-meta-sep">·</span>
+                    <span class="card-role">{cs.role}</span>
+                    <span class="card-meta-sep">·</span>
+                    <span class="card-year">{cs.year}</span>
+                  </p>
+                  <h2 class="card-impact" id={`card-${i}-title`}>{cs.impactTitle}</h2>
+                  {Array.isArray(cs.summary)
+                    ? cs.summary.map(s => <p class="card-summary">{s}</p>)
+                    : <p class="card-summary">{cs.summary}</p>
+                  }
+                </div>
+                {cs.metric && (
+                  <div class="card-metric-wrap">
+                    <p class="card-metric-number">{cs.metric}</p>
+                    <p class="card-metric-label">{cs.metricLabel}</p>
+                  </div>
+                )}
+              </div>
+
+              <div class="card-right" style={`--grad-angle: ${cs.gradAngle}`}>
+                {cs.image && (
+                  <img class={`card-right-img${cs.imageVariant === 'phone' ? ' card-right-img--phone' : ''}`} src={cs.image} alt="" aria-hidden="true" />
+                )}
+                <div class="card-right-overlay">
+                  {cs.projectName && (
+                    <p class="card-project-name" aria-hidden="true">{cs.projectName}</p>
+                  )}
+                  <a
+                    class={`card-cta${cs.protected ? ' card-cta--locked' : ''}`}
+                    href={cs.href}
+                  >
+                    {cs.protected && (
+                      <svg width="10" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                      </svg>
+                    )}
+                    View case study{!cs.protected && <span aria-hidden="true"> →</span>}
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Dot nav (right edge, shown once cards are active) -->
+        <div class="deck-nav" id="deck-nav" role="tablist" aria-label="Case study navigation">
+          {caseStudies.map((cs, i) => (
+            <button
+              class="deck-dot"
+              role="tab"
+              data-index={String(i)}
+              aria-label={`${cs.company}: ${cs.impactTitle}`}
+              aria-selected="false"
+            />
+          ))}
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── OUTRO (normal flow, after track) ── -->
+    <section class="outro-section">
+      <div class="outro-inner">
+        <p class="outro-label">Want to see more?</p>
+        <h2 class="outro-headline">
+          The full story takes a conversation.
+        </h2>
+        <p class="outro-copy">
+          Most of these have NDAs attached. Reach out and I'll walk you through the work, show you what I can share, and we'll have a real conversation about what I'd bring to your team.
         </p>
-        <a class="contact-link" href="mailto:dmartinka@gmail.com">
-          Get in touch &rarr;
+        <a class="outro-cta" href="mailto:dmartinka@gmail.com">
+          Get in touch →
         </a>
       </div>
-    </main>
+    </section>
+
+    <!-- Accessible linear content (sr-only) -->
+    <div class="sr-only-block" id="sr-content">
+      {caseStudies.map((cs, i) => (
+        <section id={`sr-card-${i}`}>
+          <h2>{cs.impactTitle}</h2>
+          <p><strong>{cs.company}</strong></p>
+          <p>{cs.summary}</p>
+          {cs.metric && <p><strong>{cs.metric}</strong> — {cs.metricLabel}</p>}
+          <p>{cs.role} · {cs.year}</p>
+          {cs.protected && (
+            <p><a href="mailto:dmartinka@gmail.com?subject=Portfolio Access Request">Request access</a></p>
+          )}
+        </section>
+      ))}
+    </div>
+
   </body>
 </html>
 
 <style>
+  /* ── RESET ── */
   body {
     background: #201e1b;
+    overflow-x: hidden;
   }
 
-  main {
+  .sr-only-block {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── FIXED BACKGROUND LAYER (orbs + grain, always visible) ── */
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .bg-orbs {
+    position: absolute;
+    inset: 0;
+  }
+
+  .bg-grain {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: overlay;
+    opacity: 0.28;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/></filter><rect width='300' height='300' filter='url(%23n)' opacity='1'/></svg>");
+    background-repeat: repeat;
+    background-size: 300px 300px;
+  }
+
+  /* ── SCROLL TRACK ──
+     6 sections: 5 cards + 1 buffer so last card is fully visible before outro
+  ── */
+  .work-track {
+    position: relative;
+    height: calc(6 * 100vh);
+  }
+
+  /* ── STICKY STAGE ── */
+  .work-stage {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    width: 100%;
+    overflow: hidden;
+    z-index: 2; /* above fixed bg-layer (z:1) */
+  }
+
+  /* stage-grain moved to .bg-grain (fixed layer) */
+
+  /* ── ORB KEYFRAMES ── */
+  @keyframes pulse-a {
+    from { opacity: 0.15; transform: scale(1); }
+    to   { opacity: 0.85; transform: scale(1.1); }
+  }
+  @keyframes pulse-b {
+    from { opacity: 0.1;  transform: scale(1); }
+    to   { opacity: 0.75; transform: scale(1.12); }
+  }
+  @keyframes pulse-c {
+    from { opacity: 0.2;  transform: scale(1); }
+    to   { opacity: 0.9;  transform: scale(1.08); }
+  }
+  @keyframes pulse-d {
+    from { opacity: 0.05; transform: scale(1); }
+    to   { opacity: 0.5;  transform: scale(1.15); }
+  }
+  @keyframes appear-a {
+    0%   { opacity: 0;    transform: scale(0.85); }
+    25%  { opacity: 0.75; transform: scale(1.05); }
+    75%  { opacity: 0.75; transform: scale(1.05); }
+    100% { opacity: 0;    transform: scale(0.85); }
+  }
+  @keyframes appear-b {
+    0%   { opacity: 0;   transform: scale(0.9); }
+    35%  { opacity: 0.6; transform: scale(1); }
+    65%  { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 0;   transform: scale(0.9); }
+  }
+
+  /* ── ORBS (inside .bg-orbs in the fixed bg-layer) ── */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+  }
+
+  .orb-a { width: 72px;  height: 72px;  top: 6%;    left: 3%;   background: #C9A96E; filter: blur(6px);  animation: pulse-a 4.2s ease-in-out infinite alternate; }
+  .orb-b { width: 52px;  height: 52px;  top: 2%;    left: 30%;  background: #f2ede8; filter: blur(5px);  animation: pulse-b 5.6s ease-in-out infinite alternate; animation-delay: 0.8s; }
+  .orb-c { width: 64px;  height: 64px;  top: 4%;    right: 5%;  background: #f2ede8; filter: blur(7px);  animation: pulse-c 3.9s ease-in-out infinite alternate; animation-delay: 1.2s; }
+  .orb-d { width: 44px;  height: 44px;  top: 35%;   left: 1%;   background: #C9A96E; filter: blur(8px);  animation: pulse-d 6.1s ease-in-out infinite alternate; animation-delay: 2.0s; }
+  .orb-e { width: 36px;  height: 36px;  top: 40%;   right: 2%;  background: #f2ede8; filter: blur(9px);  animation: pulse-b 4.7s ease-in-out infinite alternate; animation-delay: 0.3s; }
+  .orb-f { width: 60px;  height: 60px;  bottom: 8%; left: 4%;   background: #f2ede8; filter: blur(5px);  animation: appear-a 10s ease-in-out infinite; }
+  .orb-g { width: 48px;  height: 48px;  bottom: 4%; left: 28%;  background: #C9A96E; filter: blur(6px);  animation: pulse-a 5.2s ease-in-out infinite alternate; animation-delay: 1.5s; }
+  .orb-h { width: 56px;  height: 56px;  bottom: 6%; right: 8%;  background: #C9A96E; filter: blur(7px);  animation: appear-b 8.5s ease-in-out infinite; animation-delay: 3.0s; }
+  .orb-i { width: 40px;  height: 40px;  bottom: 12%;right: 1%;  background: #f2ede8; filter: blur(5px);  animation: pulse-c 4.4s ease-in-out infinite alternate; animation-delay: 0.6s; }
+
+  /* ── INTRO CONTENT (visible during section 0) ── */
+  .intro-content {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px clamp(28px, 6vw, 120px) 120px;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .intro-content.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .intro-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C9A96E;
+    margin: 0 0 28px 0;
+  }
+
+  .intro-headline {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(36px, 5.5vw, 80px);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    color: #f2ede8;
+    margin: 0 0 32px 0;
+    max-width: 900px;
+  }
+
+  .intro-headline em {
+    font-style: italic;
+    color: #C9A96E;
+  }
+
+  .intro-scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  @keyframes chevron-cascade {
+    0%, 100% { opacity: 0; }
+    40%, 60% { opacity: 0.5; }
+  }
+
+  .scroll-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(242, 237, 232, 0.3);
+    margin-bottom: 6px;
+  }
+
+  .chevron { display: block; color: rgba(242, 237, 232, 0.5); opacity: 0; }
+  .chevron-1 { animation: chevron-cascade 1.6s ease infinite 0s; }
+  .chevron-2 { animation: chevron-cascade 1.6s ease infinite 0.3s; }
+  .chevron-3 { animation: chevron-cascade 1.6s ease infinite 0.6s; }
+
+  /* ── DECK ── */
+  .deck {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+  }
+
+  /* ── WORK CARD ── */
+  .work-card {
+    position: absolute;
+    left: 50%;
+    top: 140px;      /* 60px gap below fixed header */
+    width: min(92vw, 1080px);
+    height: 77dvh;
+
+    /* Visual */
+    background: #ffffff;
+    border: 1px solid #e0dfdf;
+    border-radius: 16px;
+    box-shadow: 0 8px 48px rgba(0, 0, 0, 0.4);
+
+    /* Two-column layout */
+    display: grid;
+    grid-template-columns: 55% 45%;
+    overflow: hidden;
+
+    /* JS drives all transforms + z-index; start off-screen below */
+    transform: translateX(-50%) translateY(100dvh);
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .work-card.is-hovered {
+    box-shadow: 0 32px 96px rgba(0, 0, 0, 0.7);
+    border-color: rgba(201, 169, 110, 0.45);
+  }
+
+  .work-card.is-hovered .card-cta {
+    color: #C9A96E;
+    border-color: rgba(201, 169, 110, 0.5);
+  }
+
+  .work-card.is-hovered .card-right {
+    background: linear-gradient(
+      var(--grad-angle, 135deg),
+      rgba(201, 169, 110, 0.18) 0%,
+      rgba(201, 169, 110, 0.38) 55%,
+      rgba(242, 237, 232, 0.12) 100%
+    );
+  }
+
+  .work-card:focus-visible {
+    outline: 2px solid #C9A96E;
+    outline-offset: 4px;
+    z-index: 200 !important;
+  }
+
+  /* ── CARD LEFT ── */
+  .card-left {
+    padding: clamp(28px, 3.5vw, 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .card-top {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* ── CARD TOP META ROW ── */
+  .card-meta-top {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    margin: 0 0 14px 0;
+  }
+
+  .card-company {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #C9A96E;
+    margin: 0;
+  }
+
+  .card-role,
+  .card-year {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(43, 43, 43, 0.45);
+    margin: 0;
+  }
+
+  .card-meta-sep {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: rgba(43, 43, 43, 0.25);
+    line-height: 1;
+  }
+
+  .card-impact {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(24px, 2.8vw, 44px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: #2b2b2b;
+    margin: 0 0 18px 0;
+  }
+
+  .card-summary {
+    font-family: var(--font-sans);
+    font-size: clamp(14px, 1.05vw, 16px);
+    line-height: 1.72;
+    color: #595959;
+    margin: 0;
+  }
+
+  .card-summary + .card-summary {
+    margin-top: 12px;
+  }
+
+  /* ── METRIC ── */
+  .card-metric-wrap {
+    flex-shrink: 0;
+    padding-top: 24px;
+  }
+
+  .card-metric-number {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(40px, 5vw, 68px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: #2b2b2b;
+    margin: 0 0 5px 0;
+  }
+
+  .card-metric-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(43, 43, 43, 0.38);
+    margin: 0;
+  }
+
+  /* ── CARD CTA ── */
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: rgba(242, 237, 232, 0.8);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(242, 237, 232, 0.25);
+    padding-bottom: 1px;
+    flex-shrink: 0;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .card-cta:hover {
+    color: #C9A96E;
+    border-color: rgba(201, 169, 110, 0.5);
+  }
+
+  .card-cta--locked {
+    color: rgba(242, 237, 232, 0.45);
+    border-color: rgba(242, 237, 232, 0.12);
+  }
+
+  .card-cta--locked:hover {
+    color: rgba(242, 237, 232, 0.7);
+    border-color: rgba(242, 237, 232, 0.28);
+  }
+
+  /* ── CARD RIGHT ── */
+  .card-right {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 16px 16px 0;
+    background: linear-gradient(
+      var(--grad-angle, 135deg),
+      rgba(201, 169, 110, 0.1) 0%,
+      rgba(201, 169, 110, 0.24) 55%,
+      rgba(242, 237, 232, 0.06) 100%
+    );
+    border-left: 1px solid rgba(201, 169, 110, 0.1);
+  }
+
+  /* Noise texture */
+  .card-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.5'/></svg>");
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.22;
+    pointer-events: none;
+  }
+
+  /* ── CARD RIGHT IMAGE ── */
+  .card-right-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 110%;
+    object-fit: cover;
+    object-position: top center;
+    transform: scale(1.06);
+    filter: grayscale(1) brightness(0.45);
+    transition: transform 0.7s ease, filter 0.7s ease;
+  }
+
+  .work-card.is-hovered .card-right-img {
+    transform: scale(1);
+    filter: grayscale(0) brightness(1.05);
+  }
+
+  /* Crop Gemini logo out of waves image */
+  img[src*="bg-06-waves"] {
+    object-position: center 20%;
+  }
+
+  /* Dark background for phone composition cards */
+  .card-right:has(.card-right-img--phone),
+  .work-card.is-hovered .card-right:has(.card-right-img--phone) {
+    background: linear-gradient(
+      160deg,
+      #2a2724 0%,
+      #201e1b 50%,
+      #1a1815 100%
+    );
+    border-left-color: rgba(255,255,255,0.06);
+  }
+
+  /* Phone composition variant — zoomed in, cropped multi-screen layout */
+  .card-right-img--phone {
+    position: absolute;
+    width: 260%;
+    height: 260%;
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    object-fit: cover;
+    object-position: center center;
+    filter: grayscale(1) brightness(0.55);
+    transition: filter 0.7s ease;
+  }
+
+  .work-card.is-hovered .card-right-img--phone {
+    transform: translate(-50%, -40%);
+    filter: grayscale(0) brightness(1.0);
+  }
+
+  /* ── CARD RIGHT OVERLAY ── */
+  .card-right-overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    z-index: 3;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .card-right-overlay .card-cta {
+    pointer-events: all;
+  }
+
+  /* ── PROJECT NAME ── */
+  .card-project-name {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(22px, 2.8vw, 38px);
+    color: rgba(242, 237, 232, 0.75);
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+    margin: 0;
+    text-shadow: 0 1px 16px rgba(0, 0, 0, 0.6);
+    transition: color 0.7s ease;
+  }
+
+  .work-card.is-hovered .card-project-name {
+    color: rgba(242, 237, 232, 0.95);
+  }
+
+  /* ── DOT NAV ── */
+  .deck-nav {
+    position: absolute;
+    right: clamp(16px, 2.5vw, 32px);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 30;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .deck-nav.is-visible {
+    opacity: 1;
+  }
+
+  .deck-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+
+  .deck-dot.is-active {
+    background: #C9A96E;
+    transform: scale(1.5);
+  }
+
+  .deck-dot:focus-visible {
+    outline: 2px solid #C9A96E;
+    outline-offset: 3px;
+  }
+
+  /* ── OUTRO SECTION ── */
+  .outro-section {
+    position: relative;
+    z-index: 2; /* above fixed bg-layer so it sits on the same plane as the stage */
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 120px 56px 80px;
+    padding: 80px clamp(28px, 6vw, 120px);
     box-sizing: border-box;
   }
 
-  .work-inner {
+  .outro-inner {
     max-width: 640px;
-    width: 100%;
+    text-align: center;
   }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .outro-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C9A96E;
+    margin: 0 0 24px 0;
   }
 
-  .headline {
+  .outro-headline {
     font-family: var(--font-serif);
     font-weight: 300;
-    font-size: clamp(36px, 5vw, 64px);
-    line-height: 1.15;
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.18;
     letter-spacing: -0.02em;
     color: #f2ede8;
-    margin: 0 0 32px 0;
-    animation: fadeUp 0.9s ease both;
-    animation-delay: 0.2s;
+    margin: 0 0 28px 0;
   }
 
-  .body-copy {
+  .outro-copy {
     font-family: var(--font-sans);
-    font-size: clamp(16px, 1.4vw, 20px);
+    font-size: clamp(15px, 1.2vw, 18px);
     line-height: 1.7;
-    color: rgba(242, 237, 232, 0.6);
-    margin: 0 0 40px 0;
-    animation: fadeUp 0.8s ease both;
-    animation-delay: 0.4s;
+    color: rgba(242, 237, 232, 0.55);
+    margin: 0 0 48px 0;
   }
 
-  .contact-link {
+  .outro-cta {
     font-family: var(--font-sans);
     font-size: 15px;
     font-weight: 500;
@@ -83,20 +877,296 @@ import Header from '../components/Header.astro';
     text-decoration: none;
     border-bottom: 1px solid rgba(201, 169, 110, 0.35);
     padding-bottom: 2px;
-    transition: border-color 0.2s ease, color 0.2s ease;
-    animation: fadeUp 0.8s ease both;
-    animation-delay: 0.55s;
+    transition: color 0.2s ease, border-color 0.2s ease;
   }
 
-  .contact-link:hover {
+  .outro-cta:hover {
     color: #d9bc89;
     border-color: rgba(201, 169, 110, 0.7);
   }
 
-  @media (max-width: 800px) {
-    main {
-      padding: 100px 32px 64px;
-      align-items: flex-start;
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .work-track {
+      height: auto !important;
+      position: static;
+    }
+
+    .work-stage {
+      position: static;
+      height: auto;
+      overflow: visible;
+      padding-top: 80px;
+    }
+
+    .deck-nav {
+      display: none;
+    }
+
+    .intro-content {
+      position: static;
+      padding: 48px 24px 40px;
+    }
+
+    .deck {
+      position: static;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 0 20px 48px;
+    }
+
+    .work-card {
+      position: static !important;
+      transform: none !important;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      grid-template-columns: 1fr;
+      border-radius: 12px;
+      top: auto;
+      left: auto;
+    }
+
+    .card-right {
+      height: 220px;
+      border-radius: 0 0 12px 12px;
+      border-left: none;
+      border-top: 1px solid rgba(201, 169, 110, 0.1);
+    }
+
+    .card-project-name {
+      font-size: 22px;
+      white-space: normal;
+      max-width: 220px;
+    }
+
+    .card-metric-number {
+      font-size: 32px;
+    }
+
+    .outro-section {
+      min-height: auto;
+      padding: 80px 24px;
     }
   }
+
+  /* ── REDUCED MOTION ── */
+  @media (prefers-reduced-motion: reduce) {
+    .orb { animation: none !important; opacity: 0.35 !important; }
+    .work-card { transition: none !important; }
+    .intro-content { transition: none !important; }
+    .deck-nav { transition: none !important; }
+  }
 </style>
+
+<script>
+  const TOTAL_CARDS = 5;
+  // rawProgress = scrollY / innerHeight, range 0–5+
+  // Card N slides in during rawProgress N → N+1. No dedicated intro section.
+
+  const PEEK_PX         = 40;  // px of the top card visible at bottom
+  const PEEK_STACK_SIZE = 3;   // how many waiting cards show in the fan
+  const PEEK_STACK_STEP = 10;  // px deeper per card in the stack
+
+  // Subtle resting rotation once a card is frozen in view
+  const FROZEN_ROT = [0.6, -0.5, 0.5, -0.6, 0.4];
+  // Rotation when entering from below — more spread so the fan is visible
+  const ENTRY_ROT  = [4.0, -5.0, 3.5, -4.5, 3.0];
+
+  const HOVER_LIFT = -10;  // px to lift card on hover
+  const HOVER_LERP = 0.14; // spring speed (higher = snappier)
+
+  function easeOut(x: number): number {
+    return 1 - Math.pow(1 - x, 3);
+  }
+
+  function isMobile(): boolean {
+    return window.innerWidth <= 768;
+  }
+
+  // Z-index scheme:
+  //   Waiting (not yet sliding): higher-index cards are deeper in the stack.
+  //     Card 0 (next to slide) = z:20 (on top of waiting stack)
+  //     Card 1 = z:19, card 2 = z:18, etc.
+  //   Sliding: z:30 (above everything while animating)
+  //   Frozen: z:10 + cardIndex (later cards cover earlier ones once frozen)
+  function getZIndex(cardIndex: number, rawProgress: number): number {
+    const progress = rawProgress - cardIndex;
+    if (progress > 1)  return 10 + cardIndex;   // frozen — later cards on top
+    if (progress >= 0) return 30;               // currently sliding — on top
+    return 20 - cardIndex;                      // waiting — card 0 on top of stack
+  }
+
+  function getCardTransform(cardIndex: number, rawProgress: number, cardTopPx: number, hoverOffset = 0): string {
+    const vh     = window.innerHeight;
+    const peekTY = vh - PEEK_PX - cardTopPx;
+    const progress = rawProgress - cardIndex;
+
+    let ty: number;
+    let deg: number;
+
+    if (progress > 1) {
+      ty  = 0;
+      deg = FROZEN_ROT[cardIndex];
+    } else if (progress >= 0) {
+      const t  = easeOut(progress);
+      ty       = peekTY * (1 - t);
+      deg      = ENTRY_ROT[cardIndex] + (FROZEN_ROT[cardIndex] - ENTRY_ROT[cardIndex]) * t;
+    } else {
+      const stackPos = cardIndex - Math.floor(rawProgress) - 1;
+      if (stackPos >= 0 && stackPos < PEEK_STACK_SIZE) {
+        const peekDegs = [1.0, 2.5, 4.5];
+        ty  = peekTY + stackPos * PEEK_STACK_STEP;
+        deg = Math.sign(ENTRY_ROT[cardIndex]) * peekDegs[stackPos];
+      } else {
+        ty  = vh;
+        deg = 0;
+      }
+    }
+
+    return `translateX(-50%) translateY(${(ty + hoverOffset).toFixed(1)}px) rotate(${deg.toFixed(3)}deg)`;
+  }
+
+  function init() {
+    if (isMobile()) return;
+
+    const cards   = Array.from(document.querySelectorAll<HTMLElement>('.work-card'));
+    const dots    = Array.from(document.querySelectorAll<HTMLElement>('.deck-dot'));
+    const deckNav = document.getElementById('deck-nav');
+    const introEl = document.getElementById('intro-content');
+
+    // Read card's natural top offset once (set by CSS `top: 80px`)
+    const CARD_TOP = (cards[0] as HTMLElement).offsetTop;
+
+    let lastScrollY = -1;
+    const hoverTargets = new Array(TOTAL_CARDS).fill(0);
+    const hoverOffsets = new Array(TOTAL_CARDS).fill(0);
+
+    // Hover lift + visual state
+    cards.forEach((el, i) => {
+      el.addEventListener('mouseenter', () => {
+        hoverTargets[i] = HOVER_LIFT;
+        el.classList.add('is-hovered');
+      });
+      el.addEventListener('mouseleave', () => {
+        hoverTargets[i] = 0;
+        el.classList.remove('is-hovered');
+      });
+    });
+
+    // Card click: navigate to case study
+    cards.forEach((el) => {
+      el.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).closest('a')) return;
+        const href = el.dataset.href;
+        if (href) window.location.href = href;
+      });
+    });
+
+    // Dot click: scroll to that card's section
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        window.scrollTo({ top: i * window.innerHeight, behavior: 'smooth' });
+      });
+      dot.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const next = Math.min(i + 1, TOTAL_CARDS - 1);
+          (dots[next] as HTMLElement).focus();
+          window.scrollTo({ top: next * window.innerHeight, behavior: 'smooth' });
+        }
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prev = Math.max(i - 1, 0);
+          (dots[prev] as HTMLElement).focus();
+          window.scrollTo({ top: prev * window.innerHeight, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function tick() {
+      const scrollY = window.scrollY;
+      const scrollChanged = scrollY !== lastScrollY;
+
+      // Lerp hover offsets every frame regardless of scroll
+      let hoverDirty = false;
+      hoverOffsets.forEach((offset, i) => {
+        const delta = (hoverTargets[i] - offset) * HOVER_LERP;
+        if (Math.abs(delta) > 0.05) {
+          hoverOffsets[i] += delta;
+          hoverDirty = true;
+        } else if (hoverOffsets[i] !== hoverTargets[i]) {
+          hoverOffsets[i] = hoverTargets[i];
+          hoverDirty = true;
+        }
+      });
+
+      if (scrollChanged || hoverDirty) {
+        if (scrollChanged) lastScrollY = scrollY;
+        const vh          = window.innerHeight;
+        const rawProgress = scrollY / vh;
+
+        if (introEl && scrollChanged) {
+          const op = Math.max(0, 1 - rawProgress / 0.5);
+          introEl.style.opacity       = String(op);
+          introEl.style.pointerEvents = op < 0.05 ? 'none' : '';
+        }
+
+        if (prefersReducedMotion) {
+          const activeCard = Math.min(Math.round(rawProgress), TOTAL_CARDS - 1);
+          cards.forEach((el, i) => {
+            el.style.transform = `translateX(-50%) translateY(${i <= activeCard ? 0 : vh}px)`;
+            el.style.zIndex    = String(getZIndex(i, rawProgress));
+          });
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('is-active', i === activeCard);
+            dot.setAttribute('aria-selected', String(i === activeCard));
+          });
+          if (deckNav) deckNav.classList.toggle('is-visible', true);
+        } else {
+          cards.forEach((el, i) => {
+            el.style.transform = getCardTransform(i, rawProgress, CARD_TOP, hoverOffsets[i]);
+            el.style.zIndex    = String(getZIndex(i, rawProgress));
+          });
+
+          if (scrollChanged) {
+            const activeCard = Math.min(Math.floor(rawProgress), TOTAL_CARDS - 1);
+            dots.forEach((dot, i) => {
+              dot.classList.toggle('is-active', i === activeCard);
+              dot.setAttribute('aria-selected', String(i === activeCard));
+            });
+            if (deckNav) deckNav.classList.toggle('is-visible', true);
+          }
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    // Set initial positions before first paint
+    cards.forEach((el, i) => {
+      el.style.transform = getCardTransform(i, 0, CARD_TOP);
+      el.style.zIndex    = String(getZIndex(i, 0));
+    });
+
+    requestAnimationFrame(tick);
+
+    window.addEventListener('resize', () => {
+      if (isMobile()) {
+        cards.forEach(el => {
+          el.style.transform = '';
+          el.style.zIndex    = '';
+        });
+      }
+    }, { passive: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+</script>
