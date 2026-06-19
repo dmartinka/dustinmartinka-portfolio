@@ -133,6 +133,14 @@ const cardDefs = [
     overflow: hidden;
   }
 
+  .card-spread.has-active {
+    overflow: visible;
+  }
+
+  .experiments-stage:has(.card-spread.has-active) {
+    overflow: visible;
+  }
+
   /* ── CARD ── */
   .exp-card {
     --card-size: clamp(180px, 19vw, 280px);
@@ -363,8 +371,12 @@ const cardDefs = [
   // Entrance animation via WAAPI — avoids CSS-var-in-keyframe resolution issues.
   // Cards start off-screen by exactly enough to be hidden, so they're visible
   // for most of the journey and the rotation is clearly perceptible.
-  const vw = document.documentElement.clientWidth;
-  const vh = document.documentElement.clientHeight;
+  let vw = document.documentElement.clientWidth;
+  let vh = document.documentElement.clientHeight;
+  window.addEventListener('resize', () => {
+    vw = document.documentElement.clientWidth;
+    vh = document.documentElement.clientHeight;
+  });
 
   cards.forEach(card => {
     const restDeg = parseFloat(card.style.getPropertyValue('--rot') || '0');
