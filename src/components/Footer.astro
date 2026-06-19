@@ -214,18 +214,7 @@ const today = new Date();
 		transform: translateY(100vh);
 	}
 
-	.credits-overlay.is-open .credits-content {
-		animation: rollCredits 90s linear forwards;
-	}
-
-	.credits-content:hover {
-		animation-play-state: paused;
-	}
-
-	@keyframes rollCredits {
-		from { transform: translateY(100vh); }
-		to   { transform: translateY(-100%); }
-	}
+	/* scroll driven by JS — no CSS animation */
 
 	/* ── CREDITS TYPOGRAPHY ── */
 	.credits-section-label {
@@ -295,70 +284,88 @@ const today = new Date();
 </style>
 
 <script>
-	const overlay = document.getElementById('credits-overlay');
-	const openBtn = document.getElementById('open-credits');
+	const overlay  = document.getElementById('credits-overlay');
+	const openBtn  = document.getElementById('open-credits');
 	const closeBtn = document.getElementById('credits-close');
-	const content = document.getElementById('credits-content');
-
-	// ── CURSOR ORB + PARALLAX ──
-	const cursorOrb = document.getElementById('cursor-orb') as HTMLElement | null;
+	const content  = document.getElementById('credits-content') as HTMLElement | null;
+	const cursorOrb   = document.getElementById('cursor-orb') as HTMLElement | null;
 	const ambientOrbs = Array.from(document.querySelectorAll<HTMLElement>('.ambient-orb'));
 
+	// ── CURSOR ORB (lerp follow) ──
 	let mouseX = window.innerWidth / 2;
 	let mouseY = window.innerHeight / 2;
-	let orbX = mouseX;
-	let orbY = mouseY;
-	let rafId: number;
+	let orbX = mouseX, orbY = mouseY;
 
 	function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
 
-	function animateOrb() {
+	// ── CREDITS SCROLL (JS-driven) ──
+	const SCROLL_SPEED = 0.6; // px per frame
+	const RESUME_DELAY = 1800; // ms after wheel stops
+	let creditsY    = 0;
+	let autoScroll  = true;
+	let mainRaf     = 0;
+	let resumeTimer = 0;
+
+	function tick() {
+		// Orb lerp
 		orbX = lerp(orbX, mouseX, 0.08);
 		orbY = lerp(orbY, mouseY, 0.08);
 		if (cursorOrb) {
 			cursorOrb.style.left = orbX + 'px';
 			cursorOrb.style.top  = orbY + 'px';
 		}
-		rafId = requestAnimationFrame(animateOrb);
+
+		// Credits scroll
+		if (autoScroll) creditsY -= SCROLL_SPEED;
+		if (content) content.style.transform = `translateY(${creditsY}px)`;
+
+		mainRaf = requestAnimationFrame(tick);
 	}
 
+	// ── PARALLAX ──
 	function onMouseMove(e: MouseEvent) {
 		mouseX = e.clientX;
 		mouseY = e.clientY;
-
-		// Parallax orbs — offset from center
 		const cx = window.innerWidth / 2;
 		const cy = window.innerHeight / 2;
 		const dx = e.clientX - cx;
 		const dy = e.clientY - cy;
-
 		ambientOrbs.forEach(orb => {
-			const speed = parseFloat(orb.dataset.speed || '0.05');
-			orb.style.transform = `translate(${dx * speed}px, ${dy * speed}px)`;
+			const s = parseFloat(orb.dataset.speed || '0.05');
+			orb.style.transform = `translate(${dx * s}px, ${dy * s}px)`;
 		});
 	}
 
-	overlay?.addEventListener('mousemove', onMouseMove);
+	// ── SCROLL WHEEL HIJACK ──
+	function onWheel(e: WheelEvent) {
+		e.preventDefault();
+		autoScroll = false;
+		creditsY -= e.deltaY * 0.8;
+		clearTimeout(resumeTimer);
+		resumeTimer = window.setTimeout(() => { autoScroll = true; }, RESUME_DELAY);
+	}
 
+	overlay?.addEventListener('mousemove', onMouseMove);
+	overlay?.addEventListener('wheel', onWheel, { passive: false });
+
+	// ── OPEN / CLOSE ──
 	function openCredits() {
+		creditsY   = window.innerHeight;
+		autoScroll = true;
+		if (content) content.style.transform = `translateY(${creditsY}px)`;
 		overlay?.classList.add('is-visible');
-		requestAnimationFrame(() => {
-			requestAnimationFrame(() => {
-				overlay?.classList.add('is-open');
-			});
-		});
+		requestAnimationFrame(() => requestAnimationFrame(() => {
+			overlay?.classList.add('is-open');
+		}));
 		document.body.style.overflow = 'hidden';
-		animateOrb();
+		mainRaf = requestAnimationFrame(tick);
 	}
 
 	function closeCredits() {
 		overlay?.classList.remove('is-open');
 		document.body.style.overflow = '';
-		cancelAnimationFrame(rafId);
-		if (content) {
-			content.style.animation = 'none';
-			requestAnimationFrame(() => { content.style.animation = ''; });
-		}
+		cancelAnimationFrame(mainRaf);
+		clearTimeout(resumeTimer);
 		overlay?.addEventListener('transitionend', () => {
 			overlay?.classList.remove('is-visible');
 		}, { once: true });
@@ -366,11 +373,9 @@ const today = new Date();
 
 	openBtn?.addEventListener('click', openCredits);
 	closeBtn?.addEventListener('click', closeCredits);
-
 	document.addEventListener('keydown', e => {
 		if (e.key === 'Escape' && overlay?.classList.contains('is-open')) closeCredits();
 	});
-
 	overlay?.addEventListener('click', e => {
 		if (e.target === overlay) closeCredits();
 	});
