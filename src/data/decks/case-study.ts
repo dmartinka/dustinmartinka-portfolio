@@ -734,7 +734,7 @@ export const caseStudyDeck: Deck = {
       </div>
       <div class="grid-fd">
         <div class="fd-card rise d3"><p class="fd-k">Key finding #1</p><p class="fd-b">Participants were <em>significantly more successful</em> finding and navigating account pages than in previous designs.</p></div>
-        <div class="fd-card rise d4"><p class="fd-k">Key finding #2</p><p class="fd-b">The System Usability Score climbed from <em>"Good"</em> in round 2 to <em>"Excellent."</em></p></div>
+        <div class="fd-card rise d4"><p class="fd-k">Key finding #2</p><p class="fd-b">Average task ease climbed from <em>5.5</em> in round 2 to <em>6.0</em> out of 7.</p></div>
       </div>
     </div>
   </section>`,
@@ -802,7 +802,7 @@ export const caseStudyDeck: Deck = {
   </section>`,
     },
 
-    // 27 · RESULTS (raw — custom SUS stat layout)
+    // 27 · RESULTS (raw — custom task ease stat layout)
     {
       type: 'raw',
       html: `
@@ -814,8 +814,8 @@ export const caseStudyDeck: Deck = {
       <p class="stmt rise d2">Despite setbacks and leadership changes, applying our UX improvements to the web experience drove a <em>12% lift</em> in the upper funnel for phone upgrades.</p>
       <p class="stmt-sub rise d3">A fragmented launch — but the work proved itself where it shipped.</p>
       <div class="rise d4" style="display:flex;align-items:baseline;gap:32px;margin-top:48px;padding-top:48px;border-top:1px solid rgba(242,237,232,0.14)">
-        <p style="font-family:var(--serif);font-weight:700;font-size:72px;line-height:1;color:var(--gold);margin:0;white-space:nowrap;letter-spacing:-0.02em">"Good" → "Excellent"</p>
-        <p style="font-family:var(--sans);font-weight:300;font-size:22px;color:rgba(242,237,232,0.6);margin:0;line-height:1.5;max-width:500px">SUS score climbed across all account management testing rounds.</p>
+        <p style="font-family:var(--serif);font-weight:700;font-size:72px;line-height:1;color:var(--gold);margin:0;white-space:nowrap;letter-spacing:-0.02em">5.5 → 6.0</p>
+        <p style="font-family:var(--sans);font-weight:300;font-size:22px;color:rgba(242,237,232,0.6);margin:0;line-height:1.5;max-width:500px">Average task ease out of 7, climbed across all account management testing rounds.</p>
       </div>
     </div>
   </section>`,
