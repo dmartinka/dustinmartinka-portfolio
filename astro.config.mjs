@@ -8,7 +8,12 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://www.dustinmartinka.com',
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => !page.includes('/deck/'),
+    }),
+  ],
 
   fonts: [
     {

@@ -1,0 +1,174 @@
+---
+import { getDecks, getDeck } from '../../data/decks/index';
+import { renderSlide } from '../../data/decks/renderer';
+
+export function getStaticPaths() {
+  return getDecks().map(deck => ({ params: { id: deck.id } }));
+}
+
+const { id } = Astro.params;
+const deck = getDeck(id!);
+if (!deck) return Astro.redirect('/404');
+
+const slidesHtml = deck.slides
+  .map(slide => renderSlide(slide, deck.defaultTheme))
+  .join('\n');
+
+const passwordHashesJson = JSON.stringify(deck.passwordHashes);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{deck.title} — Dustin Martinka</title>
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Must be inline to apply before first paint, per deck-stage.js spec -->
+  <style>deck-stage:not(:defined){visibility:hidden}</style>
+  <link rel="stylesheet" href="/deck/deck.css">
+  <link rel="stylesheet" href="/deck/deck-custom.css">
+  <style>
+    body { margin: 0; background: #0d0d0d; }
+
+    /* Gate hidden by default, shown only when auth is needed */
+    #gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0d0d0d;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: 'Work Sans', system-ui, sans-serif;
+    }
+    #gate.needs-auth { display: flex; }
+    .gate-title {
+      font-family: 'IBM Plex Serif', Georgia, serif;
+      font-weight: 300;
+      font-size: 28px;
+      color: rgba(242,237,232,0.9);
+      margin: 0 0 10px;
+      letter-spacing: -0.01em;
+    }
+    .gate-sub {
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(242,237,232,0.38);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 0 0 48px;
+    }
+    .gate-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 320px;
+    }
+    .gate-input {
+      width: 100%;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .gate-input:focus { border-color: rgba(201,169,110,0.6); }
+    .gate-input.error { border-color: rgba(220,60,60,0.7); animation: shake 0.35s ease; }
+    .gate-btn {
+      width: 100%;
+      padding: 16px;
+      background: #C9A96E;
+      color: #201e1b;
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .gate-btn:hover { background: #d4b47a; }
+    .gate-error {
+      font-size: 14px;
+      color: rgba(220,100,100,0.9);
+      letter-spacing: 0.03em;
+      min-height: 20px;
+      text-align: center;
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-8px); }
+      40%      { transform: translateX(8px); }
+      60%      { transform: translateX(-6px); }
+      80%      { transform: translateX(6px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="gate">
+    <p class="gate-title">{deck.title}</p>
+    <p class="gate-sub">Dustin Martinka</p>
+    <form class="gate-form" id="gate-form">
+      <input id="gate-input" class="gate-input" type="password" placeholder="Passcode" autocomplete="off" autofocus>
+      <button class="gate-btn" type="submit">Enter</button>
+      <p class="gate-error" id="gate-error"></p>
+    </form>
+  </div>
+
+  <deck-stage width="1920" height="1080" no-rail>
+    <Fragment set:html={slidesHtml} />
+  </deck-stage>
+
+  <script src="/deck/orbs.js" is:inline></script>
+  <script src="/deck/deck-stage.js" is:inline></script>
+
+  <script is:inline define:vars={{ passwordHashesJson }}>
+    const HASHES = JSON.parse(passwordHashesJson);
+    const SESSION_KEY = 'deck-unlocked';
+    const gate = document.getElementById('gate');
+    const form = document.getElementById('gate-form');
+    const input = document.getElementById('gate-input');
+    const errorEl = document.getElementById('gate-error');
+
+    async function sha256(text) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf))
+        .map(n => n.toString(16).padStart(2, '0'))
+        .join('');
+    }
+
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if (!isLocal && !sessionStorage.getItem(SESSION_KEY)) {
+      gate.classList.add('needs-auth');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const hash = await sha256(input.value.trim());
+      if (HASHES.includes(hash)) {
+        gate.classList.remove('needs-auth');
+        sessionStorage.setItem(SESSION_KEY, '1');
+      } else {
+        errorEl.textContent = 'Incorrect passcode.';
+        input.classList.add('error');
+        input.value = '';
+        setTimeout(() => input.classList.remove('error'), 400);
+      }
+    });
+  </script>
+
+</body>
+</html>
