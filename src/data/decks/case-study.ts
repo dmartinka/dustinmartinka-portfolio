@@ -1,4 +1,5 @@
-import type { Deck } from './types';
+import type { Deck, Slide } from './types';
+import { webElevationDeck } from './web-elevation';
 
 const _d = `<span style="width:16px;height:16px;border-radius:50%;background:var(--gold);display:inline-block;flex-shrink:0"></span>`;
 const _dots = (n: number) => Array(n).fill(_d).join('');
@@ -8,15 +9,8 @@ const _cDotSm = (clr: string) => `<span style="width:56px;height:56px;border-rad
 const _gDotSm = `<span style="width:56px;height:56px;border-radius:50%;background:rgba(43,43,43,0.1);display:block;flex-shrink:0"></span>`;
 const _row = (rank: number, task: string, t: number, c: number, g: number) => `<div style="display:grid;grid-template-columns:220px 28px 1fr;align-items:center;gap:14px"><span style="text-align:right;font-family:var(--sans);font-size:16px;color:rgba(242,237,232,0.8);white-space:nowrap">${task}</span><span style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:11px;font-weight:600;color:rgba(242,237,232,0.9);flex-shrink:0">${rank}</span><div style="display:flex;flex-direction:row;align-items:center;gap:3px">${t>0?`<div style="width:${t}%;height:9px;border-radius:5px;background:rgba(242,237,232,0.85);flex-shrink:0"></div>`:''} ${c>0?`<div style="width:${c}%;height:9px;border-radius:5px;background:var(--gold);flex-shrink:0"></div>`:''} ${g>0?`<div style="width:${g}%;height:9px;border-radius:5px;background:rgba(242,237,232,0.32);flex-shrink:0"></div>`:''}</div></div>`;
 
-export const caseStudyDeck: Deck = {
-  id: 'case-study',
-  title: 'Dustin Martinka — Case Study',
-  defaultTheme: 'dark',
-  passwordHashes: [
-    // Same passcode as the gated work case studies (src/pages/work/tlife.astro)
-    'd405e342c33ea8e0e1e65c2d94e5e8eeb8329e4d15fa6a7627de3e47f6cf1406',
-  ],
-  slides: [
+// ── PART ONE · Get to know me ──
+const partOne: Slide[] = [
 
     // 1 · COVER
     {
@@ -37,7 +31,7 @@ export const caseStudyDeck: Deck = {
       items: [
         { num: '01', title: 'Get to know me' },
         { num: '02', title: 'My impact' },
-        { num: '03', title: 'Beyond leadership' },
+        { num: '03', title: 'Building teams' },
       ],
     },
 
@@ -52,7 +46,7 @@ export const caseStudyDeck: Deck = {
       cols: [
         {
           title: 'A love for building',
-          body: "Products, teams, cultures, home projects — if I can design or build it, I will. I got into this field because I love making things, and nothing has changed.",
+          body: "Products, teams, cultures, home projects. If I can design or build it, I will. I got into this field because I love making things, and nothing has changed.",
         },
         {
           title: 'Husband and father',
@@ -77,9 +71,8 @@ export const caseStudyDeck: Deck = {
       </div>
       <div class="tl-alt rise d3">
 
-        <!-- ABOVE LINE: 2014, 2020, 2024 -->
+        <!-- ABOVE LINE: 2014, 2020, 2024+ -->
         <div class="tl-above-row">
-          <div></div>
           <div></div>
           <div class="tl-cb">
             <p class="tl-role-v2">Manager / Lead Designer</p>
@@ -102,22 +95,16 @@ export const caseStudyDeck: Deck = {
         <!-- DOTS + YEARS -->
         <div class="tl-dot-row">
           <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2005</p></div>
-          <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2009</p></div>
           <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2014</p></div>
           <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2019</p></div>
           <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2020</p></div>
           <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2022</p></div>
-          <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2024</p></div>
+          <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2024+</p></div>
         </div>
 
-        <!-- BELOW LINE: 2009, 2019, 2022 -->
+        <!-- BELOW LINE: 2019, 2022, 2024+ -->
         <div class="tl-below-row">
           <div></div>
-          <div class="tl-cb">
-            <p class="tl-role-v2">Sr. Designer</p>
-            <p style="font-family:var(--sans);font-size:16px;font-weight:400;color:rgba(43,43,43,0.65);margin:2px 0 5px">Clearwire</p>
-            <p class="tl-desc-v2">Led a small design team for the first time.</p>
-          </div>
           <div></div>
           <div class="tl-cb">
             <p class="tl-role-v2">Sr. Designer</p>
@@ -128,9 +115,13 @@ export const caseStudyDeck: Deck = {
           <div class="tl-cb">
             <p class="tl-role-v2">Sr. Manager</p>
             <p style="font-family:var(--sans);font-size:16px;font-weight:400;color:rgba(43,43,43,0.65);margin:2px 0 5px">T-Mobile</p>
-            <p class="tl-desc-v2">Scaled to 37 designers across 7 product areas.</p>
+            <p class="tl-desc-v2">Scaled to 35 designers across 7 product areas.</p>
           </div>
-          <div></div>
+          <div class="tl-cb">
+            <p class="tl-role-v2">Co-founder / Product Design Lead</p>
+            <p style="font-family:var(--sans);font-size:16px;font-weight:400;color:rgba(43,43,43,0.65);margin:2px 0 5px">Paavis</p>
+            <p class="tl-desc-v2">Building a trust intelligence product from zero. Designing and prototyping in code with AI.</p>
+          </div>
         </div>
 
       </div>
@@ -148,38 +139,35 @@ export const caseStudyDeck: Deck = {
     <div class="content" style="padding:124px 140px;display:flex;flex-direction:column">
       <div class="slide-head">
         <p class="eyebrow rise">How I work</p>
-        <h2 class="head-lg rise d2">Things that show up in every room I'm in.</h2>
+        <h2 class="head-lg rise d2">Leadership philosophies.</h2>
+        <p class="rise d3" style="font-family:var(--sans);font-size:21px;font-weight:300;color:rgba(242,237,232,0.65);margin:18px 0 0;line-height:1.5;max-width:900px">These principles have helped me navigate the many challenges I've faced as a manager. I find myself coming back to them time and time again.</p>
       </div>
       <div class="rise d3" style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:28px;margin-top:auto">
         <div style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:36px 40px">
-          <p style="font-family:var(--serif);font-size:28px;color:var(--gold);margin:0 0 14px;font-weight:400">Clarity through chaos</p>
-          <p style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.55;color:rgba(242,237,232,0.65);margin:0">Reorgs, ambiguous mandates, platform migrations. I make the path clear and keep the work moving. It's the thing people mention most.</p>
+          <p style="font-family:var(--serif);font-size:28px;color:var(--gold);margin:0 0 14px;font-weight:400">Bring clarity to the chaos</p>
+          <p style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.55;color:rgba(242,237,232,0.65);margin:0">Reorgs, migrations, mandates that shift halfway through. Someone has to make the path clear so the work keeps moving, and that's usually where I end up.</p>
         </div>
         <div style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:36px 40px">
-          <p style="font-family:var(--serif);font-size:28px;color:var(--gold);margin:0 0 14px;font-weight:400">Lead with empathy and curiosity</p>
-          <p style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.55;color:rgba(242,237,232,0.65);margin:0">We're all human, driven by different factors. Each person requires a unique approach, and I adjust how I communicate and lead accordingly.</p>
+          <p style="font-family:var(--serif);font-size:28px;color:var(--gold);margin:0 0 14px;font-weight:400">Raise the level of thinking</p>
+          <p style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.55;color:rgba(242,237,232,0.65);margin:0">Solving the problem in front of you is the easy part. The harder and more useful thing is helping the team get sharper, so the next problem doesn't need you in the room.</p>
         </div>
         <div style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:36px 40px">
-          <p style="font-family:var(--serif);font-size:28px;color:var(--gold);margin:0 0 14px;font-weight:400">Foster a culture of learning</p>
-          <p style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.55;color:rgba(242,237,232,0.65);margin:0">When you're learning, you're growing, whether it's a new skill or learning from where you failed. I create space for both.</p>
+          <p style="font-family:var(--serif);font-size:28px;color:var(--gold);margin:0 0 14px;font-weight:400">Culture is part of the work</p>
+          <p style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.55;color:rgba(242,237,232,0.65);margin:0">A team is more than the people on it. It's the critique, the standards, the autonomy, and whether people feel safe enough to say the hard thing out loud. That doesn't happen by accident.</p>
         </div>
         <div style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:36px 40px">
           <p style="font-family:var(--serif);font-size:28px;color:var(--gold);margin:0 0 14px;font-weight:400">Stay close to the craft</p>
-          <p style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.55;color:rgba(242,237,232,0.65);margin:0">I still design. I stay close enough to the work to know when direction is landing, and when it isn't. Leading and making aren't mutually exclusive.</p>
+          <p style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.55;color:rgba(242,237,232,0.65);margin:0">I still design. Leading and making aren't mutually exclusive, and staying close to the work is how I know when a direction is landing and when it isn't.</p>
         </div>
       </div>
     </div>
   </section>`,
     },
 
-    // 6 · SECTION: Delivering impact
-    {
-      type: 'section',
-      theme: 'dark',
-      label: 'Part two',
-      num: 'PART TWO',
-      title: 'Delivering impact',
-    },
+];
+
+// ── TEAM ASSESSMENT · moved into Part Three ──
+const teamAssessment: Slide[] = [
 
     // 7 · SKILLS DOT CHART (raw)
     {
@@ -374,6 +362,11 @@ export const caseStudyDeck: Deck = {
   </section>`,
     },
 
+];
+
+// ── FLAGSHIP APP case study · Part Two ──
+const flagshipApp: Slide[] = [
+
     // 11 · FLAGSHIP APP STATEMENT
     {
       type: 'raw',
@@ -560,7 +553,7 @@ export const caseStudyDeck: Deck = {
       <div class="sp-text">
         <p class="eyebrow rise" style="color:var(--gold-deep)">The hardest surface</p>
         <p class="lead-stmt rise d2">Account management was the most complex area to address.</p>
-        <p class="sp-note rise d3">Plans, devices, add-ons, financing, settings, benefits, and more — all colliding in one place.</p>
+        <p class="sp-note rise d3">Plans, devices, add-ons, financing, settings, benefits, and more, all colliding in one place.</p>
       </div>
       <div class="sp-visual rise d2">
         <img class="sp-device-shot" src="/deck/assets/casestudy/current-app-account.png" alt="Current app — account screen">
@@ -771,7 +764,7 @@ export const caseStudyDeck: Deck = {
       <div class="pr-text">
         <p class="eyebrow pr-eyebrow rise">eCommerce</p>
         <h2 class="pr-head rise d2">Upgrade with ease.</h2>
-        <p class="pr-body rise d3">Say goodbye to complicated promotion paths. Our new promo-first flow makes finding the right device a breeze — see available promotions upfront, before browsing devices, streamlining the whole upgrade.</p>
+        <p class="pr-body rise d3">Say goodbye to complicated promotion paths. Our new promo-first flow makes finding the right device a breeze. You see available promotions upfront, before browsing devices, which streamlines the whole upgrade.</p>
         <p class="pr-body rise d3" style="font-size:15px;color:rgba(242,237,232,0.35);margin-top:18px">Upgrade from home</p>
       </div>
       <div class="pr-visual">
@@ -792,7 +785,7 @@ export const caseStudyDeck: Deck = {
       <div class="pr-text">
         <p class="eyebrow pr-eyebrow rise">Support</p>
         <h2 class="pr-head rise d2">Quick access to the help you need.</h2>
-        <p class="pr-body rise d3">Our support page highlights the top-visited support pages for easy access. With new search and device-specific support, finding solutions is faster than ever — and Care is one tap away by chat or scheduled call.</p>
+        <p class="pr-body rise d3">Our support page highlights the top-visited support pages for easy access. With new search and device-specific support, finding solutions is faster than ever. Care is one tap away by chat or scheduled call.</p>
         <p class="pr-body rise d3" style="font-size:15px;color:rgba(242,237,232,0.35);margin-top:18px">Home · Account · Benefits · Shop · Support</p>
       </div>
       <div class="pr-visual">
@@ -811,15 +804,16 @@ export const caseStudyDeck: Deck = {
     <div class="grain"></div>
     <div class="content">
       <p class="big-stat rise">+12%</p>
-      <p class="stmt rise d2">Despite setbacks and leadership changes, applying our UX improvements to the web experience drove a <em>12% lift</em> in the upper funnel for phone upgrades.</p>
-      <p class="stmt-sub rise d3">A fragmented launch — but the work proved itself where it shipped.</p>
-      <div class="rise d4" style="display:flex;align-items:baseline;gap:32px;margin-top:48px;padding-top:48px;border-top:1px solid rgba(242,237,232,0.14)">
-        <p style="font-family:var(--serif);font-weight:700;font-size:72px;line-height:1;color:var(--gold);margin:0;white-space:nowrap;letter-spacing:-0.02em">5.5 → 6.0</p>
-        <p style="font-family:var(--sans);font-weight:300;font-size:22px;color:rgba(242,237,232,0.6);margin:0;line-height:1.5;max-width:500px">Average task ease out of 7, climbed across all account management testing rounds.</p>
-      </div>
+      <p class="stmt rise d2">We shipped into all eight of those headwinds at once. The UX improvements we applied to the web experience still drove a <em>12% lift</em> in the upper funnel for phone upgrades.</p>
+      <p class="stmt-sub rise d3">The launch was messier than any of us wanted, and the work still proved itself where it shipped.</p>
     </div>
   </section>`,
     },
+
+];
+
+// ── AI IN PRACTICE · still to be reworked around Paavis ──
+const aiInPractice: Slide[] = [
 
     // 28 · AI IN PRACTICE
     {
@@ -832,19 +826,14 @@ export const caseStudyDeck: Deck = {
         { title: 'ELVTR certified', body: 'Completed the AI Product Design course. I think about AI-first product experiences, not just AI features bolted on.' },
         { title: 'AI guitar teacher app', body: 'Built a working prototype during the ELVTR course. Real-time feedback on playing technique, designed for a real human need.' },
         { title: 'DustAIn', body: 'An AI-powered second brain I built for myself. Claude + Todoist + Calendar + GitHub. I run my job search and daily work out of it.' },
-        { title: 'Figma Make', body: 'Pushed adoption T-Mobile before it was on the roadmap. Built the internal case and rolled it out to my team.' },
+        { title: 'Figma Make', body: 'Pushed adoption at T-Mobile before it was on the roadmap. Built the internal case and rolled it out to my team.' },
       ],
     },
 
-    // 29 · SECTION: Beyond leadership
-    {
-      type: 'section',
-      theme: 'dark',
-      label: 'Part three',
-      num: 'PART THREE',
-      title: 'Beyond leadership',
-      sub: 'Creating lasting connections. There\'s more to managing a team than delivering great results.',
-    },
+];
+
+// ── PEOPLE AND CULTURE · Part Three, after the team assessment ──
+const peopleAndCulture: Slide[] = [
 
     // 30 · MENTORSHIP (raw — overlapping photo cards)
     {
@@ -947,5 +936,51 @@ export const caseStudyDeck: Deck = {
       contacts: ['dustinmartinka.com', '<b>in</b> /in/dustinmartinka'],
     },
 
+];
+
+// ── SECTION DIVIDERS ──
+const sectionTwo: Slide = {
+  type: 'section',
+  theme: 'dark',
+  label: 'Part two',
+  num: 'PART TWO',
+  title: 'Delivering impact',
+  items: [
+    { num: '01', title: 'Web Experience Elevation', sub: 'Taking on the web experience nobody owned' },
+    { num: '02', title: 'The Flagship App Redesign', sub: 'Deep-dive into the redesign of our flagship app' },
+  ],
+};
+
+const sectionThree: Slide = {
+  type: 'section',
+  theme: 'dark',
+  label: 'Part three',
+  num: 'PART THREE',
+  title: 'Building teams',
+  items: [
+    { num: '01', title: 'Team Growth and Development', sub: 'Growing my T-Mobile Product Design team' },
+    { num: '02', title: 'Culture and Mentorship', sub: 'Investing in people beyond the work' },
+  ],
+};
+
+export const caseStudyDeck: Deck = {
+  id: 'case-study',
+  title: 'Dustin Martinka — Case Study',
+  defaultTheme: 'dark',
+  passwordHashes: [
+    // Same passcode as the gated work case studies (src/pages/work/tlife.astro)
+    'd405e342c33ea8e0e1e65c2d94e5e8eeb8329e4d15fa6a7627de3e47f6cf1406',
+  ],
+  slides: [
+    ...partOne,
+    sectionTwo,
+    ...webElevationDeck.slides,
+    ...flagshipApp,
+    // aiInPractice pulled from the running order 2026-09-08. The AI story is
+    // carried by the Paavis card on the timeline instead. Re-add this line to
+    // bring the slide back.
+    sectionThree,
+    ...teamAssessment,
+    ...peopleAndCulture,
   ],
 };

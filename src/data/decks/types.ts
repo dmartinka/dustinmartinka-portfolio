@@ -2,6 +2,11 @@ export type Theme = 'dark' | 'light';
 
 // --- Slide interfaces ---
 
+/**
+ * `photo` full-bleeds a bottom-anchored image into the right column.
+ * `visual` instead fills the right column with a black panel and centers the
+ * image inside it, contained rather than cropped.
+ */
 export interface CoverSlide {
   type: 'cover';
   theme?: Theme;
@@ -10,6 +15,9 @@ export interface CoverSlide {
   headline: string;
   meta?: string;
   photo?: string;
+  visual?: string;
+  /** Small mark layered over the top right of `visual`, e.g. a company badge. */
+  badge?: string;
 }
 
 export interface SectionSlide {
@@ -19,15 +27,25 @@ export interface SectionSlide {
   num?: string;
   title: string;
   sub?: string;
+  /** Numbered preview of what the section covers. Renders below the title. */
+  items?: { num: string; title: string; sub?: string }[];
 }
 
+/** `cards: true` lays the bullets out as bordered cards instead of a dotted list. */
 export interface BulletsSlide {
   type: 'bullets';
   theme?: Theme;
   label?: string;
   eyebrow?: string;
   headline: string;
-  bullets: string[];
+  sub?: string;
+  /** A plain string renders as body only. An object adds a heading above it. */
+  bullets: (string | { title: string; body: string })[];
+  cards?: boolean;
+  /** Numbers pulled out into a rail down the right third of the slide. */
+  stats?: Array<{ value: string; label: string }>;
+  /** A supporting image down the right of the slide, with an optional caption. */
+  artifact?: { src: string; caption?: string };
 }
 
 export interface ValuesSlide {
@@ -36,7 +54,8 @@ export interface ValuesSlide {
   label?: string;
   eyebrow?: string;
   headline: string;
-  cols: Array<{ title: string; body: string }>;
+  /** `graphic` is inline SVG markup. When present it replaces the gold rule. */
+  cols: Array<{ title: string; body: string; graphic?: string }>;
   photo?: string; // optional: stacks text left, image fills right half
 }
 

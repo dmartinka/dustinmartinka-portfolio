@@ -6,13 +6,13 @@
   padding: 130px 140px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   height: 100%;
 }
+/* 60px matches .head-lg, the standard slide headline used everywhere else. */
 .bullets-slide .bl-headline {
   font-family: var(--serif);
   font-weight: 300;
-  font-size: 68px;
+  font-size: 60px;
   line-height: 1.12;
   letter-spacing: -0.02em;
   color: var(--charcoal);
@@ -35,18 +35,18 @@
 }
 .bullets-slide .bl-list li {
   font-family: var(--sans);
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.55;
   color: rgba(43, 43, 43, 0.82);
-  padding-left: 36px;
+  padding-left: 32px;
   position: relative;
 }
 .bullets-slide .bl-list li::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 17px;
+  top: 11px;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -59,6 +59,128 @@
 .slide.dark .bullets-slide .bl-list li::before,
 .slide.dark.bullets-slide .bl-list li::before {
   background: var(--gold);
+}
+
+.bullets-slide .bl-sub {
+  font-family: var(--sans);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgba(43, 43, 43, 0.62);
+  margin: -44px 0 0;
+  max-width: 1100px;
+}
+.slide.dark .bullets-slide .bl-sub,
+.slide.dark.bullets-slide .bl-sub { color: rgba(242, 237, 232, 0.62); }
+
+/* Stats rail: bullets left, numbers down a 600px right column (about a third
+   of the 1920 stage). Only applies when the slide declares stats. */
+.bullets-slide .content:has(.bl-stats) {
+  display: grid;
+  grid-template-columns: 1fr 600px;
+  gap: 90px;
+  align-items: stretch;
+}
+.bullets-slide .bl-main { display: flex; flex-direction: column; min-width: 0; }
+.bullets-slide .bl-stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 64px;
+  border-left: 1px solid rgba(43, 43, 43, 0.14);
+  padding-left: 72px;
+}
+.slide.dark .bullets-slide .bl-stats,
+.slide.dark.bullets-slide .bl-stats { border-left-color: rgba(242, 237, 232, 0.16); }
+/* Matches the research findings slide: 80px serif at weight 700. */
+.bullets-slide .bl-n {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--gold-deep);
+  margin: 0;
+}
+.slide.dark .bullets-slide .bl-n,
+.slide.dark.bullets-slide .bl-n { color: var(--gold); }
+.bullets-slide .bl-l {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.45;
+  color: rgba(43, 43, 43, 0.62);
+  margin: 14px 0 0;
+}
+.slide.dark .bullets-slide .bl-l,
+.slide.dark.bullets-slide .bl-l { color: rgba(242, 237, 232, 0.62); }
+
+/* Artifact panel: bullets left, a supporting image down the right. Wider than
+   the stats rail because real artifacts are usually landscape. */
+.bullets-slide .content:has(.bl-artifact) {
+  display: grid;
+  grid-template-columns: 1fr 700px;
+  gap: 80px;
+  align-items: stretch;
+}
+/* Text starts at the top like every other slide. Only the image centres. */
+.bullets-slide .bl-artifact { margin: 0; align-self: center; }
+.bullets-slide .bl-artifact img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(43, 43, 43, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16);
+}
+.bullets-slide .bl-artifact figcaption {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.45;
+  color: rgba(43, 43, 43, 0.45);
+  margin: 18px 0 0;
+}
+.slide.dark .bullets-slide .bl-artifact figcaption,
+.slide.dark.bullets-slide .bl-artifact figcaption { color: rgba(242, 237, 232, 0.45); }
+
+/* Card variant: same container treatment as the leadership philosophies slide,
+   inverted for a light background. Cards sit at the bottom of the slide. */
+.bullets-slide .bl-list.bl-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 1640px;
+  margin-top: auto;
+}
+.bullets-slide .bl-list.bl-cards .bl-t {
+  display: block;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--gold-deep);
+  margin: 0 0 14px;
+}
+.slide.dark .bullets-slide .bl-list.bl-cards .bl-t,
+.slide.dark.bullets-slide .bl-list.bl-cards .bl-t { color: var(--gold); }
+.bullets-slide .bl-list.bl-cards li {
+  background: rgba(43, 43, 43, 0.04);
+  border: 1px solid rgba(43, 43, 43, 0.10);
+  border-top: 3px solid var(--gold-deep);
+  border-radius: 10px;
+  padding: 36px 40px;
+  font-size: 20px;
+  line-height: 1.55;
+  color: rgba(43, 43, 43, 0.75);
+}
+.bullets-slide .bl-list.bl-cards li::before { display: none; }
+.slide.dark .bullets-slide .bl-list.bl-cards li,
+.slide.dark.bullets-slide .bl-list.bl-cards li {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 3px solid var(--gold);
+  color: rgba(242, 237, 232, 0.65);
 }
 
 /* ── UNLOCK SLIDE ── */
@@ -231,8 +353,49 @@
   box-shadow: 0 32px 80px rgba(0,0,0,0.18);
 }
 
-/* ── TIMELINE: 7 columns, larger fonts ── */
-.tl-above-row, .tl-dot-row, .tl-below-row { grid-template-columns: repeat(7, 1fr); }
+/* ── COVER VISUAL: image sits directly on the slide, no panel behind it ── */
+/* Two thirds text, one third visual. Scoped so the main cover keeps its own split. */
+.cover .content:has(.cover-visual) { grid-template-columns: 2fr 1fr; }
+/* Case study covers carry a full sentence, so they take the statement size (64px),
+   not the 104px display size slide 1 uses for a short line. */
+.cover .content:has(.cover-visual) .headline { font-size: 64px; line-height: 1.22; }
+/* Eyebrow moves to the top left of the slide, matching the timeline slide's
+   slide-head position (130px / 140px), while the headline stays centered. */
+.cover .content:has(.cover-visual) .name {
+  position: absolute; top: 130px; left: 140px; margin: 0;
+  font-family: var(--sans); font-size: 22px; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-deep);
+}
+.cover-visual { height: 100%; display: flex; align-items: center; justify-content: center; padding: 40px; }
+.cover-visual .cv-wrap { position: relative; display: inline-block; max-width: 100%; max-height: 100%; }
+.cover-visual .cv-main { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; }
+.cover-visual .cv-badge { position: absolute; top: 3%; right: 10%; width: 17%; height: auto; }
+/* Text column is 1280px wide with 140px of left padding, so 1140px of text.
+   228px of right padding takes that down by 20%. */
+.cover .content:has(.cover-visual) .cover-text { padding-right: 228px; }
+
+/* ── AGENDA: match the section divider number treatment ── */
+.ag-item { align-items: center; gap: 36px; }
+.ag-item .ag-n { font-size: 90px; line-height: 1; width: 150px; }
+
+/* ── VALUES 3-up: match the card slides' type scale (28/20, not 30/24).
+   The photo variant keeps its own sizes further down this file. ── */
+.val-col .val-t { font-size: 28px; }
+.val-col .val-b { font-size: 20px; }
+.val-col .val-graphic { width: 400px; max-width: 100%; margin: 0 auto 44px; }
+.val-col .val-graphic svg { display: block; width: 100%; height: auto; }
+
+/* ── SECTION DIVIDER: numbered preview of what the section covers ── */
+.section .sec-items { margin-top: 64px; max-width: 1180px; }
+.section .sec-item { display: flex; align-items: center; gap: 36px; padding: 30px 0; border-top: 1px solid rgba(242,237,232,0.18); }
+.section .sec-item:last-child { border-bottom: 1px solid rgba(242,237,232,0.18); }
+.section .sec-n { font-family: var(--serif); font-weight: 300; font-size: 90px; line-height: 1; color: var(--gold); width: 150px; flex-shrink: 0; }
+.section .sec-body { min-width: 0; }
+.section .sec-t { font-family: var(--serif); font-weight: 400; font-size: 40px; letter-spacing: -0.01em; line-height: 1.15; color: #fff; margin: 0; }
+.section .sec-s { font-family: var(--sans); font-weight: 300; font-size: 21px; line-height: 1.5; color: rgba(242,237,232,0.6); margin: 10px 0 0; }
+
+/* ── TIMELINE: 6 columns, larger fonts ── */
+.tl-above-row, .tl-dot-row, .tl-below-row { grid-template-columns: repeat(6, 1fr); }
 .tl-above-row { min-height: 290px; }
 .tl-below-row { min-height: 250px; }
 .tl-role-v2 { font-size: 22px; margin-bottom: 8px; }

@@ -18,7 +18,11 @@ function wrap(theme: Theme, classes: string, label: string, inner: string): stri
 function cover(s: CoverSlide, theme: Theme, label: string): string {
   const photo = s.photo
     ? `<div class="cover-photo"><img src="${s.photo}" alt="Dustin Martinka"></div>`
-    : '';
+    : s.visual
+      ? `<div class="cover-visual"><div class="cv-wrap"><img class="cv-main" src="${s.visual}" alt="">${
+          s.badge ? `<img class="cv-badge" src="${s.badge}" alt="">` : ''
+        }</div></div>`
+      : '';
   return wrap(theme, 'cover', label, `
     ${theme === 'dark' ? atm() : ''}
     <div class="content">
@@ -33,23 +37,53 @@ function cover(s: CoverSlide, theme: Theme, label: string): string {
 }
 
 function section(s: SectionSlide, theme: Theme, label: string): string {
+  const items = s.items?.map((item, i) => `
+      <div class="sec-item rise d${i + 3}">
+        <span class="sec-n">${item.num}</span>
+        <div class="sec-body">
+          <p class="sec-t">${item.title}</p>
+          ${item.sub ? `<p class="sec-s">${item.sub}</p>` : ''}
+        </div>
+      </div>`).join('') ?? '';
   return wrap(theme, 'section', label, `
     ${atm()}
     <div class="content">
       ${s.num ? `<p class="num rise">${s.num}</p>` : ''}
       <h2 class="title rise d2">${s.title}</h2>
       ${s.sub ? `<p class="sub rise d3">${s.sub}</p>` : ''}
+      ${items ? `<div class="sec-items">${items}</div>` : ''}
     </div>`);
 }
 
 function bullets(s: BulletsSlide, theme: Theme, label: string): string {
-  const items = s.bullets.map((b, i) => `<li class="rise d${i + 3}">${b}</li>`).join('');
+  const items = s.bullets.map((b, i) => {
+    const inner = typeof b === 'string'
+      ? b
+      : `<span class="bl-t">${b.title}</span>${b.body}`;
+    return `<li class="rise d${i + 3}">${inner}</li>`;
+  }).join('');
+  const body = `
+      ${s.eyebrow ? `<p class="eyebrow rise">${s.eyebrow}</p>` : ''}
+      <h2 class="bl-headline rise d2">${s.headline}</h2>
+      ${s.sub ? `<p class="bl-sub rise d2">${s.sub}</p>` : ''}
+      <ul class="bl-list${s.cards ? ' bl-cards' : ''}">${items}</ul>`;
+  const stats = s.stats?.map((st, i) => `
+      <div class="bl-stat rise d${i + 3}">
+        <p class="bl-n">${st.value}</p>
+        <p class="bl-l">${st.label}</p>
+      </div>`).join('') ?? '';
+  const artifact = s.artifact ? `
+      <figure class="bl-artifact rise d3">
+        <img src="${s.artifact.src}" alt="">
+        ${s.artifact.caption ? `<figcaption>${s.artifact.caption}</figcaption>` : ''}
+      </figure>` : '';
+  const rail = stats
+    ? `<div class="bl-stats">${stats}</div>`
+    : artifact;
   return wrap(theme, 'bullets-slide', label, `
     ${theme === 'dark' ? atm() : ''}
     <div class="content">
-      ${s.eyebrow ? `<p class="eyebrow rise">${s.eyebrow}</p>` : ''}
-      <h2 class="bl-headline rise d2">${s.headline}</h2>
-      <ul class="bl-list">${items}</ul>
+      ${rail ? `<div class="bl-main">${body}</div>${rail}` : body}
     </div>`);
 }
 
@@ -76,7 +110,7 @@ function values(s: ValuesSlide, theme: Theme, label: string): string {
   }
   const cols = s.cols.map((c, i) => `
     <div class="val-col rise d${i + 3}">
-      <div class="val-rule"></div>
+      ${c.graphic ? `<div class="val-graphic">${c.graphic}</div>` : '<div class="val-rule"></div>'}
       <p class="val-t">${c.title}</p>
       <p class="val-b">${c.body}</p>
     </div>`).join('');
