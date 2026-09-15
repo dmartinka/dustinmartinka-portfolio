@@ -88,7 +88,7 @@ export const webElevationDeck: Deck = {
       html: `
   <section class="slide light we" data-label="The situation">
     <div class="content">
-      <div class="we-cols" style="grid-template-columns:2fr 1fr">
+      <div class="we-cols we-2-1">
         <div class="we-text">
           <p class="eyebrow rise">Web elevation · the situation</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">Web was the forgotten surface.</h2>
@@ -117,7 +117,7 @@ export const webElevationDeck: Deck = {
       html: `
   <section class="slide light we" data-label="The fragmentation">
     <div class="content">
-      <div class="we-cols" style="grid-template-columns:1fr 2fr">
+      <div class="we-cols we-1-2">
         <div class="we-text">
           <p class="eyebrow rise" style="white-space:nowrap">Web elevation · the fragmentation</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">Every team built web its own way.</h2>
@@ -199,7 +199,7 @@ export const webElevationDeck: Deck = {
       html: `
   <section class="slide light we" data-label="Navigation">
     <div class="content">
-      <div class="we-cols" style="grid-template-columns:600px 1fr">
+      <div class="we-cols we-1-2">
         <div class="we-text">
           <p class="eyebrow rise">Web elevation · navigation</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">One navigation, no matter where you enter.</h2>
@@ -221,13 +221,13 @@ export const webElevationDeck: Deck = {
     },
 
     // 7 · Defining the vision: concept direction, auto-scrolling
-    // Scroll distance in deck-custom.css (weScroll) = track height (2827px at 880w) minus view (600px).
+    // Scroll distance in deck-custom.css (weScroll) = track height (2507px at 780w, a half column) minus view (600px).
     {
       type: 'raw',
       html: `
   <section class="slide light we" data-label="The vision">
     <div class="content">
-      <div class="we-cols" style="grid-template-columns:640px 1fr">
+      <div class="we-cols we-1-1">
         <div class="we-text">
           <p class="eyebrow rise">Web elevation · the vision</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">I hired a principal designer to define what web could become.</h2>
@@ -239,7 +239,7 @@ export const webElevationDeck: Deck = {
           </ul>
           </div>
         </div>
-        <div class="we-vis rise d3" style="justify-self:end">
+        <div class="we-vis rise d3">
           <p class="we-cap">Concept direction</p>
           <div class="we-browser we-scroll">
             <div class="bar"><i></i><i></i><i></i></div>
@@ -260,7 +260,7 @@ export const webElevationDeck: Deck = {
       html: `
   <section class="slide light we" data-label="What it unlocked">
     <div class="content">
-      <div class="we-cols" style="grid-template-columns:680px 1fr">
+      <div class="we-cols we-1-1">
         <div class="we-text">
           <p class="eyebrow rise">Web elevation · what it unlocked</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">Web became a priority.</h2>
@@ -298,7 +298,7 @@ export const webElevationDeck: Deck = {
       html: `
   <section class="slide light we" data-label="Live today">
     <div class="content">
-      <div class="we-live">
+      <div class="we-cols we-1-1">
         <div class="we-text">
           <p class="eyebrow rise">Web elevation · live today</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">The new <span style="white-space:nowrap">t-mobile.com</span> homepage.</h2>

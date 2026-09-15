@@ -112,3 +112,42 @@ Add `class="wide"` to `<main>` to use the wide container.
 | Keep backgrounds beige or white | Use the blue accent from the old template |
 | Let whitespace do the work | Crowd elements together |
 | Lead with outcomes in case studies | Start with process |
+
+---
+
+## Case Study Decks (`/deck/*`)
+
+*Approved by Dustin 2026-09-15. Applies to every deck section, including the flagship work.*
+
+Canvas is 1920×1080. Every content slide uses one of two layouts. The deciding question: does the content sit **under** the headline, or **beside** it?
+
+### Layout 1: Full width
+
+Content spans the full width under the headline: stat rows, three-up columns, result cards, side-by-side pairs.
+
+- Eyebrow and headline pinned to the top (eyebrow 135px from the top).
+- Content pinned to the bottom (130px from the bottom edge).
+- All leftover space falls between the headline and the content.
+- Examples: flagship "What we know", web elevation "The playbook came down to three things."
+
+### Layout 2: Split
+
+A text column beside a visual column.
+
+- Eyebrow, headline, and body stay together as one block. No stretched gap between them.
+- The text block is vertically centered on the slide, and so is the visual column.
+- The eyebrow's height therefore varies slide to slide. That is expected for this layout.
+- Columns are halves (1:1) or thirds (1:2 or 2:1). Never arbitrary pixel widths. Classes: `.we-1-1`, `.we-1-2`, `.we-2-1`.
+- The visual may bleed off the outer edge. Allowed, not required.
+- Example: flagship "Learning to think in apps, not pages."
+
+### Shared rules
+
+| Element | Rule |
+|---|---|
+| Side margins | 140px |
+| Top and bottom padding | 130px |
+| Column gap | 80px |
+| Eyebrow | Gold (`--gold-deep` on light, `--gold` on dark), 22px, uppercase, 0.14em tracking, 26px above the headline, one per slide |
+| Headline | IBM Plex Serif 300, 60px. Up to 2 lines full width, up to 3 lines split. |
+| Labels above images | 15px, uppercase, gray. Never gold, so they never compete with the eyebrow. |
