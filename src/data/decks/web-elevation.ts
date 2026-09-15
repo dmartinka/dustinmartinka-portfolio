@@ -60,6 +60,8 @@ const _grid = (() => {
 // What it was, sitting inside what it could become.
 const _vision = `<svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A small filled circle inside a much larger outlined circle"><circle cx="90" cy="90" r="76" fill="none" stroke="${G}" stroke-width="1.5" opacity="0.55"/><circle cx="90" cy="90" r="20" fill="${G}"/></svg>`;
 
+const A = '/deck/assets/web-elevation';
+
 export const webElevationDeck: Deck = {
   id: 'web-elevation',
   title: 'Web Experience Elevation',
@@ -69,47 +71,73 @@ export const webElevationDeck: Deck = {
     'd405e342c33ea8e0e1e65c2d94e5e8eeb8329e4d15fa6a7627de3e47f6cf1406',
   ],
   slides: [
-    // 1 — Cover
+    // 1 · Cover
     {
       type: 'cover',
       theme: 'light',
       label: 'Title',
       name: 'T-Mobile · Web Experience Elevation',
       headline: 'Nobody asked me to fix web. I <em>made the case</em> until it was mine.',
-      visual: '/deck/assets/web-elevation/cover.png',
-      badge: '/deck/assets/web-elevation/tmobile-badge.png',
+      visual: `${A}/cover.png`,
+      badge: `${A}/tmobile-badge.png`,
     },
 
-    // 2 — The situation
+    // 2 · The situation: numbers left, customer voices right
     {
-      type: 'bullets',
-      theme: 'light',
-      label: 'The situation',
-      eyebrow: 'Web elevation · the situation',
-      headline: 'Web was the forgotten surface.',
-      sub: 'Most companies have a surface that slowly stops getting attention, and at T-Mobile that was the web experience.',
-      cards: true,
-      bullets: [
-        {
-          title: 'The app was the priority',
-          body: 'Most of the investment and most of the attention went to the app, and web was left inconsistent and under-resourced, with nobody owning the quality bar across teams.',
-        },
-        {
-          title: 'Ownership was split across teams',
-          body: "It wasn't really neglect. Several managers, myself included, each owned a piece of the web experience, and because nobody owned the whole thing, nothing stayed consistent and the ambition stayed low.",
-        },
-        {
-          title: 'I kept bringing evidence',
-          body: 'This had been the situation for about two years and nobody had asked me to take it on, so I kept bringing evidence that web was fragmented until my VP decided to hand me the whole thing.',
-        },
-        {
-          title: 'There was no playbook',
-          body: 'There was no playbook for this kind of work, so I got to build one. That meant deciding what the approach should be, what the standards were, and what web could become.',
-        },
-      ],
+      type: 'raw',
+      html: `
+  <section class="slide light we" data-label="The situation">
+    <div class="content">
+      <div class="we-cols" style="grid-template-columns:780px 1fr">
+        <div>
+          <p class="eyebrow rise">Web elevation · the situation</p>
+          <h2 class="head-lg rise d2" style="margin-top:26px">Web was the forgotten surface.</h2>
+          <div class="we-facts">
+            <div class="we-fact rise d3"><p class="num">#2</p><p>“Website” was the second most mentioned phrase in customer feedback, and it wasn’t positive</p></div>
+            <div class="we-fact rise d4"><p class="num">10%</p><p>of customers start self-service on web</p></div>
+            <div class="we-fact rise d5"><p class="num">0</p><p>owners for the whole experience. Several managers each owned a piece.</p></div>
+          </div>
+        </div>
+        <div class="we-quotes">
+          <div class="we-card we-quote rise d3"><p class="q">You guys keep changing the website and when I try to look up data, call, and message logs it’s more difficult every time.</p><p class="a">T-Mobile customer</p></div>
+          <div class="we-card we-quote rise d4"><p class="q">This website is not user friendly and I have now spent 2 days trying to get our protection plans cancelled.</p><p class="a">T-Mobile customer</p></div>
+          <div class="we-card we-quote rise d5"><p class="q">Your website directs me to the app that is obsolete.</p><p class="a">T-Mobile customer</p></div>
+        </div>
+      </div>
+    </div>
+  </section>`,
     },
 
-    // 3 — Strategy (3 cards)
+    // 3 · The fragmentation: one click, logo and navigation change
+    // Source: unify navigation deck, page 21. Pins are % of each screenshot.
+    {
+      type: 'raw',
+      html: `
+  <section class="slide light we" data-label="The fragmentation">
+    <div class="content">
+      <div class="we-cols" style="grid-template-columns:600px 1fr">
+        <div>
+          <p class="eyebrow rise">Web elevation · the fragmentation</p>
+          <h2 class="head-lg rise d2" style="margin-top:26px">Click once, and the whole site changes.</h2>
+          <p class="we-sub rise d2">A customer clicks into Internet. The logo and the navigation change under them.</p>
+          <div class="we-steps">
+            <div class="we-step rise d3"><span class="we-n">1</span>Customer goes to Internet</div>
+            <div class="we-step rise d4"><span class="we-n">2</span>The logo changes</div>
+            <div class="we-step rise d5"><span class="we-n">3</span>The navigation changes</div>
+          </div>
+        </div>
+        <div class="we-journey">
+          <div class="we-card rise d3"><img src="${A}/nav-journey-home.jpg" alt="T-Mobile homepage header"><span class="we-pin" style="left:20.1%;top:4.5%">1</span></div>
+          <div class="we-arrow rise d4"><span></span></div>
+          <div class="we-card rise d4"><img src="${A}/nav-journey-internet.jpg" alt="Home Internet page header with a different logo and navigation"><span class="we-pin" style="left:4.8%;top:20%">2</span><span class="we-pin" style="left:37%;top:20%">3</span></div>
+          <p class="we-foot rise d5">From the navigation unification research</p>
+        </div>
+      </div>
+    </div>
+  </section>`,
+    },
+
+    // 4 · Strategy (3 cards)
     {
       type: 'values',
       theme: 'light',
@@ -120,7 +148,7 @@ export const webElevationDeck: Deck = {
         {
           title: 'Build accountability',
           graphic: _ring,
-          body: 'I brought together the principals from every team that touched web and had them set the quality bar first, before I asked anyone else to meet it.',
+          body: '7 principals across 6 teams ran a weekly web studio. All web work went through it before it reached a VP.',
         },
         {
           title: 'Create standards and governance',
@@ -135,121 +163,199 @@ export const webElevationDeck: Deck = {
       ],
     },
 
-    // 4A — Cross-team accountability
+    // 5 · Standards: the case for the role, then the role in place
     {
-      type: 'bullets',
-      theme: 'light',
-      label: 'Cross-team accountability',
-      eyebrow: 'Web elevation · accountability',
-      headline: "I started with the people who'd have to hold the bar.",
-      bullets: [
-        'I pulled together the principals from every team that touched web and made that group the core: Foundations, Design Systems, Commerce, T-Mobile for Business, Frontline and Assisted, and Service.',
-        'We ran a weekly web crit that the principals led, and it was open to every designer across every team.',
-        "That gave us a kind of cross-team accountability that hadn't existed before.",
-      ],
-      stats: [
-        { value: '7', label: 'Principal product designers' },
-        { value: '6', label: 'Different teams' },
-        { value: '100%', label: 'Designer participation in weekly crit' },
-      ],
+      type: 'raw',
+      html: `
+  <section class="slide light we" data-label="Standards">
+    <div class="content">
+      <p class="eyebrow rise">Web elevation · standards and governance</p>
+      <h2 class="head-lg rise d2" style="margin-top:26px">Standards need an owner.</h2>
+      <div class="we-pair">
+        <div class="rise d3">
+          <p class="we-cap">The case</p>
+          <div class="we-card"><img src="${A}/role-case.jpg" alt="The role definition for a web lead and governance principal"></div>
+        </div>
+        <div class="we-arrow-h rise d4"><span></span></div>
+        <div class="rise d4">
+          <p class="we-cap">The role in place</p>
+          <div class="we-card we-org">
+            <div class="we-grp on">
+              <h4>Web governance · Principal designer</h4>
+              <div class="row"><span>Web toolkit</span><span>Navigation and information architecture</span><span>Onboarding</span></div>
+              <div class="row people"><span>Product designer</span><span>Product designer</span></div>
+            </div>
+            <div class="we-grp">
+              <h4>Web vision · Principal designer</h4>
+              <div class="row"><span>Prospect vision</span></div>
+              <div class="row people"><span>Product designer</span></div>
+            </div>
+            <div class="we-grp">
+              <h4>Web pods</h4>
+              <div class="row"><span>Login</span><span>Network and coverage</span><span>Design bench</span></div>
+              <div class="row people"><span>Designer</span><span>Designer</span><span>Designers</span></div>
+            </div>
+            <div class="we-grp">
+              <h4>Security</h4>
+              <div class="row"><span>ScamShield</span><span>Protection 360</span></div>
+              <div class="row people"><span>Product designer</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="we-stats4 rise d5">
+        <div class="we-stat"><p class="num">New role</p><p>Principal of Web Governance and Information Architecture</p></div>
+        <div class="we-stat"><p class="num">90 days</p><p>to ship web toolkit v1</p></div>
+        <div class="we-stat"><p class="num">15</p><p>new and refined design system components</p></div>
+        <div class="we-stat"><p class="num">100%</p><p>of new web designs on standard breakpoints</p></div>
+      </div>
+    </div>
+  </section>`,
     },
 
-    // 4B — Standards + governance
+    // 6 · Unifying navigation
     {
-      type: 'bullets',
-      theme: 'light',
-      label: 'Standards + governance',
-      eyebrow: 'Web elevation · standards',
-      headline: "Standards don't hold unless somebody owns them.",
-      bullets: [
-        "I created a Principal of Web Governance and Information Architecture, a role that didn't exist before, to own the standards, the components, and how the whole thing was organized.",
-        'That person partnered with the design system team to audit where the gaps were and build the plan to close them.',
-        'We shipped the first version of the web toolkit within 90 days, added 15 new and refined components to the design system, and got every new web design onto standard breakpoints.',
-        'We also launched a global nav redesign, which built alignment across business, product, and marketing on a system that could scale as new products and AI entry points came in.',
-      ],
-      artifact: {
-        src: '/deck/assets/web-elevation/team-structure.png',
-        caption: 'How the web team was structured, shown to the team once the governance and vision roles were in place.',
-      },
+      type: 'raw',
+      html: `
+  <section class="slide light we" data-label="Navigation">
+    <div class="content">
+      <div class="we-cols" style="grid-template-columns:600px 1fr">
+        <div>
+          <p class="eyebrow rise">Web elevation · navigation</p>
+          <h2 class="head-lg rise d2" style="margin-top:26px">One navigation, no matter where you enter.</h2>
+          <ul class="we-list">
+            <li class="rise d3">One primary navigation across every line of business</li>
+            <li class="rise d4">Designed for desktop and mobile web</li>
+          </ul>
+          <div class="we-big rise d5"><p class="num">$5M to $7.3M</p><p>Projected additional revenue a year, from 5.3K to 7.9K more postpaid orders</p></div>
+        </div>
+        <div class="we-navstack">
+          <div class="we-card desk rise d3"><img src="${A}/nav-desktop.jpg" alt="Unified desktop navigation with mega menu"></div>
+          <div class="we-card mob rise d5"><img src="${A}/nav-mobile.jpg" alt="Unified mobile web navigation"></div>
+        </div>
+      </div>
+    </div>
+  </section>`,
     },
 
-    // 4C — Web vision
+    // 7 · Defining the vision: concept direction, auto-scrolling
+    // Scroll distance in deck-custom.css (weScroll) = track height (2827px at 880w) minus view (600px).
     {
-      type: 'bullets',
-      theme: 'light',
-      label: 'Web vision',
-      eyebrow: 'Part three',
-      headline: 'I hired a Principal whose only job was to define what T-Mobile web could become.',
-      bullets: [
-        'Brought in Vidal Men with a specific mandate: define what web could be.',
-        'Month one: established the web design principles the entire surface should work from.',
-        'Evolved into a forward-looking prospect journey vision.',
-        'Research-grounded, stakeholder-aligned, and used as the north star for future web investments.',
-      ],
+      type: 'raw',
+      html: `
+  <section class="slide light we" data-label="The vision">
+    <div class="content">
+      <div class="we-cols" style="grid-template-columns:640px 1fr">
+        <div>
+          <p class="eyebrow rise">Web elevation · the vision</p>
+          <h2 class="head-lg rise d2" style="margin-top:26px">I hired a principal designer to define what web could become.</h2>
+          <ul class="we-list">
+            <li class="rise d3">Month one: design principles for all of web</li>
+            <li class="rise d4">Next: a vision for the full prospect journey</li>
+            <li class="rise d5">Leadership reviewed it next to two agency concepts</li>
+          </ul>
+        </div>
+        <div class="rise d3" style="justify-self:end">
+          <p class="we-cap">Concept direction</p>
+          <div class="we-browser we-scroll">
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="view"><div class="track">
+              <img src="${A}/concept-top.jpg" alt="Homepage concept, top of page">
+              <img src="${A}/concept-plans.jpg" alt="Homepage concept, plans and benefits">
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`,
     },
 
-    // 5 — What it unlocked
+    // 8 · What it unlocked
     {
-      type: 'unlock',
-      theme: 'light',
-      label: 'What it unlocked',
-      headline: "From nobody's job to a VP priority in six months.",
-      bullets: [
-        "Vidal's vision work got the attention of my VP.",
-        'There was no homepage redesign planned. The vision created one, and Marketing partnered with us to lead it.',
-        'That led to something bigger: a formal tiger team to build the next-generation T-Mobile web system.',
-      ],
-      subsection: {
-        title: 'The Web Vision Tiger Team',
-        items: [
-          '6-week sprint cadence',
-          '4 flagship web experiences in scope',
-          'Weekly VP review · Daily Director alignment',
-          'Multi-brand: T-Mobile, Mint, Metro',
-        ],
-      },
+      type: 'raw',
+      html: `
+  <section class="slide light we" data-label="What it unlocked">
+    <div class="content">
+      <div class="we-cols" style="grid-template-columns:680px 1fr">
+        <div>
+          <p class="eyebrow rise">Web elevation · what it unlocked</p>
+          <h2 class="head-lg rise d2" style="margin-top:26px">Web became a priority.</h2>
+          <ul class="we-list">
+            <li class="rise d3">A homepage redesign that wasn’t on any roadmap</li>
+            <li class="rise d3">Marketing partnered with design to lead it</li>
+            <li class="rise d4">A formal Web Vision Tiger Team</li>
+          </ul>
+          <div class="we-sublist rise d5">
+            <p>The tiger team</p>
+            <ul>
+              <li>6-week sprints</li>
+              <li>4 flagship experiences</li>
+              <li>Weekly VP review</li>
+              <li>T-Mobile, Mint, and Metro</li>
+            </ul>
+          </div>
+        </div>
+        <div class="we-deckstack">
+          <div class="we-card back rise d3"><img src="${A}/tiger-cover.jpg" alt="Web Vision Tiger Team delivery framework cover"></div>
+          <div class="we-card front rise d4"><img src="${A}/tiger-scope.jpg" alt="Tiger team scope across four flagship experiences"></div>
+        </div>
+      </div>
+    </div>
+  </section>`,
     },
 
-    // 6 — The work (homepage redesign screenshots)
-    // Add images to public/deck/assets/web-elevation/ and update the paths below.
+    // 9 · What's live today
+    // TODO(claim): headline and results wording are drafts. Dustin parked how to
+    // describe results that came after he left. Revisit once he has seen this slide.
     {
-      type: 'product',
-      theme: 'light',
-      label: 'The work',
-      eyebrow: 'Web Vision Tiger Team · in progress',
-      headline: 'Some of the most ambitious design work of my T-Mobile tenure.',
-      body: 'Modern, cohesive design direction for the full t-mobile.com experience. AI-integrated search, responsive-first, and a modular system built to scale across brands. In progress at time of layoff.',
-      footer: 'Design direction shown. Not representative of final shipped direction.',
-      images: [
-        '/deck/assets/web-elevation/homepage-mobile-1.png',
-        '/deck/assets/web-elevation/homepage-mobile-2.png',
-      ],
+      type: 'raw',
+      html: `
+  <section class="slide light we" data-label="Live today">
+    <div class="content">
+      <div class="we-live">
+        <div>
+          <p class="eyebrow rise">Web elevation · live today</p>
+          <h2 class="head-lg rise d2" style="margin-top:26px">The new <span style="white-space:nowrap">t-mobile.com</span> homepage.</h2>
+          <ul class="we-list">
+            <li class="rise d3">Rolled out in stages, starting at 2% of traffic</li>
+            <li class="rise d4">Direct navigation engagement up nearly 70%</li>
+            <li class="rise d4">Bounce rate down, time on page up</li>
+          </ul>
+          <div class="we-before rise d5">
+            <p class="we-cap">Before</p>
+            <div class="we-card"><img src="${A}/homepage-before.jpg" alt="The previous t-mobile.com homepage"></div>
+          </div>
+        </div>
+        <div class="rise d3">
+          <p class="we-cap">Now</p>
+          <div class="we-browser we-video">
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="view"><video src="${A}/homepage-scroll.mp4" poster="${A}/homepage-after-poster.jpg" autoplay muted loop playsinline preload="metadata"></video></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`,
     },
 
-    // 7 — Key outcomes
+    // 10 · Results
+    // TODO(claim): the homepage column depends on the same parked wording question.
     {
-      type: 'metrics',
-      theme: 'light',
-      label: 'Key outcomes',
-      eyebrow: 'Results',
-      headline: 'Craft + culture + momentum.',
-      cards: [
-        {
-          number: '90',
-          label: 'Days to ship',
-          description: 'v1 Web Toolkit built and shipped within 90 days of kickoff.',
-        },
-        {
-          number: '100%',
-          label: 'Crit participation',
-          description: 'Weekly web crits running with full participation across all teams.',
-        },
-        {
-          number: '6 mo',
-          label: 'Campaign to mandate',
-          description: 'From surfacing evidence nobody asked for to VP involvement and a homepage redesign that did not exist before.',
-        },
-      ],
+      type: 'raw',
+      html: `
+  <section class="slide light we" data-label="Results">
+    <div class="content">
+      <p class="eyebrow rise">Web elevation · results</p>
+      <h2 class="head-lg rise d2" style="margin-top:26px">Web became everyone’s job.</h2>
+      <div class="we-results">
+        <div class="we-res rise d2"><p class="l">Accountability</p><p class="num">100%</p><p class="d">of web work tracked through the studio. 7 principals across 6 teams.</p></div>
+        <div class="we-res rise d3"><p class="l">Standards</p><p class="num">90 days</p><p class="d">to toolkit v1. 15 components. 100% of new designs on standard breakpoints.</p></div>
+        <div class="we-res rise d4"><p class="l">Navigation</p><p class="num">$5M+</p><p class="d">projected a year, up to $7.3M, from one navigation across every line of business.</p></div>
+        <div class="we-res rise d5"><p class="l">Vision</p><p class="num">4</p><p class="d">flagship experiences in a formal tiger team, across 3 brands.</p></div>
+        <div class="we-res rise d6"><p class="l">Homepage</p><p class="num">Live</p><p class="d">on t-mobile.com. Direct navigation engagement up nearly 70%.</p></div>
+      </div>
+    </div>
+  </section>`,
     },
   ],
 };
