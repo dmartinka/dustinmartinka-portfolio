@@ -88,49 +88,56 @@ export const webElevationDeck: Deck = {
       html: `
   <section class="slide light we" data-label="The situation">
     <div class="content">
-      <div class="we-cols" style="grid-template-columns:780px 1fr">
-        <div>
+      <div class="we-cols" style="grid-template-columns:2fr 1fr">
+        <div class="we-text">
           <p class="eyebrow rise">Web elevation · the situation</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">Web was the forgotten surface.</h2>
+          <div class="we-body">
           <div class="we-facts">
             <div class="we-fact rise d3"><p class="num">#2</p><p>“Website” was the second most mentioned phrase in customer feedback, and it wasn’t positive</p></div>
             <div class="we-fact rise d4"><p class="num">10%</p><p>of customers start self-service on web</p></div>
             <div class="we-fact rise d5"><p class="num">0</p><p>owners for the whole experience. Several managers each owned a piece.</p></div>
           </div>
+          </div>
         </div>
-        <div class="we-quotes">
-          <div class="we-card we-quote rise d3"><p class="q">You guys keep changing the website and when I try to look up data, call, and message logs it’s more difficult every time.</p><p class="a">T-Mobile customer</p></div>
-          <div class="we-card we-quote rise d4"><p class="q">This website is not user friendly and I have now spent 2 days trying to get our protection plans cancelled.</p><p class="a">T-Mobile customer</p></div>
-          <div class="we-card we-quote rise d5"><p class="q">Your website directs me to the app that is obsolete.</p><p class="a">T-Mobile customer</p></div>
+        <div class="we-vis we-quotes">
+          <figure class="we-say rise d3"><div class="we-card we-quote"><p class="q">You guys keep changing the website and when I try to look up data, call, and message logs it’s more difficult every time.</p></div><figcaption>T-Mobile customer, via Qualtrics</figcaption></figure>
+          <figure class="we-say rise d4"><div class="we-card we-quote"><p class="q">This website is not user friendly and I have now spent 2 days trying to get our protection plans cancelled.</p></div><figcaption>T-Mobile customer, via Qualtrics</figcaption></figure>
+          <figure class="we-say rise d5"><div class="we-card we-quote"><p class="q">Your website directs me to the app that is obsolete.</p></div><figcaption>T-Mobile customer, via Qualtrics</figcaption></figure>
         </div>
       </div>
     </div>
   </section>`,
     },
 
-    // 3 · The fragmentation: one click, logo and navigation change
-    // Source: unify navigation deck, page 21. Pins are % of each screenshot.
+    // 3 · The fragmentation: the cause, with one prominent example and the customer voice
+    // Sources: unify navigation deck page 21 (screenshots); UX architect role proposal, IMG_1175's sibling IMG_1176 (18% stat and quote).
     {
       type: 'raw',
       html: `
   <section class="slide light we" data-label="The fragmentation">
     <div class="content">
-      <div class="we-cols" style="grid-template-columns:600px 1fr">
-        <div>
-          <p class="eyebrow rise">Web elevation · the fragmentation</p>
-          <h2 class="head-lg rise d2" style="margin-top:26px">Click once, and the whole site changes.</h2>
-          <p class="we-sub rise d2">A customer clicks into Internet. The logo and the navigation change under them.</p>
-          <div class="we-steps">
-            <div class="we-step rise d3"><span class="we-n">1</span>Customer goes to Internet</div>
-            <div class="we-step rise d4"><span class="we-n">2</span>The logo changes</div>
-            <div class="we-step rise d5"><span class="we-n">3</span>The navigation changes</div>
+      <div class="we-cols" style="grid-template-columns:1fr 2fr">
+        <div class="we-text">
+          <p class="eyebrow rise" style="white-space:nowrap">Web elevation · the fragmentation</p>
+          <h2 class="head-lg rise d2" style="margin-top:26px">Every team built web its own way.</h2>
+          <div class="we-body">
+          <ul class="we-list">
+            <li class="rise d3">Navigation changed depending on where you entered</li>
+            <li class="rise d4">No shared breakpoints</li>
+            <li class="rise d5">No shared web toolkit</li>
+          </ul>
           </div>
         </div>
-        <div class="we-journey">
-          <div class="we-card rise d3"><img src="${A}/nav-journey-home.jpg" alt="T-Mobile homepage header"><span class="we-pin" style="left:20.1%;top:4.5%">1</span></div>
-          <div class="we-arrow rise d4"><span></span></div>
-          <div class="we-card rise d4"><img src="${A}/nav-journey-internet.jpg" alt="Home Internet page header with a different logo and navigation"><span class="we-pin" style="left:4.8%;top:20%">2</span><span class="we-pin" style="left:37%;top:20%">3</span></div>
-          <p class="we-foot rise d5">From the navigation unification research</p>
+        <div class="we-vis">
+          <p class="we-cap rise d3">Example: homepage to Home Internet</p>
+          <div class="we-card rise d3"><img src="${A}/nav-journey-home.jpg" alt="T-Mobile homepage header"></div>
+          <div class="we-arrow rise d4" style="height:56px"><span style="height:34px"></span></div>
+          <div class="we-card rise d4"><img src="${A}/nav-journey-internet.jpg" alt="One click later, the Home Internet page has a different logo and navigation"></div>
+          <div class="we-voice rise d5">
+            <div class="we-stat"><p class="num">18%</p><p>of users report navigation difficulties</p></div>
+            <figure class="we-say"><div class="we-card we-quote"><p class="q">Your website sucks and is circular.</p></div><figcaption>T-Mobile customer</figcaption></figure>
+          </div>
         </div>
       </div>
     </div>
@@ -163,7 +170,8 @@ export const webElevationDeck: Deck = {
       ],
     },
 
-    // 5 · Standards: the case for the role, then the role in place
+    // 5 · Standards: two artifacts from the proposal to Dustin's VP, told as two separate points.
+    // Left: the web lead and governance role (IMG_1175). Right: the proposed structure (2026 kickoff screens/team-structure.png).
     {
       type: 'raw',
       html: `
@@ -173,41 +181,13 @@ export const webElevationDeck: Deck = {
       <h2 class="head-lg rise d2" style="margin-top:26px">Standards need an owner.</h2>
       <div class="we-pair">
         <div class="rise d3">
-          <p class="we-cap">The case</p>
-          <div class="we-card"><img src="${A}/role-case.jpg" alt="The role definition for a web lead and governance principal"></div>
+          <p class="we-cap">The proposal</p>
+          <div class="we-card"><img src="${A}/role-case.jpg" alt="The proposal for a web lead and governance role"></div>
         </div>
-        <div class="we-arrow-h rise d4"><span></span></div>
         <div class="rise d4">
-          <p class="we-cap">The role in place</p>
-          <div class="we-card we-org">
-            <div class="we-grp on">
-              <h4>Web governance · Principal designer</h4>
-              <div class="row"><span>Web toolkit</span><span>Navigation and information architecture</span><span>Onboarding</span></div>
-              <div class="row people"><span>Product designer</span><span>Product designer</span></div>
-            </div>
-            <div class="we-grp">
-              <h4>Web vision · Principal designer</h4>
-              <div class="row"><span>Prospect vision</span></div>
-              <div class="row people"><span>Product designer</span></div>
-            </div>
-            <div class="we-grp">
-              <h4>Web pods</h4>
-              <div class="row"><span>Login</span><span>Network and coverage</span><span>Design bench</span></div>
-              <div class="row people"><span>Designer</span><span>Designer</span><span>Designers</span></div>
-            </div>
-            <div class="we-grp">
-              <h4>Security</h4>
-              <div class="row"><span>ScamShield</span><span>Protection 360</span></div>
-              <div class="row people"><span>Product designer</span></div>
-            </div>
-          </div>
+          <p class="we-cap">New structure</p>
+          <div class="we-card"><img src="${A}/team-structure-proposal.png" alt="Proposed web team structure, with web governance and navigation highlighted"></div>
         </div>
-      </div>
-      <div class="we-stats4 rise d5">
-        <div class="we-stat"><p class="num">New role</p><p>Principal of Web Governance and Information Architecture</p></div>
-        <div class="we-stat"><p class="num">90 days</p><p>to ship web toolkit v1</p></div>
-        <div class="we-stat"><p class="num">15</p><p>new and refined design system components</p></div>
-        <div class="we-stat"><p class="num">100%</p><p>of new web designs on standard breakpoints</p></div>
       </div>
     </div>
   </section>`,
@@ -220,16 +200,18 @@ export const webElevationDeck: Deck = {
   <section class="slide light we" data-label="Navigation">
     <div class="content">
       <div class="we-cols" style="grid-template-columns:600px 1fr">
-        <div>
+        <div class="we-text">
           <p class="eyebrow rise">Web elevation · navigation</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">One navigation, no matter where you enter.</h2>
+          <div class="we-body">
           <ul class="we-list">
             <li class="rise d3">One primary navigation across every line of business</li>
             <li class="rise d4">Designed for desktop and mobile web</li>
           </ul>
           <div class="we-big rise d5"><p class="num">$5M to $7.3M</p><p>Projected additional revenue a year, from 5.3K to 7.9K more postpaid orders</p></div>
+          </div>
         </div>
-        <div class="we-navstack">
+        <div class="we-vis we-navstack">
           <div class="we-card desk rise d3"><img src="${A}/nav-desktop.jpg" alt="Unified desktop navigation with mega menu"></div>
           <div class="we-card mob rise d5"><img src="${A}/nav-mobile.jpg" alt="Unified mobile web navigation"></div>
         </div>
@@ -246,16 +228,18 @@ export const webElevationDeck: Deck = {
   <section class="slide light we" data-label="The vision">
     <div class="content">
       <div class="we-cols" style="grid-template-columns:640px 1fr">
-        <div>
+        <div class="we-text">
           <p class="eyebrow rise">Web elevation · the vision</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">I hired a principal designer to define what web could become.</h2>
+          <div class="we-body">
           <ul class="we-list">
             <li class="rise d3">Month one: design principles for all of web</li>
             <li class="rise d4">Next: a vision for the full prospect journey</li>
             <li class="rise d5">Leadership reviewed it next to two agency concepts</li>
           </ul>
+          </div>
         </div>
-        <div class="rise d3" style="justify-self:end">
+        <div class="we-vis rise d3" style="justify-self:end">
           <p class="we-cap">Concept direction</p>
           <div class="we-browser we-scroll">
             <div class="bar"><i></i><i></i><i></i></div>
@@ -277,9 +261,10 @@ export const webElevationDeck: Deck = {
   <section class="slide light we" data-label="What it unlocked">
     <div class="content">
       <div class="we-cols" style="grid-template-columns:680px 1fr">
-        <div>
+        <div class="we-text">
           <p class="eyebrow rise">Web elevation · what it unlocked</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">Web became a priority.</h2>
+          <div class="we-body">
           <ul class="we-list">
             <li class="rise d3">A homepage redesign that wasn’t on any roadmap</li>
             <li class="rise d3">Marketing partnered with design to lead it</li>
@@ -294,8 +279,9 @@ export const webElevationDeck: Deck = {
               <li>T-Mobile, Mint, and Metro</li>
             </ul>
           </div>
+          </div>
         </div>
-        <div class="we-deckstack">
+        <div class="we-vis we-deckstack">
           <div class="we-card back rise d3"><img src="${A}/tiger-cover.jpg" alt="Web Vision Tiger Team delivery framework cover"></div>
           <div class="we-card front rise d4"><img src="${A}/tiger-scope.jpg" alt="Tiger team scope across four flagship experiences"></div>
         </div>
@@ -313,9 +299,10 @@ export const webElevationDeck: Deck = {
   <section class="slide light we" data-label="Live today">
     <div class="content">
       <div class="we-live">
-        <div>
+        <div class="we-text">
           <p class="eyebrow rise">Web elevation · live today</p>
           <h2 class="head-lg rise d2" style="margin-top:26px">The new <span style="white-space:nowrap">t-mobile.com</span> homepage.</h2>
+          <div class="we-body">
           <ul class="we-list">
             <li class="rise d3">Rolled out in stages, starting at 2% of traffic</li>
             <li class="rise d4">Direct navigation engagement up nearly 70%</li>
@@ -325,8 +312,9 @@ export const webElevationDeck: Deck = {
             <p class="we-cap">Before</p>
             <div class="we-card"><img src="${A}/homepage-before.jpg" alt="The previous t-mobile.com homepage"></div>
           </div>
+          </div>
         </div>
-        <div class="rise d3">
+        <div class="we-vis rise d3">
           <p class="we-cap">Now</p>
           <div class="we-browser we-video">
             <div class="bar"><i></i><i></i><i></i></div>
