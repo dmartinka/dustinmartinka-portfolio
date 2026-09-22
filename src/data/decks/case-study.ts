@@ -18,7 +18,7 @@ const partOne: Slide[] = [
       theme: 'dark',
       label: 'Title',
       name: 'Product design leadership',
-      headline: 'Dustin Martinka <em>meets you</em>.',
+      headline: 'Dustin Martinka <em>meets you</em>',
       meta: 'A look at my work, my team, and my craft',
     },
 
@@ -41,7 +41,7 @@ const partOne: Slide[] = [
       theme: 'light',
       label: 'About me',
       eyebrow: 'PART ONE · ABOUT ME',
-      headline: 'A designer at heart.',
+      headline: 'A designer at heart',
       photo: '/deck/assets/about/dustin-kids.png',
       cols: [
         {
@@ -67,7 +67,7 @@ const partOne: Slide[] = [
     <div class="content">
       <div class="slide-head">
         <p class="eyebrow rise">Designer to leader</p>
-        <h2 class="head-lg rise d2">Twenty years, one throughline: the craft.</h2>
+        <h2 class="head-lg rise d2">Twenty years, one throughline: the craft</h2>
       </div>
       <div class="tl-alt rise d3">
 
@@ -139,7 +139,7 @@ const partOne: Slide[] = [
     <div class="content" style="padding:124px 140px;display:flex;flex-direction:column">
       <div class="slide-head">
         <p class="eyebrow rise">How I work</p>
-        <h2 class="head-lg rise d2">Leadership philosophies.</h2>
+        <h2 class="head-lg rise d2">Leadership philosophies</h2>
         <p class="rise d3" style="font-family:var(--sans);font-size:21px;font-weight:300;color:rgba(242,237,232,0.65);margin:18px 0 0;line-height:1.5;max-width:900px">These principles have helped me navigate the many challenges I've faced as a manager. I find myself coming back to them time and time again.</p>
       </div>
       <div class="rise d3" style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:28px;margin-top:auto">
@@ -231,7 +231,7 @@ const teamAssessment: Slide[] = [
     <div class="content">
       <div class="slide-head">
         <p class="eyebrow rise">Team assessment</p>
-        <h2 class="head-lg rise d2" style="font-size:38px">A competency assessment was created to identify strengths and opportunities across the teams.</h2>
+        <h2 class="head-lg rise d2" style="font-size:38px">A competency assessment was created to identify strengths and opportunities across the teams</h2>
       </div>
       <div class="grid5">
         <div class="cat-col rise d3"><p class="cat-h">Craft</p><ul><li>Product thinking</li><li>Agile processes</li><li>User-centered processes</li><li>Systems thinking</li><li>Visual design</li><li>Interaction design</li></ul></div>
@@ -254,7 +254,7 @@ const teamAssessment: Slide[] = [
     <!-- HEADLINE -->
     <div>
       <p class="eyebrow rise" style="color:var(--gold-deep)">Team assessment</p>
-      <h2 class="head-lg rise d2">Staffing to strengths, hiring against gaps.</h2>
+      <h2 class="head-lg rise d2">Staffing to strengths, hiring against gaps</h2>
       <p class="rise d3" style="font-family:var(--sans);font-size:22px;font-weight:300;color:rgba(43,43,43,0.65);line-height:1.5;margin:20px 0 0;max-width:1100px">Addressing strengths let us staff work with the right people. Identifying gaps surfaced clear opportunities for training and hiring.</p>
     </div>
 
@@ -389,7 +389,7 @@ const flagshipApp: Slide[] = [
     <div class="content">
       <div class="slide-head">
         <p class="eyebrow rise">Flagship app redesign</p>
-        <h2 class="head-lg rise d2">Enable customers to do everything our frontline teams can.</h2>
+        <h2 class="head-lg rise d2">Enable customers to do everything our frontline teams can</h2>
         <p class="mission rise d2" style="color:rgba(242,237,232,0.7)">One hero mission, broken into <b style="font-weight:600;color:rgba(242,237,232,0.9)">five surfaces</b> the team could own end to end.</p>
       </div>
       <div class="grid-cap" style="grid-template-columns:repeat(5,1fr)">
@@ -411,7 +411,7 @@ const flagshipApp: Slide[] = [
     <div class="orbs"></div>
     <div class="grain"></div>
     <div class="content">
-      <div class="slide-head"><p class="eyebrow rise">Navigating headwinds</p><h2 class="head-lg rise d2" style="color:#fff">Everything that made this hard.</h2></div>
+      <div class="slide-head"><p class="eyebrow rise">Navigating headwinds</p><h2 class="head-lg rise d2" style="color:#fff">Everything that made this hard</h2></div>
       <div class="grid-hw">
         <div class="hw-item rise d3"><span class="hw-x">✕</span><p class="hw-t">Tight timelines (NPI)</p></div>
         <div class="hw-item rise d3"><span class="hw-x">✕</span><p class="hw-t">Lost my director</p></div>
@@ -436,7 +436,7 @@ const flagshipApp: Slide[] = [
     <div class="content" style="padding:124px 140px;display:flex;flex-direction:column">
       <div class="slide-head">
         <p class="eyebrow rise">Team strategy</p>
-        <h2 class="head-lg rise d2">I had to find ways to give my team the confidence that we could accomplish it.</h2>
+        <h2 class="head-lg rise d2">I had to find ways to give my team the confidence that we could accomplish it</h2>
       </div>
       <div class="rise d3" style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:28px;margin-top:auto">
         <div style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:36px 40px"><p style="font-family:var(--serif);font-size:28px;color:var(--gold);margin:0 0 14px;font-weight:400">Form a UX strategy</p><p style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.55;color:rgba(242,237,232,0.65);margin:0">A clear business strategy existed, but the customer POV was lacking. The team needed a user-centered perspective to work from.</p></div>
@@ -458,7 +458,7 @@ const flagshipApp: Slide[] = [
     <div class="content" style="padding:100px 140px;display:flex;flex-direction:column">
       <div class="slide-head">
         <p class="eyebrow rise">UX strategy · what we know</p>
-        <h2 class="head-lg rise d2" style="font-size:50px">The app wasn't fulfilling our promise of fast, effortless account management.</h2>
+        <h2 class="head-lg rise d2" style="font-size:50px">The app wasn't fulfilling our promise of fast, effortless account management</h2>
         <p class="rise d3" style="font-family:var(--sans);font-size:21px;font-weight:300;color:rgba(242,237,232,0.65);margin:16px 0 0;line-height:1.5">We started by naming exactly what was not working, grounding the redesign in evidence, not assumption.</p>
       </div>
       <div class="rise d3" style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:44px">
@@ -492,7 +492,7 @@ const flagshipApp: Slide[] = [
     <div class="content">
       <div class="slide-head">
         <p class="eyebrow rise" style="color:var(--gold-deep)">UX strategy</p>
-        <h2 class="head-lg rise d2">Eight focus areas to anchor the work.</h2>
+        <h2 class="head-lg rise d2">Eight focus areas to anchor the work</h2>
       </div>
       <div class="grid-focus" style="margin-top:36px">
         <div class="rise d3" style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:28px 30px"><p style="font-family:var(--sans);font-weight:700;font-size:21px;color:var(--gold);margin:0 0 12px">Authentication</p><p style="font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.5;color:rgba(242,237,232,0.65);margin:0">Make sign-in as simple, secure, and reliable as possible.</p></div>
@@ -570,7 +570,7 @@ const flagshipApp: Slide[] = [
     <div class="content">
       <div class="slide-head">
         <p class="eyebrow rise" style="color:var(--gold-deep)">Account management · exploration</p>
-        <h2 class="head-lg rise d2">Many versions before the right one.</h2>
+        <h2 class="head-lg rise d2">Many versions before the right one</h2>
       </div>
       <div class="grid-iter">
         <div class="iter-col rise d3"><img class="iter-shot" src="/deck/assets/casestudy/account-v1.png" alt="Account version 1"><p class="iter-v">Version 1</p><p class="iter-d">Pushes down key features.</p></div>
@@ -592,7 +592,7 @@ const flagshipApp: Slide[] = [
       <div style="display:flex;flex-direction:column;min-width:0">
         <div style="margin-bottom:28px">
           <p class="eyebrow rise">Account management · prioritization</p>
-          <h2 class="head-lg rise d2" style="font-size:44px">Ranking 19 tasks by what matters.</h2>
+          <h2 class="head-lg rise d2" style="font-size:44px">Ranking 19 tasks by what matters</h2>
         </div>
         <div class="rise d2" style="display:flex;flex-direction:column;justify-content:space-between;flex:1">
           ${_row(1,'Upgrade',48,20,13)}
@@ -723,7 +723,7 @@ const flagshipApp: Slide[] = [
     <div class="content">
       <div class="slide-head">
         <p class="eyebrow rise" style="color:var(--gold-deep)">Account management · validation</p>
-        <h2 class="head-lg rise d2">Testing told us it worked.</h2>
+        <h2 class="head-lg rise d2">Testing told us it worked</h2>
       </div>
       <div class="grid-fd">
         <div class="fd-card rise d3"><p class="fd-k">Key finding #1</p><p class="fd-b">Participants were <em>significantly more successful</em> finding and navigating account pages than in previous designs.</p></div>
@@ -743,7 +743,7 @@ const flagshipApp: Slide[] = [
     <div class="content">
       <div class="pr-text">
         <p class="eyebrow pr-eyebrow rise">Account</p>
-        <h2 class="pr-head rise d2">Managing your account has never been easier.</h2>
+        <h2 class="pr-head rise d2">Managing your account has never been easier</h2>
         <p class="pr-body rise d3">Our new account landing page offers a streamlined, glanceable interface that helps customers navigate their account, take meaningful actions, and understand key statuses at a glance.</p>
       </div>
       <div class="pr-visual">
@@ -763,7 +763,7 @@ const flagshipApp: Slide[] = [
     <div class="content">
       <div class="pr-text">
         <p class="eyebrow pr-eyebrow rise">eCommerce</p>
-        <h2 class="pr-head rise d2">Upgrade with ease.</h2>
+        <h2 class="pr-head rise d2">Upgrade with ease</h2>
         <p class="pr-body rise d3">Say goodbye to complicated promotion paths. Our new promo-first flow makes finding the right device a breeze. You see available promotions upfront, before browsing devices, which streamlines the whole upgrade.</p>
         <p class="pr-body rise d3" style="font-size:15px;color:rgba(242,237,232,0.35);margin-top:18px">Upgrade from home</p>
       </div>
@@ -784,7 +784,7 @@ const flagshipApp: Slide[] = [
     <div class="content">
       <div class="pr-text">
         <p class="eyebrow pr-eyebrow rise">Support</p>
-        <h2 class="pr-head rise d2">Quick access to the help you need.</h2>
+        <h2 class="pr-head rise d2">Quick access to the help you need</h2>
         <p class="pr-body rise d3">Our support page highlights the top-visited support pages for easy access. With new search and device-specific support, finding solutions is faster than ever. Care is one tap away by chat or scheduled call.</p>
         <p class="pr-body rise d3" style="font-size:15px;color:rgba(242,237,232,0.35);margin-top:18px">Home · Account · Benefits · Shop · Support</p>
       </div>
@@ -844,7 +844,7 @@ const peopleAndCulture: Slide[] = [
     <div class="content" style="padding:124px 140px;display:flex;flex-direction:column">
       <div class="slide-head">
         <p class="eyebrow rise">Mentorship</p>
-        <h2 class="head-lg rise d2" style="color:#fff">Investing in the next generation.</h2>
+        <h2 class="head-lg rise d2" style="color:#fff">Investing in the next generation</h2>
       </div>
       <div class="card-pile rise d3">
         <div class="card-item" style="transform:rotate(-2.5deg);z-index:1">
@@ -873,7 +873,7 @@ const peopleAndCulture: Slide[] = [
     <div class="content" style="padding:124px 140px;display:flex;flex-direction:column">
       <div class="slide-head">
         <p class="eyebrow rise">Thought leadership</p>
-        <h2 class="head-lg rise d2" style="color:#fff">Sharing the craft beyond my own team.</h2>
+        <h2 class="head-lg rise d2" style="color:#fff">Sharing the craft beyond my own team</h2>
       </div>
       <div class="card-pile rise d3">
         <div class="card-item" style="transform:rotate(-2deg);z-index:1">
@@ -902,7 +902,7 @@ const peopleAndCulture: Slide[] = [
     <div class="content" style="padding:124px 140px;display:flex;flex-direction:column">
       <div class="slide-head">
         <p class="eyebrow rise">Team culture</p>
-        <h2 class="head-lg rise d2" style="color:#fff">There's more to a team than results.</h2>
+        <h2 class="head-lg rise d2" style="color:#fff">There's more to a team than results</h2>
       </div>
       <div class="card-pile four rise d3">
         <div class="card-item" style="transform:rotate(-2deg);z-index:1">
@@ -971,11 +971,16 @@ export const caseStudyDeck: Deck = {
     // Same passcode as the gated work case studies (src/pages/work/tlife.astro)
     'd405e342c33ea8e0e1e65c2d94e5e8eeb8329e4d15fa6a7627de3e47f6cf1406',
   ],
+  // No deck-level runningHead on purpose. The footer marks "you are inside a
+  // case study", so only the two case study chapters stamp one below. Part
+  // one, part three and the section dividers stay bare.
   slides: [
     ...partOne,
     sectionTwo,
-    ...webElevationDeck.slides,
-    ...flagshipApp,
+    // Stamped with the web elevation deck's own running head so the chapter
+    // keeps its name here, instead of inheriting this deck's.
+    ...webElevationDeck.slides.map(s => ({ ...s, runningHead: webElevationDeck.runningHead })),
+    ...flagshipApp.map(s => ({ ...s, runningHead: 'Flagship app redesign' })),
     // aiInPractice pulled from the running order 2026-09-08. The AI story is
     // carried by the Paavis card on the timeline instead. Re-add this line to
     // bring the slide back.

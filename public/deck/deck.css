@@ -32,12 +32,38 @@
 @keyframes pulse-b { from { opacity: 0.12; transform: scale(1);} to { opacity: 0.7; transform: scale(1.12);} }
 @keyframes pulse-c { from { opacity: 0.22; transform: scale(1);} to { opacity: 0.9; transform: scale(1.08);} }
 @keyframes pulse-d { from { opacity: 0.06; transform: scale(1);} to { opacity: 0.5; transform: scale(1.15);} }
-.slide .orb { animation: none; }
+/* Resting state: an orb with no animation running. That covers every inactive
+   slide and every visitor with reduced motion on. Without a value here they sit
+   at opacity 1, brighter than the pulse ever goes. */
+.slide .orb { animation: none; opacity: 0.45; }
+/* Light-ground variant. Screen lightens, so it has no headroom on beige:
+   multiply darkens instead, with the tinted palette in orbs.js. */
+.orbs[data-orb-tone="light"] .orb { mix-blend-mode: multiply; }
+/* The crisp styles are already darker than beige, so they need no blend trick.
+   Normal blend keeps their edges clean. */
+.orbs[data-orb-style="dots"] .orb,
+.orbs[data-orb-style="rings"] .orb { mix-blend-mode: normal; }
+/* Rings rest quieter than the blurred styles. An outline reads far harder than
+   a soft fill, so the opacity that looks like atmosphere as a blob looks like a
+   drawn line as a ring. Their peak is capped by the alpha baked into the border
+   colour in orbs.js, so they never reach full strength. */
+.orbs[data-orb-style="rings"] .orb { opacity: 0.32; }
+/* Mirrored field for slides whose right half is occupied. orbs.js flips the
+   positions, this flips the fade to match. */
+.orbs[data-orb-side="left"] {
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,0.4) 22%, black 42%);
+  mask-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,0.4) 22%, black 42%); }
+/* `backwards` is load-bearing. Each orb carries an animation-delay of up to
+   three seconds (set inline by orbs.js to stagger the field). Without a fill
+   mode an orb holds its own opacity of 1 through that delay and then snaps down
+   to the keyframe's `from` value the moment it starts, so the late orbs burn at
+   full strength and vanish. `backwards` holds the `from` value during the
+   delay instead, and the field fades up together. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-deck-active] .orb.a { animation: pulse-a 4.0s ease-in-out infinite alternate; }
-  [data-deck-active] .orb.b { animation: pulse-b 4.6s ease-in-out infinite alternate; }
-  [data-deck-active] .orb.c { animation: pulse-c 5.4s ease-in-out infinite alternate; }
-  [data-deck-active] .orb.d { animation: pulse-d 6.2s ease-in-out infinite alternate; }
+  [data-deck-active] .orb.a { animation: pulse-a 4.0s ease-in-out infinite alternate backwards; }
+  [data-deck-active] .orb.b { animation: pulse-b 4.6s ease-in-out infinite alternate backwards; }
+  [data-deck-active] .orb.c { animation: pulse-c 5.4s ease-in-out infinite alternate backwards; }
+  [data-deck-active] .orb.d { animation: pulse-d 6.2s ease-in-out infinite alternate backwards; }
 }
 .grain { position: absolute; inset: 0; z-index: 2; pointer-events: none; mix-blend-mode: overlay; opacity: 0.5;
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/></filter><rect width='300' height='300' filter='url(%23n)' opacity='1'/></svg>");

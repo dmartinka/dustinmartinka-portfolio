@@ -513,9 +513,27 @@
 .we-quote .q::after { content: '\201D'; color: var(--gold-deep); }
 .we-say figcaption { font-family: var(--sans); font-size: 15px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(43,43,43,0.5); margin: 22px 0 0 34px; }
 
-/* 3 · fragmentation */
-.we-voice { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: center; margin-top: 34px; }
-.we-voice .we-stat .num { font-size: 60px; }
+/* 3 · fragmentation (custom layout from Dustin's Figma: beige text side, stone panel
+   from x 829 with nav strips bleeding off the right edge, quote pinned bottom right) */
+.we-frag-text { position: absolute; left: 140px; top: 0; bottom: 130px; width: 560px; display: flex; flex-direction: column; justify-content: center; }
+.we-frag-text .head-lg { max-width: 532px; }
+.we-frag-text .we-list li { text-wrap: pretty; }
+.we-frag-panel { position: absolute; left: 829px; top: 0; right: 0; bottom: 0; background: #E8E4DC; }
+/* Navs sit at their natural size (1002px wide) and run flush to the right slide edge,
+   as in the Figma. Left corners are rounded and the shadow reads on the left, top and
+   bottom; the right side has no radius because there is no edge to see it against. */
+.we-frag-navs { position: absolute; left: 90px; top: 194px; width: 1001px; display: flex; flex-direction: column; gap: 70px; }
+.we-frag-navs img { display: block; width: 100%; height: auto;
+  border-radius: 10px 0 0 10px; box-shadow: 0 18px 50px rgba(32,30,27,0.16); }
+/* negative margin pulls the caption up out of the 70px strip gap, so it sits close
+   to the third nav rather than floating between it and the quote */
+.we-frag-navs .we-cap { margin: -42px 0 0; }
+.we-frag-say { position: absolute; right: 55px; top: 867px; width: 689px; }
+.we-frag-say .we-quote::after { left: auto; right: 56px; }
+.we-frag-say figcaption { text-align: right; margin: 22px 0 0; }
+/* drop-shadow rather than box-shadow so the bubble and its tail cast one shadow,
+   and deeper than the .we-card default so it reads against the stone panel */
+.we-frag-say .we-quote { box-shadow: none; filter: drop-shadow(0 16px 34px rgba(32,30,27,0.18)); }
 .we-journey { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
 .we-journey .we-card { position: relative; overflow: visible; }
 .we-journey .we-card img { border-radius: 10px; }
@@ -532,12 +550,22 @@
 .we-list { list-style: none; padding: 0; margin: 48px 0 0; display: flex; flex-direction: column; gap: 22px; }
 .we-list li { font-family: var(--sans); font-size: 25px; font-weight: 300; line-height: 1.45; color: rgba(43,43,43,0.82); padding-left: 30px; position: relative; }
 .we-list li::before { content: ''; position: absolute; left: 0; top: 15px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold-deep); }
-.we-big { margin-top: 52px; }
-.we-big .num { font-family: var(--serif); font-weight: 600; font-size: 76px; line-height: 1; color: var(--gold-deep); margin: 0 0 12px; }
-.we-big p:last-child { font-family: var(--sans); font-size: 21px; font-weight: 400; color: rgba(43,43,43,0.6); margin: 0; }
-.we-navstack { position: relative; height: 700px; }
-.we-navstack .desk { position: absolute; left: 0; top: 0; width: 900px; }
-.we-navstack .mob { position: absolute; right: 0; bottom: 0; width: 560px; }
+/* 6 · unified navigation. The only dark slide in the section: the annotated concept
+   exports carry white callout text on an espresso ground, so they sit straight on the
+   slide with no card around them and the two grounds meet invisibly. Full width, so
+   header pins top and content pins bottom per the layout standard. Both visuals are
+   concept exploration, labeled once for the pair; the nav that shipped came later with
+   the homepage redesign. */
+.we-nav6-head { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: end; }
+.we-nav6-stat { max-width: 540px; text-align: right; }
+.we-nav6-stat .num { font-family: var(--serif); font-weight: 600; font-size: 58px; line-height: 1;
+  color: var(--gold); margin: 0 0 10px; }
+.we-nav6-stat p:last-child { font-family: var(--sans); font-size: 19px; font-weight: 400;
+  line-height: 1.5; color: rgba(242,237,232,0.6); margin: 0; }
+.we-nav6-body { margin-top: auto; }
+.we-nav6 .we-cap { color: rgba(242,237,232,0.45); margin: 0 0 16px; }
+.we-nav6-figs { display: flex; gap: 60px; align-items: flex-end; }
+.we-nav6-figs img { display: block; height: 466px; width: auto; }
 
 /* 7 · vision scroll */
 .we-browser { background: #fff; border: 1px solid #e0dfdf; border-radius: 12px; overflow: hidden; box-shadow: 0 24px 60px rgba(32,30,27,0.12); }
@@ -549,27 +577,92 @@
 .we-scroll .track img { display: block; width: 100%; height: auto; }
 .we-scroll .track img + img { border-top: 14px solid #efede8; }
 @media (prefers-reduced-motion: no-preference) {
-  [data-deck-active] .we-scroll .track { animation: weScroll 34s ease-in-out 1.2s infinite alternate; }
+  [data-deck-active] .we-scroll .track { animation: weScroll 36s ease-in-out 1.2s infinite; }
 }
-@keyframes weScroll { 0%, 6% { transform: translateY(0); } 94%, 100% { transform: translateY(-1907px); } }
+/* One-way tour, then a reset rather than a rewind: fade in at the top, scroll to the
+   bottom, hold, fade out. The jump back to translateY(0) happens at opacity 0, so the
+   page appears to reload rather than scroll backwards. The browser chrome does not
+   fade, only the page inside it. */
+@keyframes weScroll {
+  0%   { transform: translateY(0); opacity: 0; }
+  4%   { transform: translateY(0); opacity: 1; }
+  8%   { transform: translateY(0); opacity: 1; }
+  88%  { transform: translateY(-1929px); opacity: 1; }
+  94%  { transform: translateY(-1929px); opacity: 1; }
+  100% { transform: translateY(-1929px); opacity: 0; }
+}
 
 /* 8 · unlocked */
 .we-sublist { margin-top: 44px; padding: 30px 36px; border-left: 3px solid var(--gold-deep); background: rgba(176,144,85,0.07); }
 .we-sublist p { font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(43,43,43,0.5); margin: 0 0 16px; }
 .we-sublist ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 30px; }
 .we-sublist li { font-family: var(--sans); font-size: 21px; font-weight: 300; line-height: 1.4; color: rgba(43,43,43,0.82); }
-.we-deckstack { position: relative; height: 560px; }
-.we-deckstack .back { position: absolute; left: 0; top: 0; width: 560px; transform: rotate(-3deg); transform-origin: left top; }
-.we-deckstack .front { position: absolute; right: 0; bottom: 20px; width: 100%; }
+/* Two pages from the tiger team deck, both 16:9. Equal widths offset on a clean
+   diagonal rather than nested corner-to-corner, so it reads as two slides from the
+   same deck. The offset clears the back card's text, which carries the mandate. */
+/* Slide 8 puts the visual on the left and the text on the right, the one flipped
+   split in the section, so the stagger is mirrored too: it opens toward the left
+   slide edge instead of crowding the text column.
+   The stack is anchored left and the horizontal offset is only 60px, so it stops
+   short of the column's right edge. That slack plus the 80px gutter keeps the dark
+   cards from crowding the headline, which they did when the stack spanned the full
+   column. The tilt and the vertical offset carry the stacked-pages read on their own. */
+.we-deckstack { position: relative; height: 670px; }
+.we-deckstack .back { position: absolute; left: 60px; top: 0; width: 660px; transform: rotate(1.5deg); transform-origin: right top; }
+.we-deckstack .front { position: absolute; left: 0; top: 295px; width: 660px; }
 
 /* 9 · live */
 .we-video .view { aspect-ratio: 5 / 3; background: #111; }
 .we-video video { position: absolute; top: 0; left: -3.334%; width: 106.668%; height: 100%; object-fit: cover; }
-.we-before { width: 440px; margin-top: 48px; }
+
+/* 9 · live today. Full width: header pinned top, content pinned bottom. The Before
+   shot overlaps the Now video's lower-left corner so the two read as one comparison
+   rather than two separate artifacts, which is what the old side-by-side did.
+   The metric carries a source caption: the homepage shipped after the layoff and the
+   numbers are the strategy doc's, so the slide cites them rather than claiming them. */
+.we-live-head { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: end; }
+.we-live-stat { max-width: 560px; text-align: right; }
+.we-live-stat .num { font-family: var(--serif); font-weight: 600; font-size: 58px; line-height: 1;
+  color: var(--gold-deep); margin: 0 0 10px; }
+.we-live-stat .d { font-family: var(--sans); font-size: 19px; font-weight: 400; line-height: 1.5;
+  color: rgba(43,43,43,0.7); margin: 0 0 14px; }
+.we-live-stat .we-cap { margin: 0; }
+/* bullets top-align with the video rather than bottom-aligning against it: the
+   visual column is much taller, and bottom-aligning left a void under the headline */
+.we-live-body { display: grid; grid-template-columns: 500px 1fr; gap: 70px; margin-top: 56px; align-items: start; }
+.we-live-body .we-list { margin: 40px 0 0; }
+.we-live-vis { position: relative; padding-left: 220px; }
+.we-live-vis .now { width: 100%; }
+/* Before sits lower than the video's bottom edge rather than flush with it, so the
+   pair reads as staggered. Its caption goes under the card, which is also what sets
+   how far the negative bottom can go before it runs into the slide's 130px margin. */
+.we-live-vis .before { position: absolute; left: 0; bottom: -54px; width: 330px; }
+.we-live-vis .before .we-cap { margin: 12px 0 0; }
 
 /* 10 · results */
-.we-results { display: grid; grid-template-columns: repeat(5, 1fr); gap: 26px; margin-top: auto; }
+.we-results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; margin-top: auto; }
 .we-res { background: #fff; border: 1px solid #e0dfdf; border-radius: 10px; padding: 40px 30px 36px; border-top: 4px solid var(--gold-deep); display: flex; flex-direction: column; }
 .we-res .l { font-family: var(--sans); font-size: 16px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal); margin: 0 0 30px; }
 .we-res .num { font-family: var(--serif); font-weight: 600; font-size: 66px; line-height: 1; color: var(--gold-deep); margin: 0 0 20px; }
 .we-res .d { font-family: var(--sans); font-size: 20px; font-weight: 300; line-height: 1.5; color: rgba(43,43,43,0.78); margin: 0; }
+/* supporting stats sit as their own paragraph rather than running on from the first */
+.we-res .d + .d { margin-top: 18px; }
+
+/* ============================================================
+   SLIDE FOOTER · running head, one per slide
+   Bare text, no container, deliberately outside the grid: it sits at 70px,
+   exactly half the 140px content margin, so the break-out lands on a number
+   the grid already uses and reads as intended rather than misaligned.
+   Gold-deep and 0.14em tracking match the eyebrow, which makes the two small
+   caps labels a matched pair bracketing the slide top and bottom.
+   No page number: this is a running head, not a component. The section
+   eyebrows dropped their "Web elevation ·" prefix because this now carries it.
+   Injected for every slide but the cover in src/pages/deck/[id].astro.
+   ============================================================ */
+.we-foot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6;
+  display: flex; align-items: center; padding: 0 70px 42px;
+  font-family: var(--sans); font-size: 14px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-deep); }
+
+/* On dark slides, the lighter gold, same swap .dark .eyebrow makes */
+.dark .we-foot { color: var(--gold); }

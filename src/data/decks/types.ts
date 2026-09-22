@@ -180,7 +180,13 @@ export interface RawSlide {
   html: string;
 }
 
-export type Slide =
+/**
+ * Every slide can override the deck's running head. This matters because
+ * case-study.ts splices webElevationDeck.slides into itself: inside the big
+ * deck those slides are a chapter and keep their own running head, while the
+ * slides around them carry the case study's.
+ */
+export type Slide = ({ runningHead?: string }) & (
   | RawSlide
   | CoverSlide
   | SectionSlide
@@ -197,7 +203,8 @@ export type Slide =
   | CapabilitySlide
   | CompareSlide
   | AnnotatedSlide
-  | ClosingSlide;
+  | ClosingSlide
+);
 
 export interface Deck {
   id: string;
@@ -208,5 +215,8 @@ export interface Deck {
   //   await crypto.subtle.digest('SHA-256', new TextEncoder().encode('yourpassword'))
   //     .then(b => Array.from(new Uint8Array(b)).map(n => n.toString(16).padStart(2,'0')).join(''))
   passwordHashes: string[];
+  // Running head printed in the bottom corner of every slide but the cover.
+  // Omit it and no slide gets a footer.
+  runningHead?: string;
   slides: Slide[];
 }

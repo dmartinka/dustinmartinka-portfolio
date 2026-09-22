@@ -10,8 +10,22 @@ const { id } = Astro.params;
 const deck = getDeck(id!);
 if (!deck) return Astro.redirect('/404');
 
+// The running head is injected here rather than written into each slide so it
+// reaches every slide type, not just the raw ones, and so adding a slide can't
+// forget it. The cover is skipped: it already carries the deck name in full, so
+// a running head there would say the same thing twice on one screen.
 const slidesHtml = deck.slides
-  .map(slide => renderSlide(slide, deck.defaultTheme))
+  .map(slide => {
+    const html = renderSlide(slide, deck.defaultTheme);
+    // A slide's own running head wins, so a chapter spliced in from another
+    // deck keeps its name. Covers are skipped: they already carry the deck or
+    // chapter name in full, so a running head would say it twice on one screen.
+    const head = slide.runningHead ?? deck.runningHead;
+    if (!head || slide.type === 'cover') return html;
+    const foot = `<footer class="we-foot"><span class="st">${head}</span></footer>`;
+    const close = html.lastIndexOf('</section>');
+    return close === -1 ? html : html.slice(0, close) + foot + html.slice(close);
+  })
   .join('\n');
 
 const passwordHashesJson = JSON.stringify(deck.passwordHashes);

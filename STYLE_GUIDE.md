@@ -121,6 +121,12 @@ Add `class="wide"` to `<main>` to use the wide container.
 
 Canvas is 1920×1080. Every content slide uses one of two layouts. The deciding question: does the content sit **under** the headline, or **beside** it?
 
+### Headline punctuation
+
+*Approved by Dustin 2026-09-22. Applies across every deck section.*
+
+**No terminal period on a slide headline.** All 30 headlines across `case-study.ts` and `web-elevation.ts` were stripped in one pass. Internal punctuation stays: the web elevation cover keeps the period between its two sentences ("Nobody asked me to fix web. I made the case until it was mine"), and "Twenty years, one throughline: the craft" keeps its colon. Eyebrows, image labels, body copy and bullets are unaffected.
+
 ### Layout 1: Full width
 
 Content spans the full width under the headline: stat rows, three-up columns, result cards, side-by-side pairs.
@@ -128,7 +134,7 @@ Content spans the full width under the headline: stat rows, three-up columns, re
 - Eyebrow and headline pinned to the top (eyebrow 135px from the top).
 - Content pinned to the bottom (130px from the bottom edge).
 - All leftover space falls between the headline and the content.
-- Examples: flagship "What we know", web elevation "The playbook came down to three things."
+- Examples: flagship "What we know", web elevation "The playbook came down to three things"
 
 ### Layout 2: Split
 
