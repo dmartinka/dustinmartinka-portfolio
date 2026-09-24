@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Temp copy used to push a deck slide into Figma (carries the capture script)
+public/_figma-capture-tmp.html
+
+# Full size originals for deck photos. The deck ships the cropped *-sq.jpg copies only.
+_source/

@@ -79,7 +79,7 @@ export const webElevationDeck: Deck = {
       theme: 'light',
       label: 'Title',
       name: 'T-Mobile · Web Experience Elevation',
-      headline: 'Nobody asked me to fix web. I <em>made the case</em> until it was mine',
+      headline: 'No one asked me to fix the web. <em>I made the case</em> until it was my job.',
       visual: `${A}/cover.png`,
       badge: `${A}/tmobile-badge.png`,
     },

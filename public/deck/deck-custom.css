@@ -355,7 +355,9 @@
 
 /* ── COVER VISUAL: image sits directly on the slide, no panel behind it ── */
 /* Two thirds text, one third visual. Scoped so the main cover keeps its own split. */
-.cover .content:has(.cover-visual) { grid-template-columns: 2fr 1fr; }
+/* The visual column is the 560px circle plus 140px of right padding, so the
+   circle's right edge mirrors the text's 140px left margin. */
+.cover .content:has(.cover-visual) { grid-template-columns: 1fr 700px; }
 /* Case study covers carry a full sentence, so they take the statement size (64px),
    not the 104px display size slide 1 uses for a short line. */
 .cover .content:has(.cover-visual) .headline { font-size: 64px; line-height: 1.22; }
@@ -366,13 +368,14 @@
   font-family: var(--sans); font-size: 22px; font-weight: 400;
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-deep);
 }
-.cover-visual { height: 100%; display: flex; align-items: center; justify-content: center; padding: 40px; }
+.cover-visual { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding: 40px 140px 40px 0; }
 .cover-visual .cv-wrap { position: relative; display: inline-block; max-width: 100%; max-height: 100%; }
 .cover-visual .cv-main { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; }
 .cover-visual .cv-badge { position: absolute; top: 3%; right: 10%; width: 17%; height: auto; }
-/* Text column is 1280px wide with 140px of left padding, so 1140px of text.
-   228px of right padding takes that down by 20%. */
-.cover .content:has(.cover-visual) .cover-text { padding-right: 228px; }
+/* Text column is 1220px wide with 140px of left padding, so 1080px of text.
+   280px of right padding sets an 800px measure, which breaks the headline
+   into three lines after "the" and "it". */
+.cover .content:has(.cover-visual) .cover-text { padding-right: 280px; }
 
 /* ── AGENDA: match the section divider number treatment ── */
 .ag-item { align-items: center; gap: 36px; }
@@ -666,3 +669,74 @@
 
 /* On dark slides, the lighter gold, same swap .dark .eyebrow makes */
 .dark .we-foot { color: var(--gold); }
+
+/* ── TIMELINE, free positioned (case study slide 4) ──
+   Stops and role blocks are placed by inline left offsets instead of the
+   equal six column grid, so each year lines up with its role text. */
+.tl-free .tl-above-row, .tl-free .tl-dot-row, .tl-free .tl-below-row { display: block; position: relative; }
+.tl-free .tl-cb { position: absolute; width: 257px; }
+.tl-free .tl-above-row .tl-cb { bottom: 0; }
+.tl-free .tl-below-row .tl-cb { top: 0; }
+.tl-free .tl-dot-row { height: 53px; }
+.tl-free .tl-dot-row::before { top: 9px; transform: none; }
+/* The year is wider than the dot, so the stop's left edge is the year's */
+.tl-free .tl-dc { position: absolute; top: 0; }
+/* Small dot with a beige ring that breaks the line around it */
+.tl-free .tl-d2 { width: 6px; height: 6px; border: 6px solid var(--beige); box-sizing: content-box; background: var(--gold-deep); }
+.tl-org { font-family: var(--sans); font-size: 16px; font-weight: 400; color: rgba(43,43,43,0.65); margin: 2px 0 5px; }
+.tl-note { font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.5; color: rgba(43,43,43,0.6); margin: 0; width: 220px; }
+
+/* ── ABOUT ME (case study slide 3): split, text left, circle cluster right ── */
+.ab-items { display: flex; flex-direction: column; gap: 34px; margin-top: 56px; max-width: 700px; }
+.ab-item p { font-family: var(--sans); font-size: 24px; font-weight: 300; line-height: 1.5; color: rgba(43,43,43,0.8); margin: 0; }
+.ab-item .t { font-weight: 600; font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 8px; }
+.about .we-vis { display: flex; align-items: center; justify-content: center; }
+.ab-cluster { position: relative; width: 780px; height: 820px; }
+/* Beige ring on every circle, same as the timeline dots, so overlaps read as
+   stacked cut-outs. Depth comes from two shadows scaled to the circle's own
+   size: a tight contact shadow where it meets the page, and a wide, faint
+   ambient one offset downward. Light from above, so every circle casts the
+   same way, and since the shadow travels with its circle the drift reads as
+   things floating rather than sliding. */
+.ab-c { position: absolute; border-radius: 50%; overflow: hidden; box-sizing: border-box;
+  border: 6px solid var(--beige); background: #e6e2da; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 1px 2px rgba(32,30,27,0.10), 0 calc(var(--sh, 20px) * 0.5) var(--sh, 20px) calc(var(--sh, 20px) * -0.3) rgba(32,30,27,0.14); }
+.ab-c img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ab-c span { font-family: var(--sans); font-size: 16px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-deep); }
+.ab-me { background: #d9d3c7; --sh: 34px; }
+.ab-sm { background: #ece9e2; --sh: 8px; }
+.ab-sm span { font-size: 10px; letter-spacing: 0.08em; }
+/* Team logos: full colour marks on a white disc, contained with room to
+   breathe so wide marks (Seahawks) and tall ones (Kraken) sit at one weight. */
+.ab-logo { background: #fff; }
+.ab-logo img { width: 66%; height: 66%; object-fit: contain; }
+/* Arrival then drift. Arrival owns scale and opacity. Drift runs three
+   registered properties on independent loops (x, y, tilt) that feed the
+   translate and rotate properties, so the axes wander separately instead of
+   swinging along one line. Inactive slides and reduced motion get neither. */
+@property --tx { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --ty { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --tr { syntax: '<angle>';  inherits: false; initial-value: 0deg; }
+.ab-c { translate: var(--tx) var(--ty); rotate: var(--tr); }
+@media (prefers-reduced-motion: no-preference) {
+  [data-deck-active] .ab-c {
+    animation:
+      ab-in 1.1s cubic-bezier(0.16,1,0.3,1) var(--in, 0s) both,
+      ab-x var(--dx, 8s) ease-in-out var(--px, 0s) infinite alternate,
+      ab-y var(--dy, 11s) ease-in-out var(--py, 0s) infinite alternate,
+      ab-r var(--dr, 17s) ease-in-out var(--pr, 0s) infinite alternate;
+  }
+  [data-deck-active] .ab-me { animation: ab-in 1.1s cubic-bezier(0.16,1,0.3,1) 0s both; }
+}
+@keyframes ab-in { from { opacity: 0; scale: 0.9; } to { opacity: 1; scale: 1; } }
+@keyframes ab-x { from { --tx: calc(var(--ax, 0px) * -1); } to { --tx: var(--ax, 0px); } }
+@keyframes ab-y { from { --ty: calc(var(--ay, 0px) * -1); } to { --ty: var(--ay, 0px); } }
+@keyframes ab-r { from { --tr: calc(var(--ar, 0deg) * -1); } to { --tr: var(--ar, 0deg); } }
+
+/* Empty rings among the photo circles. Same outline and alpha as the ring
+   orbs (orbs.js RING palette), resting at the ring opacity, pulsing on the
+   active slide via the shared .orb a to d classes. */
+.ab-ring { position: absolute; border-radius: 50%; box-sizing: border-box; background: transparent;
+  border: 1.5px solid rgba(201,191,169,0.60); mix-blend-mode: normal; }
+.ab-ring.gold { border-color: rgba(176,144,85,0.55); }
+.slide .ab-ring { opacity: 0.6; }

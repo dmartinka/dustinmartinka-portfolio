@@ -9,6 +9,77 @@ const _cDotSm = (clr: string) => `<span style="width:56px;height:56px;border-rad
 const _gDotSm = `<span style="width:56px;height:56px;border-radius:50%;background:rgba(43,43,43,0.1);display:block;flex-shrink:0"></span>`;
 const _row = (rank: number, task: string, t: number, c: number, g: number) => `<div style="display:grid;grid-template-columns:220px 28px 1fr;align-items:center;gap:14px"><span style="text-align:right;font-family:var(--sans);font-size:16px;color:rgba(242,237,232,0.8);white-space:nowrap">${task}</span><span style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:11px;font-weight:600;color:rgba(242,237,232,0.9);flex-shrink:0">${rank}</span><div style="display:flex;flex-direction:row;align-items:center;gap:3px">${t>0?`<div style="width:${t}%;height:9px;border-radius:5px;background:rgba(242,237,232,0.85);flex-shrink:0"></div>`:''} ${c>0?`<div style="width:${c}%;height:9px;border-radius:5px;background:var(--gold);flex-shrink:0"></div>`:''} ${g>0?`<div style="width:${g}%;height:9px;border-radius:5px;background:rgba(242,237,232,0.32);flex-shrink:0"></div>`:''}</div></div>`;
 
+// ── About me circle cluster (slide 3) ──
+// Positions come straight from the Figma pass (2026-09-24): x/y are the
+// top-left corner in px inside the 780x820 right column, d is the diameter.
+// That matches what Figma reports, so layout changes copy across one to one.
+// Order is stacking order, bottom to top, also as in Figma.
+// Leave src empty and the circle renders as a labelled placeholder.
+const A_ = '/deck/assets/about';
+const _aboutCircles: { label: string; x: number; y: number; d: number; src?: string; me?: boolean; logo?: boolean }[] = [
+  { label: 'Huskies',      x: 355, y: 175, d: 80, src: `${A_}/huskies-logo.svg`, logo: true },
+  { label: 'Mariners',     x: 58, y: 309, d: 80, src: `${A_}/mariners-logo.svg`, logo: true },
+  { label: 'Bobcats',      x: 38, y: 598, d: 80, src: `${A_}/msu-bobcats-logo.svg`, logo: true },
+  { label: 'Shelley',      x: 94, y: 160, d: 220, src: `${A_}/shelley-sq.jpg` },
+  { label: 'Toby',         x: 453, y: 111, d: 210, src: `${A_}/toby-sq.jpg` },
+  { label: 'Buchi',        x: 80, y: 365, d: 150, src: `${A_}/buchi-sq.jpg` },
+  { label: 'Guitar',       x: 590, y: 393, d: 140, src: `${A_}/guitar-sq.jpg` },
+  // Moved clear of Felicity and hiking, which had buried it
+  { label: 'Seahawks',     x: 670, y: 620, d: 80, src: `${A_}/seahawks-logo.svg`, logo: true },
+  { label: 'Hiking',       x: 274, y: 589, d: 149, src: `${A_}/hiking-sq.jpg` },
+  { label: 'Snowboarding', x: 143, y: 490, d: 190, src: `${A_}/snowboarding-sq.jpg` },
+  { label: 'Felicity',     x: 450, y: 509, d: 203, src: `${A_}/felicity-sq.jpg` },
+  // Me, the largest, in the middle of everything
+  { label: 'Dustin',       x: 230, y: 250, d: 320, src: `${A_}/dustin-sq.jpg`, me: true },
+  { label: 'Kraken',       x: 591, y: 304, d: 80, src: `${A_}/kraken-logo.svg`, logo: true },
+];
+// Empty rings in the gaps, the same outlined orbs as web elevation slide 2.
+// They carry the orb pulse classes (a to d), so they breathe with the deck.
+const _aboutRings: { x: number; y: number; d: number; k: string; gold?: boolean }[] = [
+  { x: 360, y: 72, d: 70,  k: 'a', gold: true },
+  { x: 15, y: 132, d: 110, k: 'b' },
+  { x: 671, y: 73, d: 90,  k: 'c' },
+  { x: 11, y: 525, d: 60,  k: 'd', gold: true },
+  { x: 649, y: 495, d: 90,  k: 'b' },
+  { x: 340, y: 683, d: 100, k: 'c', gold: true },
+  { x: 63, y: 696, d: 70,  k: 'a' },
+  { x: 667, y: 726, d: 50,  k: 'd', gold: true },
+  { x: 219, y: 116, d: 39,  k: 'c' },
+  { x: 221, y: 699, d: 36,  k: 'b', gold: true },
+  { x: 590, y: 98, d: 36,  k: 'a' },
+];
+// Motion, all set per circle here so nothing is hand tuned in CSS:
+//   arrival  circles settle in outward from mine, delay grows with distance
+//   drift    x and y sway on separate loops whose lengths never line up, plus
+//            a slow tilt on a third. Together they trace a wandering path that
+//            takes minutes to repeat, instead of a line. Negative delays start
+//            each loop mid-swing, so nothing begins from rest in unison.
+//            Smaller circles drift further and quicker, the way lighter
+//            things do. Mine stays still as the anchor.
+const _me = _aboutCircles.find(c => c.me)!;
+const _mx = _me.x + _me.d / 2, _my = _me.y + _me.d / 2;
+// Deterministic 0 to 1 noise per circle and channel, so renders are stable
+const _rnd = (i: number, k: number) => { const v = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return v - Math.floor(v); };
+const _aboutCluster = _aboutRings.map((r, i) =>
+  `<div class="ab-ring orb ${r.k}${r.gold ? ' gold' : ''}" style="left:${r.x}px;top:${r.y}px;width:${r.d}px;height:${r.d}px;animation-delay:${(i * 0.31).toFixed(2)}s"></div>`
+).join('') + _aboutCircles.map((c, i) => {
+  const cls = ['ab-c', c.me ? 'ab-me' : '', c.d <= 90 ? 'ab-sm' : '', c.logo ? 'ab-logo' : ''].filter(Boolean).join(' ');
+  const inner = c.src ? `<img src="${c.src}" alt="${c.label}">` : `<span>${c.label}</span>`;
+  const dist = Math.hypot(c.x + c.d / 2 - _mx, c.y + c.d / 2 - _my);
+  const inDelay = c.me ? 0 : 0.2 + dist / 700;
+  const amp = c.me ? 0 : c.d <= 90 ? 12 : c.d <= 160 ? 9 : 7;
+  const tilt = c.me ? 0 : c.d <= 90 ? 3 : 1.5;
+  const base = c.d <= 90 ? 6 : 8;
+  const dx = base * (0.9 + _rnd(i, 1) * 0.4), dy = base * (1.35 + _rnd(i, 2) * 0.4), dr = base * (2.1 + _rnd(i, 3) * 0.6);
+  const motion = [
+    `--in:${inDelay.toFixed(2)}s`,
+    `--ax:${(amp * (0.7 + _rnd(i, 4) * 0.3)).toFixed(1)}px`, `--ay:${(amp * (0.7 + _rnd(i, 5) * 0.3)).toFixed(1)}px`, `--ar:${tilt}deg`,
+    `--dx:${dx.toFixed(1)}s`, `--dy:${dy.toFixed(1)}s`, `--dr:${dr.toFixed(1)}s`,
+    `--px:-${(_rnd(i, 6) * dx).toFixed(1)}s`, `--py:-${(_rnd(i, 7) * dy).toFixed(1)}s`, `--pr:-${(_rnd(i, 8) * dr).toFixed(1)}s`,
+  ].join(';');
+  return `<div class="${cls}" style="left:${c.x}px;top:${c.y}px;width:${c.d}px;height:${c.d}px;${motion}">${inner}</div>`;
+}).join('');
+
 // ── PART ONE · Get to know me ──
 const partOne: Slide[] = [
 
@@ -30,33 +101,32 @@ const partOne: Slide[] = [
       eyebrow: 'Today\'s agenda',
       items: [
         { num: '01', title: 'Get to know me' },
-        { num: '02', title: 'My impact' },
+        { num: '02', title: 'Delivering impact' },
         { num: '03', title: 'Building teams' },
       ],
     },
 
     // 3 · ABOUT ME
+    // Split slide, halves: text block left, circle cluster right.
     {
-      type: 'values',
-      theme: 'light',
-      label: 'About me',
-      eyebrow: 'PART ONE · ABOUT ME',
-      headline: 'A designer at heart',
-      photo: '/deck/assets/about/dustin-kids.png',
-      cols: [
-        {
-          title: 'A love for building',
-          body: "Products, teams, cultures, home projects. If I can design or build it, I will. I got into this field because I love making things, and nothing has changed.",
-        },
-        {
-          title: 'Husband and father',
-          body: 'Recently married to Shelley. Father of Felicity (12) and Toby (9) and our dog Buchi. They\'ve taught me more about patience and perspective than any management training ever did.',
-        },
-        {
-          title: 'Happiest outdoors',
-          body: 'Snowboarding, baseball, hiking, traveling and watching Seattle sports (all of them). Getting outside is how I reset.',
-        },
-      ],
+      type: 'raw',
+      html: `
+  <section class="slide light we about" data-label="About me">
+    <div class="content">
+      <div class="we-cols we-1-1">
+        <div class="we-text">
+          <p class="eyebrow rise">About me</p>
+          <h2 class="head-lg rise d2" style="margin-top:26px">A designer at heart</h2>
+          <div class="ab-items">
+            <div class="ab-item rise d3"><p class="t">A love for building</p><p>Products, teams, home projects. If I can design it or build it, I will. It's why I got into this field, and that hasn't changed.</p></div>
+            <div class="ab-item rise d4"><p class="t">Husband and father</p><p>Recently married to Shelley. Dad to Felicity (12), Toby (10) and our dog Buchi. They've taught me more about patience than any management training ever did.</p></div>
+            <div class="ab-item rise d5"><p class="t">Happiest outdoors</p><p>Snowboarding, baseball, hiking, guitar, travel, and every Seattle team. Getting outside is how I reset.</p></div>
+          </div>
+        </div>
+        <div class="we-vis"><div class="ab-cluster">${_aboutCluster}</div></div>
+      </div>
+    </div>
+  </section>`,
     },
 
     // 4 · TIMELINE
@@ -64,62 +134,55 @@ const partOne: Slide[] = [
       type: 'raw',
       html: `
   <section class="slide light timeline" data-label="Designer to leader">
+    <div class="orbs" data-orb-tone="light" data-orb-style="rings"></div>
     <div class="content">
       <div class="slide-head">
         <p class="eyebrow rise">Designer to leader</p>
         <h2 class="head-lg rise d2">Twenty years, one throughline: the craft</h2>
       </div>
-      <div class="tl-alt rise d3">
+      <!-- Stops sit at hand-set x positions (from the Figma pass, 2026-09-24):
+           each year shares its left edge with the role text beside it, so the
+           spacing is deliberately uneven. -->
+      <div class="tl-alt tl-free rise d3">
 
-        <!-- ABOVE LINE: 2014, 2020, 2024+ -->
         <div class="tl-above-row">
-          <div></div>
-          <div class="tl-cb">
+          <div class="tl-cb" style="left:257px">
             <p class="tl-role-v2">Manager / Lead Designer</p>
-            <p style="font-family:var(--sans);font-size:16px;font-weight:400;color:rgba(43,43,43,0.65);margin:2px 0 5px">MoxiWorks</p>
+            <p class="tl-org">MoxiWorks</p>
             <p class="tl-desc-v2">IC and lead simultaneously. Built the design practice, the team, and the culture from zero.</p>
           </div>
-          <div></div>
-          <div class="tl-cb">
+          <div class="tl-cb" style="left:858px">
             <p class="tl-role-v2">Manager</p>
-            <p style="font-family:var(--sans);font-size:16px;font-weight:400;color:rgba(43,43,43,0.65);margin:2px 0 5px">T-Mobile</p>
+            <p class="tl-org">T-Mobile</p>
             <p class="tl-desc-v2">Built the team, set the operating model, developed mid and senior designers.</p>
           </div>
-          <div></div>
-          <div class="tl-cb">
-            <p class="tl-role-v2">Journey into AI</p>
-            <p class="tl-desc-v2">AI Product Design certified · ELVTR</p>
-          </div>
+          <div class="tl-cb" style="left:1295px"><p class="tl-note">* AI Product Design certified via ELVTR</p></div>
         </div>
 
-        <!-- DOTS + YEARS -->
         <div class="tl-dot-row">
-          <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2005</p></div>
-          <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2014</p></div>
-          <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2019</p></div>
-          <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2020</p></div>
-          <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2022</p></div>
-          <div class="tl-dc"><span class="tl-d2"></span><p class="tl-yr">2024+</p></div>
+          <div class="tl-dc" style="left:80px"><span class="tl-d2"></span><p class="tl-yr">2005</p></div>
+          <div class="tl-dc" style="left:257px"><span class="tl-d2"></span><p class="tl-yr">2014</p></div>
+          <div class="tl-dc" style="left:553px"><span class="tl-d2"></span><p class="tl-yr">2019</p></div>
+          <div class="tl-dc" style="left:858px"><span class="tl-d2"></span><p class="tl-yr">2020</p></div>
+          <div class="tl-dc" style="left:1106px"><span class="tl-d2"></span><p class="tl-yr">2022</p></div>
+          <div class="tl-dc" style="left:1295px"><span class="tl-d2"></span><p class="tl-yr">2024</p></div>
+          <div class="tl-dc" style="left:1418px"><span class="tl-d2"></span><p class="tl-yr">2026</p></div>
         </div>
 
-        <!-- BELOW LINE: 2019, 2022, 2024+ -->
         <div class="tl-below-row">
-          <div></div>
-          <div></div>
-          <div class="tl-cb">
+          <div class="tl-cb" style="left:553px">
             <p class="tl-role-v2">Sr. Designer</p>
-            <p style="font-family:var(--sans);font-size:16px;font-weight:400;color:rgba(43,43,43,0.65);margin:2px 0 5px">T-Mobile</p>
+            <p class="tl-org">T-Mobile</p>
             <p class="tl-desc-v2">Designing at scale for over 100 million customers.</p>
           </div>
-          <div></div>
-          <div class="tl-cb">
+          <div class="tl-cb" style="left:1106px">
             <p class="tl-role-v2">Sr. Manager</p>
-            <p style="font-family:var(--sans);font-size:16px;font-weight:400;color:rgba(43,43,43,0.65);margin:2px 0 5px">T-Mobile</p>
+            <p class="tl-org">T-Mobile</p>
             <p class="tl-desc-v2">Scaled to 35 designers across 7 product areas.</p>
           </div>
-          <div class="tl-cb">
-            <p class="tl-role-v2">Co-founder / Product Design Lead</p>
-            <p style="font-family:var(--sans);font-size:16px;font-weight:400;color:rgba(43,43,43,0.65);margin:2px 0 5px">Paavis</p>
+          <div class="tl-cb" style="left:1418px">
+            <p class="tl-role-v2">Co-founder / Head of Design</p>
+            <p class="tl-org">Paavis</p>
             <p class="tl-desc-v2">Building a trust intelligence product from zero. Designing and prototyping in code with AI.</p>
           </div>
         </div>
@@ -250,6 +313,7 @@ const teamAssessment: Slide[] = [
       type: 'raw',
       html: `
   <section class="slide light" data-label="Strengths &amp; gaps" style="display:flex;flex-direction:column;justify-content:space-between;padding:72px 100px">
+    <div class="orbs" data-orb-tone="light" data-orb-style="rings"></div>
 
     <!-- HEADLINE -->
     <div>
