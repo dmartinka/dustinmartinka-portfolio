@@ -740,3 +740,47 @@
   border: 1.5px solid rgba(201,191,169,0.60); mix-blend-mode: normal; }
 .ab-ring.gold { border-color: rgba(176,144,85,0.55); }
 .slide .ab-ring { opacity: 0.6; }
+
+/* ── UX STRATEGY (flagship): split like the web elevation situation slide.
+   Findings left in a 2x2, the focus areas they led to on the right. ── */
+.uxs .content { padding: 130px 140px; display: flex; flex-direction: column; }
+.uxs-cols { display: grid; grid-template-columns: 3fr 2fr; gap: 100px; flex: 1; align-items: center; }
+.uxs-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 44px 56px; margin-top: 64px; }
+.uxs-stat { border-top: 2px solid var(--gold); padding-top: 20px; }
+.uxs-stat p { font-family: var(--sans); font-size: 22px; font-weight: 300; line-height: 1.45; color: rgba(242,237,232,0.7); margin: 0; }
+.uxs-stat .n { font-family: var(--serif); font-weight: 700; font-size: 80px; line-height: 1; color: var(--gold); margin: 0 0 14px; }
+.uxs-credit { font-family: var(--sans); font-size: 14px; color: rgba(242,237,232,0.38); margin: 36px 0 0; }
+.uxs-out { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.07); border-top: 3px solid var(--gold); border-radius: 10px; padding: 40px 44px 28px; }
+.uxs-label { font-family: var(--sans); font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(242,237,232,0.5); margin: 0 0 12px; }
+.uxs-focus { list-style: none; margin: 0; padding: 0; }
+.uxs-focus li { display: flex; align-items: baseline; gap: 22px; font-family: var(--sans); font-weight: 500; font-size: 25px; color: rgba(242,237,232,0.92); padding: 17px 0; border-bottom: 1px solid rgba(201,169,110,0.22); }
+.uxs-focus li:last-child { border-bottom: 0; }
+.uxs-label-2 { margin-top: 36px; }
+/* Principles are qualities, not places: lighter weight, gold dot marker */
+.uxs-princ li { font-weight: 300; }
+.uxs-princ li::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; align-self: center; }
+
+/* ── ITERATIONS: four columns once the before screen joined ── */
+.iterations .grid-iter.grid-iter-4 { grid-template-columns: repeat(4, 1fr); gap: 48px; }
+.iter-sub { font-family: var(--sans); font-size: 22px; font-weight: 300; line-height: 1.5; color: rgba(242,237,232,0.65); margin: 18px 0 0; }
+.dark .iter-col .iter-d { color: rgba(242,237,232,0.7); }
+
+/* ── RE-ORGANIZE: the real org chart as a full width artifact card ── */
+.reorg .content { padding: 130px 140px; display: flex; flex-direction: column; }
+.reorg-sub { font-family: var(--sans); font-size: 22px; font-weight: 300; line-height: 1.5; color: rgba(242,237,232,0.65); margin: 20px 0 0; max-width: 1100px; }
+/* Height-led: the trimmed chart is about 2.5:1, so full width would run off
+   the bottom. 560px tall keeps it inside the 130px bottom margin. */
+.reorg-card { margin-top: auto; align-self: flex-start; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,0.35); }
+.reorg-card img { display: block; height: 560px; width: auto; }
+
+/* ── COMPETENCIES (team assessment): one card per category. Dot count is the
+   number of competencies, dot colour matches the category on the staffing
+   slide that follows, so the two read as framework then measurement. ── */
+.cmp .content { padding: 130px 140px; }
+.cmp-src { font-family: var(--sans); font-size: 22px; font-weight: 300; color: rgba(43,43,43,0.65); margin: 20px 0 0; }
+.cmp-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-top: auto; align-items: stretch; }
+.cmp-card { background: #fff; border: 1px solid #e0dfdf; border-top: 3px solid var(--gold-deep); border-radius: 10px; box-shadow: 0 18px 50px rgba(32,30,27,0.08); padding: 30px 28px 32px; }
+.cmp-h { font-family: var(--sans); font-size: 17px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal); margin: 0; }
+.cmp-card ul { list-style: none; margin: 20px 0 0; padding: 20px 0 0; border-top: 1px solid rgba(43,43,43,0.1); display: flex; flex-direction: column; gap: 14px; }
+.cmp-card li { display: flex; align-items: baseline; gap: 12px; font-family: var(--sans); font-size: 19px; font-weight: 300; line-height: 1.35; color: rgba(43,43,43,0.8); padding: 0; border: 0; margin: 0; }
+.cmp-card li::before { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--dot, var(--gold)); flex-shrink: 0; transform: translateY(1px); }

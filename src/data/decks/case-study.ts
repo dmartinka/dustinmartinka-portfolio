@@ -236,15 +236,15 @@ const teamAssessment: Slide[] = [
     {
       type: 'raw',
       html: `
-  <section class="slide" data-label="Skill assessment" style="display:grid;grid-template-columns:2fr 3fr;padding:0">
+  <section class="slide light" data-label="Skill assessment" style="display:grid;grid-template-columns:2fr 3fr;padding:0">
 
     <!-- LEFT: dark panel -->
-    <div style="background:#0d0d0d;display:flex;flex-direction:column;justify-content:center;padding:80px 72px;position:relative;overflow:hidden">
+    <div style="background:var(--espresso);display:flex;flex-direction:column;justify-content:center;padding:80px 72px;position:relative;overflow:hidden">
       <div class="orbs"></div>
       <div class="grain"></div>
       <div style="position:relative;z-index:1">
-        <p class="eyebrow rise" style="color:var(--gold)">Assessing the team</p>
-        <p class="rise d2" style="font-family:var(--serif);font-size:46px;font-weight:300;color:rgba(242,237,232,0.9);line-height:1.25;letter-spacing:-0.02em;margin:24px 0 0">As demand for UX grew, it was clear we needed to <em>assess the team's skillsets</em> to optimize performance.</p>
+        <p class="eyebrow rise" style="color:var(--gold)">Assessing the team · first pass</p>
+        <p class="rise d2" style="font-family:var(--serif);font-size:46px;font-weight:300;color:rgba(242,237,232,0.9);line-height:1.25;letter-spacing:-0.02em;margin:24px 0 0">As demand for UX grew, it was clear we needed to <em>assess the team's skillsets</em> to optimize performance</p>
       </div>
     </div>
 
@@ -289,21 +289,23 @@ const teamAssessment: Slide[] = [
     {
       type: 'raw',
       html: `
-  <section class="slide light competency" data-label="Competencies">
-    <div class="cap-aside rise"><p class="n">16</p><p class="l">competencies across 5 categories, identified for T-Mobile</p></div>
+  <section class="slide light competency cmp" data-label="Competencies">
+    <div class="orbs" data-orb-tone="light" data-orb-style="rings"></div>
     <div class="content">
       <div class="slide-head">
         <p class="eyebrow rise">Team assessment</p>
-        <h2 class="head-lg rise d2" style="font-size:38px">A competency assessment was created to identify strengths and opportunities across the teams</h2>
+        <h2 class="head-lg rise d2" style="margin-top:26px">Skills were only part of the picture, so I widened the lens</h2>
+        <p class="cmp-src rise d3">16 competencies in 5 categories, based on The Design Career Journey by Todd Zaki Warfel</p>
       </div>
-      <div class="grid5">
-        <div class="cat-col rise d3"><p class="cat-h">Craft</p><ul><li>Product thinking</li><li>Agile processes</li><li>User-centered processes</li><li>Systems thinking</li><li>Visual design</li><li>Interaction design</li></ul></div>
-        <div class="cat-col rise d3"><p class="cat-h">Communication</p><ul><li>Storytelling &amp; presentation</li><li>Participation</li><li>Receiving feedback</li></ul></div>
-        <div class="cat-col rise d4"><p class="cat-h">Influence</p><ul><li>Mentoring</li><li>Cultural stewardship</li><li>Influencer</li></ul></div>
-        <div class="cat-col rise d4"><p class="cat-h">Engagement</p><ul><li>Relationships</li><li>Collaboration</li></ul></div>
-        <div class="cat-col rise d5"><p class="cat-h">Ownership</p><ul><li>Manages priorities</li><li>Decision making</li></ul></div>
+      <!-- Each competency carries a dot in its category colour, matching the
+           columns on the next slide -->
+      <div class="cmp-grid">
+        <div class="cmp-card rise d3"><p class="cmp-h">Craft</p><ul style="--dot:#C9A96E"><li>Product thinking</li><li>Agile processes</li><li>User-centered processes</li><li>Systems thinking</li><li>Visual design</li><li>Interaction design</li></ul></div>
+        <div class="cmp-card rise d3"><p class="cmp-h">Communication</p><ul style="--dot:#888680"><li>Storytelling &amp; presentation</li><li>Participation</li><li>Receiving feedback</li></ul></div>
+        <div class="cmp-card rise d4"><p class="cmp-h">Influence</p><ul style="--dot:#2B2B2B"><li>Mentoring</li><li>Cultural stewardship</li><li>Influencer</li></ul></div>
+        <div class="cmp-card rise d4"><p class="cmp-h">Engagement</p><ul style="--dot:#9E9891"><li>Relationships</li><li>Collaboration</li></ul></div>
+        <div class="cmp-card rise d5"><p class="cmp-h">Ownership</p><ul style="--dot:#403c38"><li>Manages priorities</li><li>Decision making</li></ul></div>
       </div>
-      <p style="font-family:var(--sans);font-size:14px;color:rgba(43,43,43,0.4);margin:36px 0 0">Based on The Design Career Journey by Todd Zaki Warfel</p>
     </div>
   </section>`,
     },
@@ -312,7 +314,7 @@ const teamAssessment: Slide[] = [
     {
       type: 'raw',
       html: `
-  <section class="slide light" data-label="Strengths &amp; gaps" style="display:flex;flex-direction:column;justify-content:space-between;padding:72px 100px">
+  <section class="slide light" data-label="Strengths &amp; gaps" style="display:flex;flex-direction:column;justify-content:space-between;padding:130px 140px">
     <div class="orbs" data-orb-tone="light" data-orb-style="rings"></div>
 
     <!-- HEADLINE -->
@@ -512,61 +514,44 @@ const flagshipApp: Slide[] = [
   </section>`,
     },
 
-    // 15 · RESEARCH FINDINGS (raw)
+    // 15 · UX STRATEGY: what we knew, and the eight focus areas it led to.
+    // Research findings and focus areas merged 2026-09-24. The sentiment
+    // topics and the focus area one-liners moved to speaking notes.
     {
       type: 'raw',
       html: `
-  <section class="slide dark" data-label="Research findings">
+  <section class="slide dark uxs" data-label="UX strategy">
     <div class="orbs"></div>
     <div class="grain"></div>
-    <div class="content" style="padding:100px 140px;display:flex;flex-direction:column">
-      <div class="slide-head">
-        <p class="eyebrow rise">UX strategy · what we know</p>
-        <h2 class="head-lg rise d2" style="font-size:50px">The app wasn't fulfilling our promise of fast, effortless account management</h2>
-        <p class="rise d3" style="font-family:var(--sans);font-size:21px;font-weight:300;color:rgba(242,237,232,0.65);margin:16px 0 0;line-height:1.5">We started by naming exactly what was not working, grounding the redesign in evidence, not assumption.</p>
-      </div>
-      <div class="rise d3" style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:44px">
-        <div style="border-top:2px solid var(--gold);padding-top:18px"><p style="font-family:var(--serif);font-weight:700;font-size:80px;color:var(--gold);line-height:1;margin:0 0 14px">52%</p><p style="font-family:var(--sans);font-size:18px;font-weight:300;color:rgba(242,237,232,0.65);line-height:1.45;margin:0">less than satisfied with the overall app experience</p></div>
-        <div style="border-top:2px solid var(--gold);padding-top:18px"><p style="font-family:var(--serif);font-weight:700;font-size:80px;color:var(--gold);line-height:1;margin:0 0 14px">53%</p><p style="font-family:var(--sans);font-size:18px;font-weight:300;color:rgba(242,237,232,0.65);line-height:1.45;margin:0">able to successfully complete their task</p></div>
-        <div style="border-top:2px solid var(--gold);padding-top:18px"><p style="font-family:var(--serif);font-weight:700;font-size:80px;color:var(--gold);line-height:1;margin:0 0 14px">30%</p><p style="font-family:var(--sans);font-size:18px;font-weight:300;color:rgba(242,237,232,0.65);line-height:1.45;margin:0">unable to complete the task they came to do</p></div>
-        <div style="border-top:2px solid var(--gold);padding-top:18px"><p style="font-family:var(--serif);font-weight:700;font-size:80px;color:var(--gold);line-height:1;margin:0 0 14px">16%</p><p style="font-family:var(--sans);font-size:18px;font-weight:300;color:rgba(242,237,232,0.65);line-height:1.45;margin:0">only partially able to complete their task</p></div>
-      </div>
-      <div class="rise d4" style="margin-top:32px">
-        <p style="font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(242,237,232,0.38);margin:0 0 12px">Top sentiment topics</p>
-        <div style="display:flex;flex-wrap:wrap;gap:9px">
-          <span style="font-family:var(--sans);font-size:16px;color:rgba(242,237,232,0.7);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:7px 16px">Relevant features missing</span>
-          <span style="font-family:var(--sans);font-size:16px;color:rgba(242,237,232,0.7);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:7px 16px">Authentication</span>
-          <span style="font-family:var(--sans);font-size:16px;color:rgba(242,237,232,0.7);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:7px 16px">Password</span>
-          <span style="font-family:var(--sans);font-size:16px;color:rgba(242,237,232,0.7);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:7px 16px">Performance</span>
-          <span style="font-family:var(--sans);font-size:16px;color:rgba(242,237,232,0.7);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:7px 16px">Lack of prepaid support</span>
-          <span style="font-family:var(--sans);font-size:16px;color:rgba(242,237,232,0.7);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:7px 16px">App-to-web redirects</span>
-          <span style="font-family:var(--sans);font-size:16px;color:rgba(242,237,232,0.7);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:7px 16px">Brand perception</span>
-        </div>
-      </div>
-      <p class="rise d4" style="font-family:var(--sans);font-size:14px;color:rgba(242,237,232,0.38);margin:20px 0 0">Credit to Lara Kocab for the research summary</p>
-    </div>
-  </section>`,
-    },
-
-    // 16 · UX FOCUS AREAS (raw)
-    {
-      type: 'raw',
-      html: `
-  <section class="slide dark focus" data-label="Focus areas">
     <div class="content">
-      <div class="slide-head">
-        <p class="eyebrow rise" style="color:var(--gold-deep)">UX strategy</p>
-        <h2 class="head-lg rise d2">Eight focus areas to anchor the work</h2>
-      </div>
-      <div class="grid-focus" style="margin-top:36px">
-        <div class="rise d3" style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:28px 30px"><p style="font-family:var(--sans);font-weight:700;font-size:21px;color:var(--gold);margin:0 0 12px">Authentication</p><p style="font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.5;color:rgba(242,237,232,0.65);margin:0">Make sign-in as simple, secure, and reliable as possible.</p></div>
-        <div class="rise d3" style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:28px 30px"><p style="font-family:var(--sans);font-weight:700;font-size:21px;color:var(--gold);margin:0 0 12px">Billing &amp; payments</p><p style="font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.5;color:rgba(242,237,232,0.65);margin:0">Don't lose focus on the driver for 30% of app visits. Clarity and transparency in billing.</p></div>
-        <div class="rise d3" style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:28px 30px"><p style="font-family:var(--sans);font-weight:700;font-size:21px;color:var(--gold);margin:0 0 12px">Streamline upgrades</p><p style="font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.5;color:rgba(242,237,232,0.65);margin:0">Make it easier for existing customers to get a new phone.</p></div>
-        <div class="rise d3" style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:28px 30px"><p style="font-family:var(--sans);font-weight:700;font-size:21px;color:var(--gold);margin:0 0 12px">UX consistency</p><p style="font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.5;color:rgba(242,237,232,0.65);margin:0">Simplify the experience and standardize it across channels.</p></div>
-        <div class="rise d4" style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:28px 30px"><p style="font-family:var(--sans);font-weight:700;font-size:21px;color:var(--gold);margin:0 0 12px">Support &amp; troubleshooting</p><p style="font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.5;color:rgba(242,237,232,0.65);margin:0">Decrease Care calls with more self-service options.</p></div>
-        <div class="rise d4" style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:28px 30px"><p style="font-family:var(--sans);font-weight:700;font-size:21px;color:var(--gold);margin:0 0 12px">Perceived speed</p><p style="font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.5;color:rgba(242,237,232,0.65);margin:0">Make it feel instantly responsive, every action met with immediate feedback.</p></div>
-        <div class="rise d4" style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:28px 30px"><p style="font-family:var(--sans);font-weight:700;font-size:21px;color:var(--gold);margin:0 0 12px">Privacy &amp; security</p><p style="font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.5;color:rgba(242,237,232,0.65);margin:0">Enhance information and tools to raise customer trust and confidence.</p></div>
-        <div class="rise d4" style="background:rgba(0,0,0,0.3);border-radius:10px;border:1px solid rgba(255,255,255,0.07);border-top:3px solid var(--gold);padding:28px 30px"><p style="font-family:var(--sans);font-weight:700;font-size:21px;color:var(--gold);margin:0 0 12px">Accessibility</p><p style="font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.5;color:rgba(242,237,232,0.65);margin:0">Meet or exceed all accessibility standards.</p></div>
+      <div class="uxs-cols">
+        <div class="uxs-text">
+          <p class="eyebrow rise">UX strategy</p>
+          <h2 class="head-lg rise d2" style="margin-top:26px">The app wasn't fulfilling our promise of fast, effortless account management</h2>
+          <div class="uxs-stats rise d3">
+            <div class="uxs-stat"><p class="n">52%</p><p>less than satisfied with the overall app experience</p></div>
+            <div class="uxs-stat"><p class="n">53%</p><p>able to successfully complete their task</p></div>
+            <div class="uxs-stat"><p class="n">30%</p><p>unable to complete the task they came to do</p></div>
+            <div class="uxs-stat"><p class="n">16%</p><p>only partially able to complete their task</p></div>
+          </div>
+          <p class="uxs-credit rise d4">Research summary by Lara Kocab</p>
+        </div>
+        <div class="uxs-out rise d4">
+          <p class="uxs-label">Product areas to fix</p>
+          <ul class="uxs-focus">
+            <li>Authentication</li>
+            <li>Billing &amp; payments</li>
+            <li>Streamline upgrades</li>
+            <li>Support &amp; troubleshooting</li>
+          </ul>
+          <p class="uxs-label uxs-label-2">Principles across all of it</p>
+          <ul class="uxs-focus uxs-princ">
+            <li>UX consistency</li>
+            <li>Perceived speed</li>
+            <li>Privacy &amp; security</li>
+            <li>Accessibility</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>`,
@@ -576,16 +561,14 @@ const flagshipApp: Slide[] = [
     {
       type: 'raw',
       html: `
-  <section class="slide dark" data-label="Re-organize">
-    <div class="content" style="display:grid;grid-template-columns:1fr 2.4fr;align-items:center;gap:0;padding:90px 0 90px 140px;height:100%">
-      <div style="padding-right:56px">
+  <section class="slide dark reorg" data-label="Re-organize">
+    <div class="content">
+      <div class="slide-head">
         <p class="eyebrow rise">Re-organize my team</p>
-        <p class="lead-stmt rise d2" style="font-family:var(--serif);font-weight:300;font-size:44px;line-height:1.2;letter-spacing:-0.02em;color:rgba(242,237,232,0.9);margin:24px 0 0">Aligning team structure to product goals.</p>
-        <p class="rise d3" style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.5;color:rgba(242,237,232,0.65);margin:22px 0 0">I mapped people to surfaces, built parity across pods, and defined clear roles and responsibilities for every member.</p>
+        <h2 class="head-lg rise d2" style="margin-top:26px">Aligning team structure to product goals</h2>
+        <p class="reorg-sub rise d3">I mapped people to surfaces, built parity across pods, and defined clear roles and responsibilities for every member.</p>
       </div>
-      <div style="height:100%;overflow:hidden">
-        <img src="/deck/assets/casestudy/team-mapping.png" alt="Team mapping" style="width:100%;height:100%;object-fit:cover;object-position:left center">
-      </div>
+      <div class="reorg-card rise d3"><img src="/deck/assets/casestudy/team-mapping-trim.png" alt="Team mapping: portfolios, workstreams, squad leads, designers and partners"></div>
     </div>
   </section>`,
     },
@@ -598,29 +581,11 @@ const flagshipApp: Slide[] = [
     <div class="content" style="display:grid;grid-template-columns:1fr 1.3fr;align-items:center;gap:0;padding:90px 0 90px 140px;height:100%">
       <div style="padding-right:64px">
         <p class="eyebrow rise">App design training</p>
-        <p class="lead-stmt rise d2" style="font-family:var(--serif);font-weight:300;font-size:46px;line-height:1.2;letter-spacing:-0.02em;color:rgba(242,237,232,0.9);margin:24px 0 0">Learning to think in apps, not pages.</p>
+        <p class="lead-stmt rise d2" style="font-family:var(--serif);font-weight:300;font-size:46px;line-height:1.2;letter-spacing:-0.02em;color:rgba(242,237,232,0.9);margin:24px 0 0">Learning to think in apps, not pages</p>
         <p class="rise d3" style="font-family:var(--sans);font-size:20px;font-weight:300;line-height:1.5;color:rgba(242,237,232,0.65);margin:22px 0 0">A team rooted in web needed a new vocabulary. We built benchmarking collections, studying best-in-class apps like Airbnb, to calibrate the bar.</p>
       </div>
       <div style="position:relative;height:100%;overflow:hidden">
         <img src="/deck/assets/casestudy/benchmarking.png" alt="Airbnb app benchmarking collection" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center">
-      </div>
-    </div>
-  </section>`,
-    },
-
-    // 19 · ACCOUNT COMPLEXITY (raw)
-    {
-      type: 'raw',
-      html: `
-  <section class="slide dark split" data-label="Account complexity">
-    <div class="content">
-      <div class="sp-text">
-        <p class="eyebrow rise" style="color:var(--gold-deep)">The hardest surface</p>
-        <p class="lead-stmt rise d2">Account management was the most complex area to address.</p>
-        <p class="sp-note rise d3">Plans, devices, add-ons, financing, settings, benefits, and more, all colliding in one place.</p>
-      </div>
-      <div class="sp-visual rise d2">
-        <img class="sp-device-shot" src="/deck/assets/casestudy/current-app-account.png" alt="Current app — account screen">
       </div>
     </div>
   </section>`,
@@ -633,13 +598,15 @@ const flagshipApp: Slide[] = [
   <section class="slide dark iterations" data-label="Iterations">
     <div class="content">
       <div class="slide-head">
-        <p class="eyebrow rise" style="color:var(--gold-deep)">Account management · exploration</p>
-        <h2 class="head-lg rise d2">Many versions before the right one</h2>
+        <p class="eyebrow rise" style="color:var(--gold-deep)">Account management</p>
+        <h2 class="head-lg rise d2">The hardest surface took many versions</h2>
+        <p class="iter-sub rise d3">Plans, devices, add-ons, financing, settings, benefits, and more, all colliding in one place</p>
       </div>
-      <div class="grid-iter">
-        <div class="iter-col rise d3"><img class="iter-shot" src="/deck/assets/casestudy/account-v1.png" alt="Account version 1"><p class="iter-v">Version 1</p><p class="iter-d">Pushes down key features.</p></div>
-        <div class="iter-col rise d4"><img class="iter-shot" src="/deck/assets/casestudy/account-v2.png" alt="Account version 2"><p class="iter-v">Version 2</p><p class="iter-d">Too many redundancies.</p></div>
-        <div class="iter-col rise d5"><img class="iter-shot" src="/deck/assets/casestudy/account-v5.png" alt="Account version 5"><p class="iter-v">Version 5</p><p class="iter-d">Lack of priority.</p></div>
+      <div class="grid-iter grid-iter-4">
+        <div class="iter-col rise d3"><img class="iter-shot" src="/deck/assets/casestudy/current-app-account.png" alt="Current app, account screen"><p class="iter-v">Before</p><p class="iter-d">Everything colliding</p></div>
+        <div class="iter-col rise d4"><img class="iter-shot" src="/deck/assets/casestudy/account-v1.png" alt="Account version 1"><p class="iter-v">Version 1</p><p class="iter-d">Pushes down key features</p></div>
+        <div class="iter-col rise d5"><img class="iter-shot" src="/deck/assets/casestudy/account-v2.png" alt="Account version 2"><p class="iter-v">Version 2</p><p class="iter-d">Too many redundancies</p></div>
+        <div class="iter-col rise d6"><img class="iter-shot" src="/deck/assets/casestudy/account-v5.png" alt="Account version 5"><p class="iter-v">Version 5</p><p class="iter-d">Lack of priority</p></div>
       </div>
     </div>
   </section>`,
@@ -650,13 +617,13 @@ const flagshipApp: Slide[] = [
       type: 'raw',
       html: `
   <section class="slide dark" data-label="Task data" style="padding:0">
-    <div style="display:grid;grid-template-columns:1fr 280px;height:100%;padding:72px 72px 72px 100px;gap:60px">
+    <div style="display:grid;grid-template-columns:1fr 280px;height:100%;padding:130px 140px;gap:60px;box-sizing:border-box">
 
       <!-- CHART AREA -->
       <div style="display:flex;flex-direction:column;min-width:0">
-        <div style="margin-bottom:28px">
+        <div style="margin-bottom:44px">
           <p class="eyebrow rise">Account management · prioritization</p>
-          <h2 class="head-lg rise d2" style="font-size:44px">Ranking 19 tasks by what matters</h2>
+          <h2 class="head-lg rise d2" style="margin-top:26px">Ranking 19 tasks by what matters</h2>
         </div>
         <div class="rise d2" style="display:flex;flex-direction:column;justify-content:space-between;flex:1">
           ${_row(1,'Upgrade',48,20,13)}
@@ -811,7 +778,7 @@ const flagshipApp: Slide[] = [
         <p class="pr-body rise d3">Our new account landing page offers a streamlined, glanceable interface that helps customers navigate their account, take meaningful actions, and understand key statuses at a glance.</p>
       </div>
       <div class="pr-visual">
-        <img class="pr-screen-shot rise d2" src="/deck/assets/casestudy/upgrade.png" alt="Account overview">
+        <img class="pr-screen-shot rise d2" src="/work/flagship/flagship-account.png" alt="Redesigned account page">
       </div>
     </div>
   </section>`,
@@ -827,9 +794,8 @@ const flagshipApp: Slide[] = [
     <div class="content">
       <div class="pr-text">
         <p class="eyebrow pr-eyebrow rise">eCommerce</p>
-        <h2 class="pr-head rise d2">Upgrade with ease</h2>
-        <p class="pr-body rise d3">Say goodbye to complicated promotion paths. Our new promo-first flow makes finding the right device a breeze. You see available promotions upfront, before browsing devices, which streamlines the whole upgrade.</p>
-        <p class="pr-body rise d3" style="font-size:15px;color:rgba(242,237,232,0.35);margin-top:18px">Upgrade from home</p>
+        <h2 class="pr-head rise d2">Upgrades start with the deal</h2>
+        <p class="pr-body rise d3">Customers told us cost was the first thing they wanted to understand. So the offers they qualify for show up first, before they ever browse a phone, and the path to upgrading starts right from home.</p>
       </div>
       <div class="pr-visual">
         <img class="pr-screen-shot rise d2" src="/deck/assets/casestudy/upgrade.png" alt="Promo-first upgrade flow">
@@ -849,8 +815,7 @@ const flagshipApp: Slide[] = [
       <div class="pr-text">
         <p class="eyebrow pr-eyebrow rise">Support</p>
         <h2 class="pr-head rise d2">Quick access to the help you need</h2>
-        <p class="pr-body rise d3">Our support page highlights the top-visited support pages for easy access. With new search and device-specific support, finding solutions is faster than ever. Care is one tap away by chat or scheduled call.</p>
-        <p class="pr-body rise d3" style="font-size:15px;color:rgba(242,237,232,0.35);margin-top:18px">Home · Account · Benefits · Shop · Support</p>
+        <p class="pr-body rise d3">Search, the most visited help topics, and support for each device on the account, all on one screen. Chat or a scheduled call is one tap away when self-service isn't enough.</p>
       </div>
       <div class="pr-visual">
         <img class="pr-screen-shot rise d2" src="/deck/assets/casestudy/support.png" alt="Redesigned support page">
@@ -1049,7 +1014,9 @@ export const caseStudyDeck: Deck = {
     // carried by the Paavis card on the timeline instead. Re-add this line to
     // bring the slide back.
     sectionThree,
-    ...teamAssessment,
-    ...peopleAndCulture,
+    // Part three chapters stamp their own names, like the two case studies.
+    // The closing thank you slide stays bare.
+    ...teamAssessment.map(s => ({ ...s, runningHead: 'Team growth and development' })),
+    ...peopleAndCulture.map(s => (s.label === 'Thank you' ? s : { ...s, runningHead: 'Culture and mentorship' })),
   ],
 };
